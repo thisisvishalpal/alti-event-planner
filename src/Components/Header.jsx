@@ -40,7 +40,7 @@ export const Header = () => {
         <Container fluid className="no-padding-container">
           <Navbar.Brand>
             <NavLink to="/" className="nav-link">
-              Event Booker
+              Event Planner
             </NavLink>
           </Navbar.Brand>
           <Nav className="me-auto">
