@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { RouterProvider } from "react-router-dom";
+import { Provider } from "react-redux";
 
-function App() {
+import { router } from "Routes";
+import { Store } from "Store";
+import { ThemeProvider, useTheme } from "Theme";
+
+const ThemeToggler = ({ children }) => {
+  const { theme } = useTheme();
+
+  return <div className={`app-container ${theme}`}>{children}</div>;
+};
+
+export function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ThemeProvider>
+        <Provider store={Store}>
+          <ThemeToggler>
+            <RouterProvider router={router} />
+          </ThemeToggler>
+        </Provider>
+      </ThemeProvider>
     </div>
   );
 }
-
-export default App;
