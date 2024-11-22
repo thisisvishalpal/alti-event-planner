@@ -7,12 +7,8 @@ export const Footer = () => {
       <hr />
       <div className="footer-container">
         <div className="footer-section">
-          <h3>About Job Portal</h3>
-          <p>
-            Your one-stop platform to explore job opportunities in various
-            fields. We help connect job seekers and employers, making hiring
-            easier.
-          </p>
+          <h3>About Event planner</h3>
+          <p>Your one-stop platform to explore events in various fields.</p>
         </div>
 
         <div className="footer-section">
@@ -24,12 +20,12 @@ export const Footer = () => {
             <li>
               <a href="/about">About</a>
             </li>
-            <li>
+            {/* <li>
               <a href="#">Jobs</a>
             </li>
             <li>
               <a href="#">Contact Us</a>
-            </li>
+            </li> */}
           </ul>
         </div>
 
@@ -51,7 +47,7 @@ export const Footer = () => {
 
       <div className="footer-bottom">
         <p>
-          &copy; {new Date().getFullYear()} Job Portal. All Rights Reserved.
+          &copy; {new Date().getFullYear()} Event Planner. All Rights Reserved.
         </p>
       </div>
     </footer>
