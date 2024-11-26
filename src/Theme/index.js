@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useMemo,
+} from "react";
 
 // Create the context
 const ThemeContext = createContext();
@@ -10,6 +16,7 @@ export const ThemeProvider = ({ children }) => {
     return localStorage.getItem("theme") || "light";
   });
 
+  // Sync theme changes to localStorage and update body class
   useEffect(() => {
     localStorage.setItem("theme", theme);
     document.body.className = `app-container ${theme}`; // Set the theme class on the <body>
@@ -20,10 +27,11 @@ export const ThemeProvider = ({ children }) => {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
 
+  // Memoize the context value to prevent unnecessary re-renders
+  const value = useMemo(() => ({ theme, toggleTheme }), [theme]);
+
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      {children}
-    </ThemeContext.Provider>
+    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
   );
 };
 
