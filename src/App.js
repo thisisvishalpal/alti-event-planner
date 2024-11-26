@@ -1,26 +1,16 @@
 import { RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
 
-import { router } from "Routes";
+import { Router } from "Routes";
 import { Store } from "Store";
-import { ThemeProvider, useTheme } from "Theme";
-
-const ThemeToggler = ({ children }) => {
-  const { theme } = useTheme();
-
-  return <div className={`app-container ${theme}`}>{children}</div>;
-};
+import { ThemeProvider } from "Theme";
 
 export function App() {
   return (
-    <div className="App">
-      <ThemeProvider>
-        <Provider store={Store}>
-          <ThemeToggler>
-            <RouterProvider router={router} />
-          </ThemeToggler>
-        </Provider>
-      </ThemeProvider>
-    </div>
+    <ThemeProvider>
+      <Provider store={Store}>
+        <RouterProvider router={Router} />
+      </Provider>
+    </ThemeProvider>
   );
 }
