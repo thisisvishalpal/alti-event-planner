@@ -2,8 +2,7 @@ import { createBrowserRouter, Outlet } from "react-router-dom";
 
 import { Header, Footer } from "Components";
 import { Landing, Events, Shows, NotFound } from "Containers";
-
-import { urls } from "./../Utils";
+import { urls } from "Utils";
 
 const { root, events, shows } = urls;
 
@@ -13,10 +12,10 @@ const ChildRoutes = [
     path: events,
     element: <Events />,
   },
-  {
-    path: shows,
-    element: <Shows />,
-  },
+  // {
+  //   path: shows,
+  //   element: <Shows />,
+  // },
   {
     path: "*",
     element: <NotFound />,
@@ -58,7 +57,7 @@ const Layout = () => {
   );
 };
 
-export const router = createBrowserRouter([
+export const Router = createBrowserRouter([
   {
     path: root,
     element: <Layout />,

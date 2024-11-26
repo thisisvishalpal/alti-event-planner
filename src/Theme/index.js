@@ -10,9 +10,9 @@ export const ThemeProvider = ({ children }) => {
     return localStorage.getItem("theme") || "light";
   });
 
-  // Sync theme changes to localStorage
   useEffect(() => {
     localStorage.setItem("theme", theme);
+    document.body.className = `app-container ${theme}`; // Set the theme class on the <body>
   }, [theme]);
 
   // Toggle theme function
@@ -22,7 +22,7 @@ export const ThemeProvider = ({ children }) => {
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <div className={`app-container ${theme}`}>{children}</div>
+      {children}
     </ThemeContext.Provider>
   );
 };

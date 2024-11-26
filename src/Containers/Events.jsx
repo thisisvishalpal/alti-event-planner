@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Card, Button, Row, Col, Modal, Form } from "react-bootstrap";
+import { useTheme } from "Theme";
 // import { events } from "./../Mock/events.json"; // Adjust path if necessary
 
 const events = [
@@ -359,6 +360,7 @@ const events = [
 
 const SeatSelectionModal = ({ event, show, onClose }) => {
   const [seats, setSeats] = useState(1); // Default to 1 seat
+  const { theme } = useTheme();
 
   const handleSeatChange = (e) => {
     setSeats(e.target.value);
@@ -373,10 +375,13 @@ const SeatSelectionModal = ({ event, show, onClose }) => {
 
   return (
     <Modal show={show} onHide={onClose}>
-      <Modal.Header closeButton>
+      <Modal.Header
+        className={theme === "dark" ? "bg-dark text-light" : ""}
+        closeButton
+      >
         <Modal.Title>Select Seats</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className={theme === "dark" ? "bg-dark text-light" : ""}>
         <h5>{event.payload.items[0].event_name}</h5>
         <p>{event.payload.items[0].event_description}</p>
         <Row>
@@ -407,7 +412,7 @@ const SeatSelectionModal = ({ event, show, onClose }) => {
           </Col>
         </Row>
       </Modal.Body>
-      <Modal.Footer>
+      <Modal.Footer className={theme === "dark" ? "bg-dark text-light" : ""}>
         <Button variant="secondary" onClick={onClose}>
           Close
         </Button>
