@@ -1,16 +1,30 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const CounterSlice = createSlice({
-  name: "counter",
-  initialState: 0,
+const initialState = {
+  events: [],
+  loading: false,
+  error: null,
+};
+
+const eventSlice = createSlice({
+  name: "events",
+  initialState,
   reducers: {
-    increament: (state) => (state += 1),
-    decreament: (state) => (state -= 1),
-    editByAmount: (state, action) => (state += Number(action.payload)),
-    asyncUpdate: (state, action) => (state += Number(action.payload)),
+    fetchStart(state) {
+      state.loading = true;
+      state.error = null;
+    },
+    fetchSuccess(state, action) {
+      state.loading = false;
+      state.events = action.payload;
+    },
+    fetchFailure(state, action) {
+      state.loading = false;
+      state.error = action.payload;
+    },
   },
 });
 
-export const { increament, decreament, editByAmount } = CounterSlice.actions;
+export const { fetchStart, fetchSuccess, fetchFailure } = eventSlice.actions;
 
-export default CounterSlice.reducer;
+export default eventSlice.reducer;

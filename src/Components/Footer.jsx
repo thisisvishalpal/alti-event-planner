@@ -1,5 +1,4 @@
 import React from "react";
-// import "./index.css"; // CSS for styling the footer
 
 export const Footer = () => {
   return (
@@ -20,12 +19,6 @@ export const Footer = () => {
             <li>
               <a href="/about">About</a>
             </li>
-            {/* <li>
-              <a href="#">Jobs</a>
-            </li>
-            <li>
-              <a href="#">Contact Us</a>
-            </li> */}
           </ul>
         </div>
 

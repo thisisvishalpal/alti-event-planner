@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import "./index.css"; // Optional: For styling the switch component
 
 export const SwitchSelector = ({ labelLeft, labelRight, onChange }) => {
   const value = localStorage.getItem("theme") || "light";
@@ -8,12 +7,11 @@ export const SwitchSelector = ({ labelLeft, labelRight, onChange }) => {
 
   const handleToggle = () => {
     setIsToggled(!isToggled);
-    onChange(!isToggled); // Call the callback function when the switch is toggled
+    onChange(!isToggled);
   };
 
   return (
     <div className="switch-container">
-      {/* <span>Looking for</span> */}
       <span className="label">{labelLeft}</span>
       <div
         className={`switch ${isToggled ? "toggled" : ""}`}

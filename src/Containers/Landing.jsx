@@ -45,7 +45,7 @@ const HeroSection = () => {
   );
 };
 
-const EventCards = ({ events }) => {
+export const EventCards = ({ events }) => {
   return (
     <section id="events" className="py-5">
       <Container>
