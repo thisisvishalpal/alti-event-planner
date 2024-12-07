@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Button, Container, Row, Col, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
@@ -45,7 +45,7 @@ const HeroSection = () => {
   );
 };
 
-export const EventCards = ({ events }) => {
+export const EventCards = memo(({ events }) => {
   return (
     <section id="events" className="py-5">
       <Container>
@@ -69,7 +69,7 @@ export const EventCards = ({ events }) => {
       </Container>
     </section>
   );
-};
+});
 
 const eventsData = [
   {
