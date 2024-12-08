@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 
@@ -8,6 +9,8 @@ import { SwitchSelector } from "./SwitchSelector";
 export const Header = () => {
   const { myAccount } = urls;
   const { theme, toggleTheme } = useTheme();
+  const { data, error, loading } = useSelector(({ userInfo }) => userInfo);
+
   return (
     <div className="header">
       <Navbar
@@ -39,19 +42,19 @@ export const Header = () => {
             </NavLink>
           </Nav> */}
 
-          <Nav className="me-auto">
-            <NavLink to={myAccount} className="nav-link">
-              My Account
+          <Nav className="">
+            <NavLink to={`/${data?.userName}`} className="nav-link">
+              {data?.userName}
             </NavLink>
           </Nav>
 
-          <Nav className="ms-auto">
+          {/* <Nav className="ms-auto">
             <SwitchSelector
               labelLeft="Light"
               labelRight="Dark"
               onChange={toggleTheme}
             />
-          </Nav>
+          </Nav> */}
         </Container>
       </Navbar>
     </div>

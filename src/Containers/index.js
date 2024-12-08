@@ -5,4 +5,4 @@ export { Feeds } from "./Feeds";
 export { SignIn } from "./SignIn";
 export { SignUp } from "./SignUp";
 export { Friends } from "./Friends";
-export { MyAccount } from "./MyAccount";
+export { UserAccount } from "./UserAccount";

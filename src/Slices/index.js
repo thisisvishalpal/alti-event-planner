@@ -10,6 +10,12 @@ import allFeeds, {
   fetchFeedsFailure,
 } from "./feeds.slice";
 
+import userInfo, {
+  fetchUserInfo,
+  fetchUserInfoSuccess,
+  fetchUserInfoFailure,
+} from "./userInfo.slice";
+
 export {
   allEvents,
   fetchStart,
@@ -19,4 +25,8 @@ export {
   fetchFeeds,
   fetchFeedsSuccess,
   fetchFeedsFailure,
+  userInfo,
+  fetchUserInfo,
+  fetchUserInfoSuccess,
+  fetchUserInfoFailure,
 };

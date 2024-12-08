@@ -1,69 +1,93 @@
+import { UserPosts } from "Components/UserPosts";
 import React, { useState } from "react";
-import { Card, Row, Col, Image, Button, Form, Collapse } from "react-bootstrap";
+import {
+  Card,
+  Row,
+  Col,
+  Image,
+  Button,
+  Form,
+  Collapse,
+  Spinner,
+} from "react-bootstrap";
+import { useSelector } from "react-redux";
 
-const UserAccount = ({ user }) => {
+const Account = ({ user, loading }) => {
   const {
     profilePicture,
-    name,
+    userName,
+    firstName,
+    lastName,
+    city,
+    state,
+    phoneNumber,
     bio,
-    followingCount,
-    postsCount,
-    followersCount,
+    followers,
+    following,
+    posts,
+    private: pri,
+    gotra,
+    age,
+    gender,
   } = user;
   const [showSettings, setShowSetting] = useState(false);
 
   return (
     <Card className="shadow-sm p-3 mb-4">
-      <Row>
-        {/* Profile Picture */}
-        <Col md={3} className="text-center">
-          <Image
-            src={profilePicture}
-            roundedCircle
-            alt={`${name}'s profile`}
-            className="img-fluid"
-            style={{ width: "150px", height: "150px" }}
-          />
-        </Col>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <Row>
+          {/* Profile Picture */}
+          <Col md={3} className="text-center">
+            <Image
+              src={profilePicture}
+              roundedCircle
+              alt={`${firstName}'s profile`}
+              className="img-fluid"
+              style={{ width: "150px", height: "150px" }}
+            />
+          </Col>
 
-        {/* User Details */}
-        <Col md={9}>
-          <Card.Body>
-            {/* Name and Bio */}
-            <h3>{name}</h3>
-            <p className="text-muted">{bio}</p>
+          {/* User Details */}
+          <Col md={9}>
+            <Card.Body>
+              {/* Name and Bio */}
+              <h3>{`${firstName} ${lastName}`}</h3>
+              <p className="text-muted">{bio}</p>
 
-            {/* User Stats */}
-            <Row className="text-center my-3">
-              <Col>
-                <h5>{postsCount}</h5>
-                <p className="text-muted">Posts</p>
-              </Col>
-              <Col>
-                <h5>{followersCount}</h5>
-                <p className="text-muted">Followers</p>
-              </Col>
-              <Col>
-                <h5>{followingCount}</h5>
-                <p className="text-muted">Following</p>
-              </Col>
-            </Row>
+              {/* User Stats */}
+              <Row className="text-center my-3">
+                <Col>
+                  <h5>{posts?.length}</h5>
+                  <p className="text-muted">Posts</p>
+                </Col>
+                <Col>
+                  <h5>{followers}</h5>
+                  <p className="text-muted">Followers</p>
+                </Col>
+                <Col>
+                  <h5>{following}</h5>
+                  <p className="text-muted">Following</p>
+                </Col>
+              </Row>
 
-            {/* Action Buttons */}
-            <div className="text-end">
-              <Button variant="primary" className="me-2">
-                Edit Profile
-              </Button>
-              <Button
-                variant="outline-secondary"
-                onClick={() => setShowSetting((prev) => !prev)}
-              >
-                Settings
-              </Button>
-            </div>
-          </Card.Body>
-        </Col>
-      </Row>
+              {/* Action Buttons */}
+              <div className="text-end">
+                <Button variant="primary" className="me-2">
+                  Edit Profile
+                </Button>
+                <Button
+                  variant="outline-secondary"
+                  onClick={() => setShowSetting((prev) => !prev)}
+                >
+                  Settings
+                </Button>
+              </div>
+            </Card.Body>
+          </Col>
+        </Row>
+      )}
 
       <Collapse in={showSettings}>
         <div className="mt-4">
@@ -126,20 +150,13 @@ const UserAccount = ({ user }) => {
   );
 };
 
-// Example Usage
-export const MyAccount = () => {
-  const userData = {
-    profilePicture: "https://pbs.twimg.com/media/Fe3abQPaAAAN3s-.jpg", // Replace with actual URL
-    name: "Vishal Pal",
-    bio: "Find what you love & let it kill you.",
-    followingCount: 120,
-    postsCount: 45,
-    followersCount: 820,
-  };
+export const UserAccount = () => {
+  const { data, error, loading } = useSelector(({ userInfo }) => userInfo);
 
   return (
     <div className="container mt-5">
-      <UserAccount user={userData} />
+      <Account user={data} loading={loading} />
+      <UserPosts posts={data?.posts} loading={loading} />
     </div>
   );
 };
