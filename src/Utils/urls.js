@@ -3,7 +3,10 @@ export const urls = {
   events: "events",
   about: "about",
   contact: "contact",
-  shows: "shows",
   signIn: "signin",
   signUp: "signup",
+  feeds: "feeds",
+  myAccount: "myaccount",
+  friends: "friends",
+  notifications: "notifications",
 };

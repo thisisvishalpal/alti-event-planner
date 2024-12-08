@@ -1,30 +1,22 @@
-import { createSlice } from "@reduxjs/toolkit";
+import allEvents, {
+  fetchStart,
+  fetchSuccess,
+  fetchFailure,
+} from "./events.slice";
 
-const initialState = {
-  events: [],
-  loading: false,
-  error: null,
+import allFeeds, {
+  fetchFeeds,
+  fetchFeedsSuccess,
+  fetchFeedsFailure,
+} from "./feeds.slice";
+
+export {
+  allEvents,
+  fetchStart,
+  fetchSuccess,
+  fetchFailure,
+  allFeeds,
+  fetchFeeds,
+  fetchFeedsSuccess,
+  fetchFeedsFailure,
 };
-
-const eventSlice = createSlice({
-  name: "events",
-  initialState,
-  reducers: {
-    fetchStart(state) {
-      state.loading = true;
-      state.error = null;
-    },
-    fetchSuccess(state, action) {
-      state.loading = false;
-      state.events = action.payload;
-    },
-    fetchFailure(state, action) {
-      state.loading = false;
-      state.error = action.payload;
-    },
-  },
-});
-
-export const { fetchStart, fetchSuccess, fetchFailure } = eventSlice.actions;
-
-export default eventSlice.reducer;

@@ -1,16 +1,45 @@
 import { createBrowserRouter, Outlet } from "react-router-dom";
 
 import { Header, Footer } from "Components";
-import { Landing, Events, NotFound } from "Containers";
+import {
+  Landing,
+  Events,
+  NotFound,
+  Feeds,
+  SignIn,
+  SignUp,
+  Friends,
+  MyAccount,
+} from "Containers";
 import { urls } from "Utils";
 
-const { root, events } = urls;
+const { root, events, feeds, signIn, signUp, friends, myAccount } = urls;
 
 const ChildRoutes = [
   { path: root, element: <Landing /> },
   {
     path: events,
     element: <Events />,
+  },
+  {
+    path: feeds,
+    element: <Feeds />,
+  },
+  {
+    path: signIn,
+    element: <SignIn />,
+  },
+  {
+    path: signUp,
+    element: <SignUp />,
+  },
+  {
+    path: friends,
+    element: <Friends />,
+  },
+  {
+    path: myAccount,
+    element: <MyAccount />,
   },
   {
     path: "*",
