@@ -1,4 +1,3 @@
-import React from "react";
 import { Card, Container, Row, Col, Spinner } from "react-bootstrap";
 
 export const UserPosts = ({ posts, loading }) => {

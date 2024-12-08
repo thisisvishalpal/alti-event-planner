@@ -6,7 +6,7 @@ export const urls = {
   signIn: "signin",
   signUp: "signup",
   feeds: "feeds",
-  myAccount: "myaccount",
-  friends: "friends",
+  profile: ":username",
+  connections: "connections",
   notifications: "notifications",
 };

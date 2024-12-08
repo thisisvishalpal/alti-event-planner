@@ -1,5 +1,6 @@
-import { UserPosts } from "Components/UserPosts";
-import React, { useState } from "react";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
 import {
   Card,
   Row,
@@ -10,9 +11,9 @@ import {
   Collapse,
   Spinner,
 } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { urls } from "Utils";
 
-const Account = ({ user, loading }) => {
+export const UserInfo = ({ user, loading }) => {
   const {
     profilePicture,
     userName,
@@ -31,6 +32,11 @@ const Account = ({ user, loading }) => {
     gender,
   } = user;
   const [showSettings, setShowSetting] = useState(false);
+  const navigate = useNavigate();
+
+  const handleConnectionLink = (prop) => {
+    navigate("/connections", { state: prop });
+  };
 
   return (
     <Card className="shadow-sm p-3 mb-4">
@@ -63,11 +69,15 @@ const Account = ({ user, loading }) => {
                   <p className="text-muted">Posts</p>
                 </Col>
                 <Col>
-                  <h5>{followers}</h5>
+                  <h5 onClick={() => handleConnectionLink("followers")}>
+                    {followers}
+                  </h5>
                   <p className="text-muted">Followers</p>
                 </Col>
                 <Col>
-                  <h5>{following}</h5>
+                  <h5 onClick={() => handleConnectionLink("following")}>
+                    {following}
+                  </h5>
                   <p className="text-muted">Following</p>
                 </Col>
               </Row>
@@ -147,16 +157,5 @@ const Account = ({ user, loading }) => {
         </div>
       </Collapse>
     </Card>
-  );
-};
-
-export const UserAccount = () => {
-  const { data, error, loading } = useSelector(({ userInfo }) => userInfo);
-
-  return (
-    <div className="container mt-5">
-      <Account user={data} loading={loading} />
-      <UserPosts posts={data?.posts} loading={loading} />
-    </div>
   );
 };

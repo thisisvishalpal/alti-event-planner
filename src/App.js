@@ -1,16 +1,25 @@
+import { useEffect } from "react";
 import { RouterProvider } from "react-router-dom";
-import { Provider } from "react-redux";
+import { useDispatch } from "react-redux";
 
+import { mockUserInfo } from "Mock";
 import { Router } from "Routes";
-import { Store } from "Store";
+import { fetchUserInfo, fetchUserInfoSuccess } from "Slices";
 import { ThemeProvider } from "Theme";
 
 export function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchUserInfo());
+    setTimeout(() => {
+      dispatch(fetchUserInfoSuccess(mockUserInfo));
+    }, 500);
+  }, []);
+
   return (
     <ThemeProvider>
-      <Provider store={Store}>
-        <RouterProvider router={Router} />
-      </Provider>
+      <RouterProvider router={Router} />
     </ThemeProvider>
   );
 }
