@@ -1,19 +1,25 @@
 import { useEffect } from "react";
-import { RouterProvider } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import axios, { HttpStatusCode } from "axios";
-import { mockUserInfo } from "Mock";
-import { Router } from "Routes";
-import { ThemeProvider } from "Theme";
 
+//Importing local files
+import { Layout } from "Layout";
+import { LoggedInRoutes, LoggedOutRoutes } from "Routes";
+import { ThemeProvider } from "Theme";
 import {
   fetchUserInfo,
   fetchUserInfoSuccess,
   fetchUserInfoFailure,
 } from "Slices";
+import { urls } from "Utils";
 
 export function App() {
   const dispatch = useDispatch();
+  const store = useSelector(({ userInfo }) => userInfo);
+  const { data, error, loading } = store;
+  // console.log(data.isLoggedIn, "isloggedin from app");
+
   const { Ok } = HttpStatusCode;
 
   useEffect(() => {
@@ -36,7 +42,15 @@ export function App() {
 
   return (
     <ThemeProvider>
-      <RouterProvider router={Router} />
+      <RouterProvider
+        router={createBrowserRouter([
+          {
+            path: urls?.root,
+            element: <Layout />,
+            children: data?.isLoggedIn ? LoggedInRoutes : LoggedOutRoutes,
+          },
+        ])}
+      />
     </ThemeProvider>
   );
 }

@@ -1,17 +1,9 @@
-import {
-  Events,
-  NotFound,
-  Feeds,
-  SignIn,
-  SignUp,
-  Profile,
-  Connections,
-} from "Containers";
+import { Events, NotFound, Feeds, Profile, Connections } from "Containers";
 import { urls } from "Utils";
 
-const { root, events, feeds, signIn, signUp, profile, connections } = urls;
+const { root, events, feeds, profile, connections } = urls;
 
-export const ChildRoutes = [
+export const LoggedInRoutes = [
   {
     path: root,
     element: <Feeds />,
@@ -23,14 +15,6 @@ export const ChildRoutes = [
   {
     path: feeds,
     element: <Feeds />,
-  },
-  {
-    path: signIn,
-    element: <SignIn />,
-  },
-  {
-    path: signUp,
-    element: <SignUp />,
   },
   {
     path: profile,
