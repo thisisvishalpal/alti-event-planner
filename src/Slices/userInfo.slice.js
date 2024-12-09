@@ -1,5 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { mockPosts } from "Mock";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+// import { mockPosts } from "Mock";
+import { axiosInstance } from "Services";
 
 const initialState = {
   data: {
@@ -24,6 +25,17 @@ const initialState = {
   loading: false,
   error: null,
 };
+// Async Thunk to fetch initial state
+export const fetchInitialState = createAsyncThunk(
+  "userInfo/fetchInitialState",
+  async () => {
+    const response = await axiosInstance.get("/user/username", {
+      params: { username: "thisisvishalpal" },
+    });
+
+    return response?.data?.data;
+  }
+);
 
 const userInfoSlice = createSlice({
   name: "userInfo",
@@ -41,6 +53,21 @@ const userInfoSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchInitialState.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchInitialState.fulfilled, (state, action) => {
+        state.loading = false;
+        state.data = action.payload;
+      })
+      .addCase(fetchInitialState.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      });
   },
 });
 

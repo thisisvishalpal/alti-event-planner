@@ -11,16 +11,13 @@ import allFeeds, {
 } from "./feeds.slice";
 
 import userInfo, {
+  fetchInitialState,
   fetchUserInfo,
   fetchUserInfoSuccess,
   fetchUserInfoFailure,
 } from "./userInfo.slice";
 
-import userAuth, {
-  fetchUserAuth,
-  fetchUserAuthFailure,
-  fetchUserAuthSuccess,
-} from "./auth.slice";
+import userAuth, { validateToken, logout, signIn } from "./auth.slice";
 
 export {
   allEvents,
@@ -32,11 +29,12 @@ export {
   fetchFeedsSuccess,
   fetchFeedsFailure,
   userInfo,
+  fetchInitialState,
   fetchUserInfo,
   fetchUserInfoSuccess,
   fetchUserInfoFailure,
   userAuth,
-  fetchUserAuth,
-  fetchUserAuthSuccess,
-  fetchUserAuthFailure,
+  validateToken,
+  signIn,
+  logout,
 };

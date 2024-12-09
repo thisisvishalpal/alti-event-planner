@@ -1,5 +1,4 @@
 import {
-  Events,
   NotFound,
   Feeds,
   Profile,
@@ -7,28 +6,25 @@ import {
   Notifications,
   Messages,
   Search,
+  SignIn,
 } from "Containers";
 import { urls } from "Utils";
 
 const {
   root,
-  events,
   feeds,
   profile,
   connections,
   notifications,
   messages,
   search,
+  signIn,
 } = urls;
 
 export const LoggedInRoutes = [
   {
     path: root,
     element: <Feeds />,
-  },
-  {
-    path: events,
-    element: <Events />,
   },
   {
     path: feeds,
@@ -53,6 +49,10 @@ export const LoggedInRoutes = [
   {
     path: search,
     element: <Search />,
+  },
+  {
+    path: signIn,
+    element: <SignIn />,
   },
   {
     path: "*",

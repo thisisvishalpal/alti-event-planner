@@ -13,3 +13,5 @@ export const fetchEvents = () => async (dispatch) => {
     dispatch(fetchFailure(error.message));
   }
 };
+
+export { axiosInstance } from "./Interceptors";

@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Button, Form, Container, Spinner } from "react-bootstrap";
 import axios from "axios";
-import { fetchUserAuthSuccess } from "Slices";
+import { signIn } from "Slices";
 import { urls } from "Utils";
 
-const { signIn, root } = urls;
+// const { signIn, root } = urls;
 
 export const SignUp = () => {
   const [username, setUsername] = useState("");
@@ -16,6 +16,7 @@ export const SignUp = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
+  const { isAuthenticated } = useSelector(({ userAuth }) => userAuth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -49,8 +50,8 @@ export const SignUp = () => {
 
       if (response.status === 201) {
         setSuccess("Account created successfully! Redirecting to Sign In...");
-        dispatch(fetchUserAuthSuccess(response.data)); // Save user data in Redux store
-        setTimeout(() => navigate(signIn), 2000); // Redirect to Sign In after 2 seconds
+        dispatch(signIn(response.data)); // Save user data in Redux store
+        setTimeout(() => navigate(urls.signIn), 2000); // Redirect to Sign In after 2 seconds
       }
     } catch (err) {
       setError(
@@ -61,6 +62,11 @@ export const SignUp = () => {
     }
   };
 
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/"); // Redirect to the home page
+    }
+  }, [isAuthenticated, navigate]);
   return (
     <Container
       className="d-flex justify-content-center align-items-center"

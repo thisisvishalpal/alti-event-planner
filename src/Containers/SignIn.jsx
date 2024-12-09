@@ -1,18 +1,15 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Button, Form, Container, Spinner } from "react-bootstrap";
-import {
-  fetchUserInfo,
-  fetchUserInfoSuccess,
-  fetchUserInfoFailure,
-} from "Slices";
-import axios from "axios";
+
+import { signIn } from "Slices";
 import { urls } from "Utils";
 
 const { root, signUp } = urls;
 
 export const SignIn = () => {
+  const { isAuthenticated } = useSelector(({ userAuth }) => userAuth);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -33,31 +30,14 @@ export const SignIn = () => {
     setLoading(true);
     setError("");
 
-    dispatch(fetchUserInfo());
-    try {
-      // Example API call to authenticate user
-      const { data, status } = await axios.post(
-        "http://localhost:8000/auth/signin",
-        {
-          username,
-          password,
-        }
-      );
-
-      if (data.status === 200) {
-        dispatch(fetchUserInfoSuccess(data.data));
-
-        navigate(root);
-        localStorage.setItem("user", JSON.stringify(data?.data));
-      }
-    } catch (err) {
-      setError("Invalid credentials. Please try again.");
-      dispatch(fetchUserInfoFailure("Login failed."));
-    } finally {
-      setLoading(false);
-    }
+    dispatch(signIn({ username, password }));
   };
 
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate(root); // Redirect to the home page
+    }
+  }, [isAuthenticated, navigate]);
   return (
     <Container
       className="d-flex justify-content-center align-items-center"
