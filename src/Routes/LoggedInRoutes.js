@@ -1,7 +1,25 @@
-import { Events, NotFound, Feeds, Profile, Connections } from "Containers";
+import {
+  Events,
+  NotFound,
+  Feeds,
+  Profile,
+  Connections,
+  Notifications,
+  Messages,
+  Search,
+} from "Containers";
 import { urls } from "Utils";
 
-const { root, events, feeds, profile, connections } = urls;
+const {
+  root,
+  events,
+  feeds,
+  profile,
+  connections,
+  notifications,
+  messages,
+  search,
+} = urls;
 
 export const LoggedInRoutes = [
   {
@@ -23,6 +41,18 @@ export const LoggedInRoutes = [
   {
     path: connections,
     element: <Connections />,
+  },
+  {
+    path: notifications,
+    element: <Notifications />,
+  },
+  {
+    path: messages,
+    element: <Messages />,
+  },
+  {
+    path: search,
+    element: <Search />,
   },
   {
     path: "*",

@@ -19,11 +19,29 @@ code {
   padding: 10px 20px;
 }
 
-.nav {
-  display: flex;
-  justify-content: center;
+/* Brand on the top left */
+.brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #007bff;
 }
 
+/* Middle navigation */
+.middle-nav {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center; /* Center the links horizontally */
+  align-items: center;
+}
+
+/* Top-right navigation */
+.top-right-nav {
+  display: flex;
+  justify-content: flex-end; /* Align to the right */
+  align-items: center;
+}
+
+/* Nav link styles */
 .nav-link {
   color: white;
   text-decoration: none;
@@ -39,12 +57,18 @@ code {
 }
 
 .nav-link:not(:last-child) {
-  margin-right: 20px; /* Example: Add right margin to all but the last link */
+  margin-right: 20px; /* Add right margin to all but the last link */
 }
 
+/* Active link styling */
 .active {
   font-weight: bold;
   color: #007bff;
+}
+
+/* Username specific styles */
+.username {
+  font-weight: bold;
 }
 
 /* .App {

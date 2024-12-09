@@ -16,6 +16,12 @@ import userInfo, {
   fetchUserInfoFailure,
 } from "./userInfo.slice";
 
+import userAuth, {
+  fetchUserAuth,
+  fetchUserAuthFailure,
+  fetchUserAuthSuccess,
+} from "./auth.slice";
+
 export {
   allEvents,
   fetchStart,
@@ -29,4 +35,8 @@ export {
   fetchUserInfo,
   fetchUserInfoSuccess,
   fetchUserInfoFailure,
+  userAuth,
+  fetchUserAuth,
+  fetchUserAuthSuccess,
+  fetchUserAuthFailure,
 };

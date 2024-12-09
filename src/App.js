@@ -1,5 +1,9 @@
 import { useEffect } from "react";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  RouterProvider,
+  createBrowserRouter,
+  useParams,
+} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios, { HttpStatusCode } from "axios";
 
@@ -12,45 +16,49 @@ import {
   fetchUserInfoSuccess,
   fetchUserInfoFailure,
 } from "Slices";
-import { urls } from "Utils";
+import { urls, checkUsernameParam } from "Utils";
 
 export function App() {
   const dispatch = useDispatch();
   const store = useSelector(({ userInfo }) => userInfo);
   const { data, error, loading } = store;
   // console.log(data.isLoggedIn, "isloggedin from app");
+  const savedUser = JSON.parse(localStorage.getItem("user"));
 
   const { Ok } = HttpStatusCode;
+  const { username } = useParams();
 
   useEffect(() => {
-    dispatch(fetchUserInfo());
-    axios
-      .get("http://localhost:8000/user/username", {
-        params: {
-          username: "thisisvishalpal",
-        },
-      })
-      .then(({ data }) => {
-        if (data.status === Ok) dispatch(fetchUserInfoSuccess(data.data));
-        console.log(data);
-      })
-      .catch(({ message }) => {
-        dispatch(fetchUserInfoFailure(message));
-        console.log(message);
-      });
+    if (!checkUsernameParam(username)) {
+      dispatch(fetchUserInfo());
+      axios
+        .get("http://localhost:8000/user/username", {
+          params: {
+            username: savedUser.userName,
+          },
+        })
+        .then(({ data }) => {
+          if (data.status === Ok) dispatch(fetchUserInfoSuccess(data.data));
+          // console.log(data);
+        })
+        .catch(({ message }) => {
+          dispatch(fetchUserInfoFailure(message));
+          // console.log(message);
+        });
+    }
   }, []);
+
+  const Router = createBrowserRouter([
+    {
+      path: urls?.root,
+      element: <Layout />,
+      children: data?.isLoggedIn ? LoggedInRoutes : LoggedOutRoutes,
+    },
+  ]);
 
   return (
     <ThemeProvider>
-      <RouterProvider
-        router={createBrowserRouter([
-          {
-            path: urls?.root,
-            element: <Layout />,
-            children: data?.isLoggedIn ? LoggedInRoutes : LoggedOutRoutes,
-          },
-        ])}
-      />
+      <RouterProvider router={Router} />
     </ThemeProvider>
   );
 }

@@ -1,3 +1,111 @@
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { Button, Form, Container, Spinner } from "react-bootstrap";
+import {
+  fetchUserInfo,
+  fetchUserInfoSuccess,
+  fetchUserInfoFailure,
+} from "Slices";
+import axios from "axios";
+import { urls } from "Utils";
+
+const { root, signUp } = urls;
+
 export const SignIn = () => {
-  return <>SignIn container</>;
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!username || !password) {
+      setError("Please fill out both fields.");
+      return;
+    }
+
+    setLoading(true);
+    setError("");
+
+    dispatch(fetchUserInfo());
+    try {
+      // Example API call to authenticate user
+      const { data, status } = await axios.post(
+        "http://localhost:8000/auth/signin",
+        {
+          username,
+          password,
+        }
+      );
+
+      if (data.status === 200) {
+        dispatch(fetchUserInfoSuccess(data.data));
+
+        navigate(root);
+        localStorage.setItem("user", JSON.stringify(data?.data));
+      }
+    } catch (err) {
+      setError("Invalid credentials. Please try again.");
+      dispatch(fetchUserInfoFailure("Login failed."));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <Container
+      className="d-flex justify-content-center align-items-center"
+      style={{ minHeight: "100vh" }}
+    >
+      <div className="signin-form">
+        <h2 className="text-center mb-4">Sign In</h2>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group controlId="formUsername" className="mb-3">
+            <Form.Label>Username</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </Form.Group>
+
+          <Form.Group controlId="formPassword" className="mb-3">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type="password"
+              placeholder="Enter password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </Form.Group>
+
+          {error && <p className="text-danger">{error}</p>}
+
+          <Button variant="primary" type="submit" block disabled={loading}>
+            {loading ? (
+              <>
+                <Spinner animation="border" size="sm" /> Logging In...
+              </>
+            ) : (
+              "Sign In"
+            )}
+          </Button>
+        </Form>
+
+        <p className="mt-3 text-center">
+          Don't have an account?{" "}
+          <a href={signUp} style={{ textDecoration: "none" }}>
+            Sign Up
+          </a>
+        </p>
+      </div>
+    </Container>
+  );
 };
