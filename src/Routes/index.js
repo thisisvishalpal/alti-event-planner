@@ -2,7 +2,7 @@ import { createBrowserRouter, Outlet } from "react-router-dom";
 
 import { Header, Footer } from "Components";
 import { urls } from "Utils";
-import { ChildRoutes } from "./ChildRoutes";
+import { ChildRoutes } from "./LoggedInRoutes";
 
 const { root } = urls;
 

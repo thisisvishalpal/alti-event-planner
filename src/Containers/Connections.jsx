@@ -19,7 +19,7 @@ export const ConnectionTabs = ({ state, followers, following }) => {
         className="mb-3"
         justify
       >
-        <Tab eventKey="followers" title="Followers">
+        <Tab eventKey="followers" title={`Followers ${followers.length}`}>
           <ListGroup>
             {followers.map((follower) => (
               <ListGroup.Item key={follower.id}>
@@ -41,7 +41,7 @@ export const ConnectionTabs = ({ state, followers, following }) => {
           </ListGroup>
         </Tab>
 
-        <Tab eventKey="following" title="Following">
+        <Tab eventKey="following" title={`Following ${following.length}`}>
           <ListGroup>
             {following.map((followed) => (
               <ListGroup.Item key={followed.id}>

@@ -1,0 +1,12 @@
+.hero-section {
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  color: white;
+}
+
+.features-section h4 {
+  color: #333;
+}
+
+.cta-section {
+  background-color: #1d1d1d;
+}

@@ -6,3 +6,5 @@ export { SeatSelectionModal } from "./SeatSelectionModal";
 export { EventCard } from "./EventCard";
 export { UserInfo } from "./UserInfo";
 export { UserPosts } from "./UserPosts";
+export { UploadSection } from "./UploadSection";
+export { Feed } from "./Feed";

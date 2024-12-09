@@ -137,30 +137,202 @@ export const mockUserInfo = {
   gotra: ["dubele", "mohaniya"],
   age: 28,
   gender: "male",
+  isLoggedIn: true,
+  accountType: "profile",
 };
 
 export const followers = [
   {
     id: 1,
-    name: "John Doe",
+    name: "Aarav Sharma",
     profilePicture: "https://via.placeholder.com/40",
   },
   {
     id: 2,
-    name: "Jane Smith",
+    name: "Ishita Patel",
+    profilePicture: "https://via.placeholder.com/40",
+  },
+  {
+    id: 3,
+    name: "Rohan Gupta",
+    profilePicture: "https://via.placeholder.com/40",
+  },
+  {
+    id: 4,
+    name: "Priya Singh",
+    profilePicture: "https://via.placeholder.com/40",
+  },
+  {
+    id: 5,
+    name: "Kabir Verma",
+    profilePicture: "https://via.placeholder.com/40",
+  },
+  {
+    id: 6,
+    name: "Ananya Iyer",
+    profilePicture: "https://via.placeholder.com/40",
+  },
+  {
+    id: 7,
+    name: "Vivaan Mehta",
+    profilePicture: "https://via.placeholder.com/40",
+  },
+  {
+    id: 8,
+    name: "Diya Nair",
+    profilePicture: "https://via.placeholder.com/40",
+  },
+  {
+    id: 9,
+    name: "Aditya Malhotra",
+    profilePicture: "https://via.placeholder.com/40",
+  },
+  {
+    id: 10,
+    name: "Sneha Deshmukh",
+    profilePicture: "https://via.placeholder.com/40",
+  },
+  {
+    id: 11,
+    name: "Rajiv Chatterjee",
+    profilePicture: "https://via.placeholder.com/40",
+  },
+  {
+    id: 12,
+    name: "Sanya Kapoor",
+    profilePicture: "https://via.placeholder.com/40",
+  },
+  {
+    id: 13,
+    name: "Arjun Khanna",
+    profilePicture: "https://via.placeholder.com/40",
+  },
+  {
+    id: 14,
+    name: "Meera Joshi",
+    profilePicture: "https://via.placeholder.com/40",
+  },
+  {
+    id: 15,
+    name: "Nikhil Reddy",
+    profilePicture: "https://via.placeholder.com/40",
+  },
+  {
+    id: 16,
+    name: "Aditi Menon",
+    profilePicture: "https://via.placeholder.com/40",
+  },
+  {
+    id: 17,
+    name: "Harsh Vardhan",
+    profilePicture: "https://via.placeholder.com/40",
+  },
+  {
+    id: 18,
+    name: "Tara Kulkarni",
+    profilePicture: "https://via.placeholder.com/40",
+  },
+  {
+    id: 19,
+    name: "Yash Tiwari",
+    profilePicture: "https://via.placeholder.com/40",
+  },
+  {
+    id: 20,
+    name: "Kavya Bhat",
     profilePicture: "https://via.placeholder.com/40",
   },
 ];
-
 export const following = [
   {
     id: 1,
-    name: "Alice Johnson",
+    name: "Aarav Sharma",
     profilePicture: "https://via.placeholder.com/40",
   },
   {
     id: 2,
-    name: "Bob Williams",
+    name: "Ishita Patel",
+    profilePicture: "https://via.placeholder.com/40",
+  },
+  {
+    id: 3,
+    name: "Rohan Gupta",
+    profilePicture: "https://via.placeholder.com/40",
+  },
+  {
+    id: 4,
+    name: "Priya Singh",
+    profilePicture: "https://via.placeholder.com/40",
+  },
+  {
+    id: 5,
+    name: "Kabir Verma",
+    profilePicture: "https://via.placeholder.com/40",
+  },
+  {
+    id: 6,
+    name: "Ananya Iyer",
+    profilePicture: "https://via.placeholder.com/40",
+  },
+  {
+    id: 7,
+    name: "Vivaan Mehta",
+    profilePicture: "https://via.placeholder.com/40",
+  },
+  {
+    id: 8,
+    name: "Diya Nair",
+    profilePicture: "https://via.placeholder.com/40",
+  },
+  {
+    id: 9,
+    name: "Aditya Malhotra",
+    profilePicture: "https://via.placeholder.com/40",
+  },
+  {
+    id: 10,
+    name: "Sneha Deshmukh",
+    profilePicture: "https://via.placeholder.com/40",
+  },
+  {
+    id: 11,
+    name: "Rajiv Chatterjee",
+    profilePicture: "https://via.placeholder.com/40",
+  },
+  {
+    id: 12,
+    name: "Sanya Kapoor",
+    profilePicture: "https://via.placeholder.com/40",
+  },
+  {
+    id: 13,
+    name: "Arjun Khanna",
+    profilePicture: "https://via.placeholder.com/40",
+  },
+  {
+    id: 14,
+    name: "Meera Joshi",
+    profilePicture: "https://via.placeholder.com/40",
+  },
+  {
+    id: 15,
+    name: "Nikhil Reddy",
+    profilePicture: "https://via.placeholder.com/40",
+  },
+
+  {
+    id: 18,
+    name: "Tara Kulkarni",
+    profilePicture: "https://via.placeholder.com/40",
+  },
+  {
+    id: 19,
+    name: "Yash Tiwari",
+    profilePicture: "https://via.placeholder.com/40",
+  },
+  {
+    id: 20,
+    name: "Kavya Bhat",
     profilePicture: "https://via.placeholder.com/40",
   },
 ];

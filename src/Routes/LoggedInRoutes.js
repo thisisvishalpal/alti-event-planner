@@ -1,5 +1,4 @@
 import {
-  Landing,
   Events,
   NotFound,
   Feeds,
@@ -13,7 +12,10 @@ import { urls } from "Utils";
 const { root, events, feeds, signIn, signUp, profile, connections } = urls;
 
 export const ChildRoutes = [
-  { path: root, element: <Landing /> },
+  {
+    path: root,
+    element: <Feeds />,
+  },
   {
     path: events,
     element: <Events />,

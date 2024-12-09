@@ -7,7 +7,7 @@ import { urls } from "Utils";
 import { SwitchSelector } from "./SwitchSelector";
 
 export const Header = () => {
-  const { myAccount } = urls;
+  const { signIn, signUp } = urls;
   const { theme, toggleTheme } = useTheme();
   const { data, error, loading } = useSelector(({ userInfo }) => userInfo);
 
@@ -26,27 +26,32 @@ export const Header = () => {
             </NavLink>
           </Navbar.Brand>
 
-          <Nav className="me-auto">
+          {/* <Nav className="me-auto">
             <NavLink to="/feeds" className="nav-link">
               Feeds
             </NavLink>
-          </Nav>
-          {/* <Nav className="me-auto">
-            <NavLink to="/signin" className="nav-link">
-              Sign In
-            </NavLink>
-          </Nav> */}
-          {/* <Nav className="me-auto">
-            <NavLink to="/signup" className="nav-link">
-              Sign Up
-            </NavLink>
           </Nav> */}
 
-          <Nav className="">
-            <NavLink to={`/${data?.userName}`} className="nav-link">
-              {data?.userName}
-            </NavLink>
-          </Nav>
+          {data?.isLoggedIn ? (
+            <Nav>
+              <NavLink to={data?.userName} className="nav-link">
+                {data?.userName}
+              </NavLink>
+            </Nav>
+          ) : (
+            <>
+              <Nav>
+                <NavLink to={signIn} className="nav-link">
+                  Sign In
+                </NavLink>
+              </Nav>
+              <Nav>
+                <NavLink to={signUp} className="nav-link">
+                  Sign Up
+                </NavLink>
+              </Nav>
+            </>
+          )}
 
           {/* <Nav className="ms-auto">
             <SwitchSelector

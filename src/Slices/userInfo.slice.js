@@ -18,6 +18,8 @@ const initialState = {
     gotra: null,
     age: null,
     gender: null,
+    accountType: null,
+    isLoggedIn: false,
   },
   loading: false,
   error: null,
