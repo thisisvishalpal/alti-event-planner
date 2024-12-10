@@ -7,6 +7,7 @@ import {
   Messages,
   Search,
   SignIn,
+  Settings,
 } from "Containers";
 import { urls } from "Utils";
 
@@ -19,6 +20,7 @@ const {
   messages,
   search,
   signIn,
+  settings,
 } = urls;
 
 export const LoggedInRoutes = [
@@ -53,6 +55,10 @@ export const LoggedInRoutes = [
   {
     path: signIn,
     element: <SignIn />,
+  },
+  {
+    path: settings,
+    element: <Settings />,
   },
   {
     path: "*",

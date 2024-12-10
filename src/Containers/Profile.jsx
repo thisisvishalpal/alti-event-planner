@@ -1,26 +1,34 @@
 import React, { useEffect } from "react";
-import axios, { HttpStatusCode } from "axios";
+import { HttpStatusCode } from "axios";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import { UserInfo, UserPosts } from "Components";
-import { checkUsernameParam } from "Utils";
 import {
-  fetchUserInfo,
-  fetchUserInfoFailure,
-  fetchUserInfoSuccess,
+  fetchOtherProfile,
+  fetchOtherProfileSuccess,
+  fetchOtherProfileFailure,
 } from "Slices";
+import { axiosInstance } from "Services";
 
 export const Profile = () => {
   const { data, error, loading } = useSelector(({ userInfo }) => userInfo);
+  const {
+    data: profileData,
+    error: profileError,
+    loading: profileLoading,
+  } = useSelector(({ otherProfile }) => otherProfile);
+
   const { username } = useParams();
   const dispatch = useDispatch();
 
-  // console.log(username, "profile");
+  // console.log(username, "username from profile");
+  const mainLogic = data?.username !== username;
   useEffect(() => {
-    if (!checkUsernameParam(username)) {
-      dispatch(fetchUserInfo());
-      axios
+    if (mainLogic) {
+      console.log("yes control is coming here");
+      dispatch(fetchOtherProfile());
+      axiosInstance
         .get("http://localhost:8000/user/username", {
           params: {
             username: username,
@@ -28,22 +36,26 @@ export const Profile = () => {
         })
         .then(({ data }) => {
           if (data.status === HttpStatusCode?.Ok)
-            dispatch(fetchUserInfoSuccess(data.data));
+            dispatch(fetchOtherProfileSuccess(data.data));
           // console.log(data);
         })
         .catch(({ message }) => {
-          dispatch(fetchUserInfoFailure(message));
+          dispatch(fetchOtherProfileFailure(message));
           // console.log(message);
         });
     }
   }, [username]);
 
-  // console.log(username, "from profile component");
-
   return (
-    <div className="container mt-5">
-      <UserInfo user={data} loading={loading} />
-      <UserPosts posts={data?.posts} loading={loading} />
+    <div className="container">
+      <UserInfo
+        user={mainLogic ? profileData : data}
+        loading={mainLogic ? profileLoading : loading}
+      />
+      <UserPosts
+        posts={mainLogic ? profileData?.posts : data?.posts}
+        loading={mainLogic ? profileLoading : loading}
+      />
     </div>
   );
 };

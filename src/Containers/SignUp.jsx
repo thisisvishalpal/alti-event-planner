@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Button, Form, Container, Spinner } from "react-bootstrap";
 import axios from "axios";
+
+import { useAuthenticated } from "Hooks";
 import { signIn } from "Slices";
 import { urls } from "Utils";
-
-// const { signIn, root } = urls;
 
 export const SignUp = () => {
   const [username, setUsername] = useState("");
@@ -16,7 +16,8 @@ export const SignUp = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  const { isAuthenticated } = useSelector(({ userAuth }) => userAuth);
+  const isAuthenticated = useAuthenticated();
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -121,9 +122,9 @@ export const SignUp = () => {
 
         <p className="mt-3 text-center">
           Already have an account?{" "}
-          <a href={signIn} style={{ textDecoration: "none" }}>
+          <Link to={`/${urls?.signIn}`} replace className="nav-ec">
             Sign In
-          </a>
+          </Link>
         </p>
       </div>
     </Container>

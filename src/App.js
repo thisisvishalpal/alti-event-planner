@@ -1,29 +1,14 @@
-import { useEffect } from "react";
-import {
-  RouterProvider,
-  createBrowserRouter,
-  useParams,
-} from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 //Importing local files
 import { Layout } from "Layout";
 import { LoggedInRoutes, LoggedOutRoutes } from "Routes";
 import { ThemeProvider } from "Theme";
-
-import { urls, checkUsernameParam } from "Utils";
-import { fetchInitialState } from "Slices";
+import { useAuthenticated } from "Hooks";
+import { urls } from "Utils";
 
 export function App() {
-  const dispatch = useDispatch();
-  const { isAuthenticated } = useSelector(({ userAuth }) => userAuth);
-  const { username } = useParams();
-
-  useEffect(() => {
-    if (!checkUsernameParam(username)) {
-      dispatch(fetchInitialState());
-    }
-  }, []);
+  const isAuthenticated = useAuthenticated();
 
   const Router = createBrowserRouter([
     {

@@ -27,30 +27,29 @@ const initialState = {
 };
 // Async Thunk to fetch initial state
 export const fetchInitialState = createAsyncThunk(
-  "userInfo/fetchInitialState",
-  async (_, { getState }) => {
-    const { username } = getState().userAuth;
+  "otherProfile/fetchInitialState",
+  async () => {
     const response = await axiosInstance.get("/user/username", {
-      params: { username: username },
+      params: { username: "thisisvishalpal" },
     });
 
     return response?.data?.data;
   }
 );
 
-const userInfoSlice = createSlice({
-  name: "userInfo",
+const otherProfileSlice = createSlice({
+  name: "otherProfile",
   initialState,
   reducers: {
-    fetchUserInfo(state) {
+    fetchOtherProfile(state) {
       state.loading = true;
       state.error = null;
     },
-    fetchUserInfoSuccess(state, action) {
+    fetchOtherProfileSuccess(state, action) {
       state.loading = false;
       state.data = action.payload;
     },
-    fetchUserInfoFailure(state, action) {
+    fetchOtherProfileFailure(state, action) {
       state.loading = false;
       state.error = action.payload;
     },
@@ -72,7 +71,10 @@ const userInfoSlice = createSlice({
   },
 });
 
-export const { fetchUserInfo, fetchUserInfoSuccess, fetchUserInfoFailure } =
-  userInfoSlice.actions;
+export const {
+  fetchOtherProfile,
+  fetchOtherProfileSuccess,
+  fetchOtherProfileFailure,
+} = otherProfileSlice.actions;
 
-export default userInfoSlice.reducer;
+export default otherProfileSlice.reducer;

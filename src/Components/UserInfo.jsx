@@ -1,16 +1,6 @@
-import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import {
-  Card,
-  Row,
-  Col,
-  Image,
-  Button,
-  Form,
-  Collapse,
-  Spinner,
-} from "react-bootstrap";
+import { Card, Row, Col, Image, Button, Spinner } from "react-bootstrap";
 import { urls } from "Utils";
 
 export const UserInfo = ({ user, loading }) => {
@@ -31,11 +21,10 @@ export const UserInfo = ({ user, loading }) => {
     age,
     gender,
   } = user;
-  const [showSettings, setShowSetting] = useState(false);
   const navigate = useNavigate();
 
   const handleConnectionLink = (prop) => {
-    navigate("/connections", { state: prop });
+    navigate(urls?.connections, { state: prop });
   };
 
   return (
@@ -69,27 +58,46 @@ export const UserInfo = ({ user, loading }) => {
                   <p className="text-muted">Posts</p>
                 </Col>
                 <Col>
-                  <h5 onClick={() => handleConnectionLink("followers")}>
-                    {followers}
-                  </h5>
+                  <Link
+                    style={{
+                      textDecoration: "none",
+                      color: "inherit",
+                    }}
+                  >
+                    <h5 onClick={() => handleConnectionLink("followers")}>
+                      {followers}
+                    </h5>
+                  </Link>
+
                   <p className="text-muted">Followers</p>
                 </Col>
                 <Col>
-                  <h5 onClick={() => handleConnectionLink("following")}>
-                    {following}
-                  </h5>
+                  <Link
+                    style={{
+                      textDecoration: "none",
+                      color: "inherit",
+                    }}
+                  >
+                    <h5 onClick={() => handleConnectionLink("following")}>
+                      {following}
+                    </h5>
+                  </Link>
                   <p className="text-muted">Following</p>
                 </Col>
               </Row>
 
               {/* Action Buttons */}
               <div className="text-end">
-                <Button variant="primary" className="me-2">
+                <Button
+                  variant="primary"
+                  onClick={() => navigate("/settings")}
+                  className="me-2"
+                >
                   Edit Profile
                 </Button>
                 <Button
                   variant="outline-secondary"
-                  onClick={() => setShowSetting((prev) => !prev)}
+                  onClick={() => navigate("/settings")}
                 >
                   Settings
                 </Button>
@@ -98,64 +106,6 @@ export const UserInfo = ({ user, loading }) => {
           </Col>
         </Row>
       )}
-
-      <Collapse in={showSettings}>
-        <div className="mt-4">
-          <Card className="p-3">
-            <h5 className="mb-3">User Settings</h5>
-
-            {/* Update Password */}
-            <Form>
-              <h6>Update Password</h6>
-              <Row className="mb-3">
-                <Col md={6}>
-                  <Form.Group controlId="currentPassword">
-                    <Form.Label>Current Password</Form.Label>
-                    <Form.Control
-                      type="password"
-                      placeholder="Enter current password"
-                    />
-                  </Form.Group>
-                </Col>
-                <Col md={6}>
-                  <Form.Group controlId="newPassword">
-                    <Form.Label>New Password</Form.Label>
-                    <Form.Control
-                      type="password"
-                      placeholder="Enter new password"
-                    />
-                  </Form.Group>
-                </Col>
-              </Row>
-
-              {/* Notification Preferences */}
-              <h6>Notification Preferences</h6>
-              <Form.Group className="mb-3" controlId="emailNotifications">
-                <Form.Check
-                  type="switch"
-                  label="Receive email notifications"
-                  defaultChecked
-                />
-              </Form.Group>
-
-              <Form.Group className="mb-3" controlId="smsNotifications">
-                <Form.Check type="switch" label="Receive SMS notifications" />
-              </Form.Group>
-
-              {/* Privacy Settings */}
-              <h6>Privacy Settings</h6>
-              <Form.Group className="mb-3" controlId="privacySettings">
-                <Form.Check type="checkbox" label="Make my profile private" />
-              </Form.Group>
-
-              {/* Save Settings Button */}
-              <div className="text-end">
-                <Button variant="success">Save Changes</Button>
-              </div>
-            </Form>
-          </Card>
-        </div>
-      </Collapse>
     </Card>
   );
 };

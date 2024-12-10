@@ -8,3 +8,6 @@ export { UserInfo } from "./UserInfo";
 export { UserPosts } from "./UserPosts";
 export { UploadSection } from "./UploadSection";
 export { Feed } from "./Feed";
+export { Aside } from "./Aside";
+export { SearchBar } from "./SearchBar";
+export { UserRow } from "./UserRow";

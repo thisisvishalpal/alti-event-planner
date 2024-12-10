@@ -1,0 +1,45 @@
+.notifications-page {
+  padding: 20px;
+}
+
+.notifications-page h5 {
+  margin-bottom: 20px;
+}
+
+.notification-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.notification-item:hover {
+  background-color: #f8f9fa;
+}
+
+.notification-item.unread {
+  font-weight: bold;
+}
+
+.notification-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.notification-type {
+  display: inline-block;
+  min-width: 80px;
+  text-align: center;
+}
+
+.notification-text {
+  flex: 1;
+}
+
+.notification-timestamp {
+  font-size: 0.9rem;
+  color: #6c757d;
+}

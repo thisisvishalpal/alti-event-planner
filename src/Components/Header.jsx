@@ -4,6 +4,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 
 import { logout } from "Slices";
 import { useTheme } from "Theme";
+import { useAuthenticated } from "Hooks";
 import { urls } from "Utils";
 
 export const Header = () => {
@@ -11,9 +12,8 @@ export const Header = () => {
   const navigate = useNavigate();
   const { theme } = useTheme();
   const { data } = useSelector(({ userInfo }) => userInfo);
-  const { isAuthenticated } = useSelector(({ userAuth }) => userAuth);
-  const { root, signIn, signUp, connections, messages, notifications, search } =
-    urls;
+  const isAuthenticated = useAuthenticated();
+  const { root, signIn, signUp, settings } = urls;
 
   const handleLogout = () => {
     dispatch(logout());
@@ -31,7 +31,6 @@ export const Header = () => {
         expand="lg"
       >
         <Container fluid>
-          {/* Top-left: Brand */}
           <Navbar.Brand>
             <NavLink to={root} className="nav-link brand">
               Community
@@ -42,8 +41,7 @@ export const Header = () => {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
           <Navbar.Collapse id="responsive-navbar-nav">
-            {/* Middle: Navigation Links */}
-            {isAuthenticated && (
+            {/* {isAuthenticated && (
               <Nav className="middle-nav mx-auto">
                 <NavLink to={connections} className="nav-link">
                   Connections
@@ -58,23 +56,16 @@ export const Header = () => {
                   Search
                 </NavLink>
               </Nav>
-            )}
+            )} */}
 
             {/* Top-right: User Info or Authentication Links */}
             <Nav className="top-right-nav ms-auto">
               {isAuthenticated ? (
-                <NavDropdown
-                  title={data?.userName}
-                  id="user-dropdown"
-                  align="end"
-                >
-                  <NavDropdown.Item as={NavLink} to={`user/${data?.userName}`}>
-                    Profile
-                  </NavDropdown.Item>
-                  <NavDropdown.Item>
-                    <Button onClick={handleLogout}>Logout</Button>
-                  </NavDropdown.Item>
-                </NavDropdown>
+                <>
+                  <NavLink to={`user/${data?.username}`} className="nav-link">
+                    {data?.username}
+                  </NavLink>
+                </>
               ) : (
                 <>
                   <NavLink to={signIn} className="nav-link">

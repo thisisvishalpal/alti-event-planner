@@ -1,6 +1,6 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 
-import { allEvents, allFeeds, userInfo, userAuth } from "Slices";
+import { allEvents, allFeeds, userInfo, userAuth, otherProfile } from "Slices";
 
 export const Store = configureStore({
   reducer: combineReducers({
@@ -8,5 +8,6 @@ export const Store = configureStore({
     allFeeds,
     userInfo,
     userAuth,
+    otherProfile,
   }),
 });

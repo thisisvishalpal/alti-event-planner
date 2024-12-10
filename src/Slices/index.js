@@ -18,6 +18,11 @@ import userInfo, {
 } from "./userInfo.slice";
 
 import userAuth, { validateToken, logout, signIn } from "./auth.slice";
+import otherProfile, {
+  fetchOtherProfile,
+  fetchOtherProfileSuccess,
+  fetchOtherProfileFailure,
+} from "./otherProfile.slice";
 
 export {
   allEvents,
@@ -37,4 +42,8 @@ export {
   validateToken,
   signIn,
   logout,
+  otherProfile,
+  fetchOtherProfile,
+  fetchOtherProfileSuccess,
+  fetchOtherProfileFailure,
 };

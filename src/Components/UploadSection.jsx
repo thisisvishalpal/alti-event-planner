@@ -16,17 +16,14 @@ export const UploadSection = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(`${activeTab} submitted:`, inputData);
+    // console.log(`${activeTab} submitted:`, inputData);
     handleClose();
   };
 
   return (
-    <div
-      className="upload-section"
-      style={{ "max-width": "600px", margin: "20px auto" }}
-    >
+    <div className="upload-section" style={{ "max-width": "hw100" }}>
       <Card className="p-3 mb-4 shadow-sm">
-        <h4>Create New</h4>
+        <Form.Control />
         <div className="d-flex justify-content-between mt-3">
           <Button variant="primary" onClick={() => handleShow("photos")}>
             📸 Upload Photos

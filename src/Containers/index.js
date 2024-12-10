@@ -9,3 +9,5 @@ export { Profile } from "./Profile";
 export { Notifications } from "./Notifications";
 export { Messages } from "./Messages";
 export { Search } from "./Search";
+export { AccessDenied } from "./AccessDenied";
+export { Settings } from "./Settings";

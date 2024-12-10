@@ -19,7 +19,7 @@ export const validateToken = createAsyncThunk(
 const authSlice = createSlice({
   name: "auth",
   initialState: {
-    user: null,
+    username: null,
     token: null,
     isAuthenticated: false,
     loading: false,
@@ -27,7 +27,7 @@ const authSlice = createSlice({
   },
   reducers: {
     logout: (state) => {
-      state.user = null;
+      state.username = null;
       state.token = null;
       state.isAuthenticated = false;
     },
@@ -39,7 +39,7 @@ const authSlice = createSlice({
       })
       .addCase(signIn.fulfilled, (state, action) => {
         state.loading = false;
-        // state.user = action.payload.user;
+        state.username = action.payload.username;
         state.accessToken = action.payload.accessToken;
         state.refreshToken = action.payload.refreshToken;
         state.isAuthenticated = true;

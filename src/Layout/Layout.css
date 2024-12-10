@@ -1,0 +1,10 @@
+@media (max-width: 768px) {
+  div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  aside {
+    margin-bottom: 20px; /* Add spacing for mobile layout */
+  }
+}
