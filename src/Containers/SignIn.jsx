@@ -1,24 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button, Form, Container, Spinner } from "react-bootstrap";
 
 import { signIn } from "Slices";
 import { urls } from "Utils";
-import { useAuthenticated } from "Hooks";
 
-const { root, signUp } = urls;
+const { signUp } = urls;
 
 export const SignIn = () => {
-  const isAuthenticated = useAuthenticated();
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   // Handle form submission
   const handleSubmit = async (e) => {
@@ -35,11 +31,6 @@ export const SignIn = () => {
     dispatch(signIn({ username, password }));
   };
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate(root); // Redirect to the home page
-    }
-  }, [isAuthenticated, navigate]);
   return (
     <Container
       className="d-flex justify-content-center align-items-center"

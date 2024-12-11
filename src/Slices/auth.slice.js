@@ -1,14 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 import { axiosInstance } from "Services";
 
 export const signIn = createAsyncThunk("auth/signIn", async (credentials) => {
-  const token = Cookies.get("accessToken");
-  console.log(token, "token from cookies from signin slice");
+  // const token = Cookies.get("accessToken");
+  // console.log(token, "token from cookies from signin slice");
   const response = await axiosInstance.post("/auth/signin", credentials);
-
-  return response.data;
+  return response.data.data;
 });
 
 export const validateToken = createAsyncThunk(

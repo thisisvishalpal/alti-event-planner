@@ -7,8 +7,7 @@ export const UserInfo = ({ user, loading }) => {
   const {
     profilePicture,
     userName,
-    firstName,
-    lastName,
+    fullName,
     city,
     state,
     phoneNumber,
@@ -38,7 +37,7 @@ export const UserInfo = ({ user, loading }) => {
             <Image
               src={profilePicture}
               roundedCircle
-              alt={`${firstName}'s profile`}
+              alt={`${fullName}'s profile`}
               className="img-fluid"
               style={{ width: "150px", height: "150px" }}
             />
@@ -48,7 +47,7 @@ export const UserInfo = ({ user, loading }) => {
           <Col md={9}>
             <Card.Body>
               {/* Name and Bio */}
-              <h3>{`${firstName} ${lastName}`}</h3>
+              <h3>{fullName}</h3>
               <p className="text-muted">{bio}</p>
 
               {/* User Stats */}

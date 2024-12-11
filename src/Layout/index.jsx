@@ -6,7 +6,7 @@ import "./Layout.css";
 
 export const Layout = () => {
   const isAuth = useAuthenticated();
-  console.log(isAuth, "value");
+  // console.log(isAuth, "value");
   return (
     <>
       <Header />

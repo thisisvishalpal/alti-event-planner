@@ -26,7 +26,7 @@ export const SignUp = () => {
         if (user.username) {
           dispatch(signIn({ username: user.username }));
         }
-        navigate("/signin"); // Redirect to Sign In
+        navigate(urls.signIn); // Redirect to Sign In
       }
     } catch (error) {
       console.error(error.response?.data?.message || "An error occurred");
