@@ -4,22 +4,6 @@ import { Header, Footer, Aside } from "Components";
 import { useAuthenticated } from "Hooks";
 import "./Layout.css";
 
-// export const Layout = () => {
-//   return (
-//     <>
-//       <Header />
-//       <div
-//         style={{
-//           minHeight: "100vh",
-//         }}
-//       >
-//         {/* aside section here  */}
-//         <Outlet />
-//       </div>
-//       <Footer />
-//     </>
-//   );
-// };
 export const Layout = () => {
   const isAuth = useAuthenticated();
   console.log(isAuth, "value");

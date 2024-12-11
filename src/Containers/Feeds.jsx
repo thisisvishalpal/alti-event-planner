@@ -14,13 +14,12 @@ export const Feeds = () => {
 
   const dispatch = useDispatch();
   const { username } = useParams();
-  const store = useSelector(({ userAuth }) => userAuth);
 
   useEffect(() => {
     if (!checkUsernameParam(username)) {
       dispatch(fetchInitialState());
     }
-  }, []);
+  }, [username]);
 
   return (
     <div className="container mt-5">

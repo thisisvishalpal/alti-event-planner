@@ -51,6 +51,7 @@ code {
 
 .nav-link:hover {
   background-color: #4688eb;
+  /* padding: 5px; */
   color: palevioletred; /* Example: Change color on hover */
   border-radius: 4px; /* Example: Add border radius on hover */
   transition: background-color 0.3s ease; /* Example: Smooth transition */
@@ -70,32 +71,6 @@ code {
 .username {
   font-weight: bold;
 }
-
-/* .header .nav-link {
-  color: white;
-  text-decoration: none;
-  padding: 10px;
-}
-
-.header .nav-link:hover {
-  background-color: #4688eb;
-  color: white;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
-}
-
-.header .brand {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-.middle-nav {
-  justify-content: center;
-}
-
-.top-right-nav {
-  align-items: center;
-} */
 
 @media (max-width: 991.98px) {
   .middle-nav,

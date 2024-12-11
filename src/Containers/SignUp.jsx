@@ -1,73 +1,39 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
-import { Button, Form, Container, Spinner } from "react-bootstrap";
-import axios from "axios";
+import { Button, Form, Container } from "react-bootstrap";
 
-import { useAuthenticated } from "Hooks";
 import { signIn } from "Slices";
 import { urls } from "Utils";
+import { axiosInstance } from "Services";
 
 export const SignUp = () => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-
-  const isAuthenticated = useAuthenticated();
-
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
-  // Handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!username || !email || !password) {
-      setError("Please fill out all fields.");
-      return;
-    }
-
-    if (!validateEmail(email)) {
-      setError("Please enter a valid email address.");
-      return;
-    }
-
-    setLoading(true);
-    setError("");
-    setSuccess("");
-
+  const onSubmit = async (data) => {
     try {
-      // Example API call to register user
-      const response = await axios.post("http://localhost:8000/auth/signup", {
-        username,
-        email,
-        password,
-      });
-
+      const response = await axiosInstance.post("auth/signup", data);
       if (response.status === 201) {
-        setSuccess("Account created successfully! Redirecting to Sign In...");
-        dispatch(signIn(response.data)); // Save user data in Redux store
-        setTimeout(() => navigate(urls.signIn), 2000); // Redirect to Sign In after 2 seconds
+        const { user } = response.data;
+        if (user.username) {
+          dispatch(signIn({ username: user.username }));
+        }
+        navigate("/signin"); // Redirect to Sign In
       }
-    } catch (err) {
-      setError(
-        err.response?.data?.message || "An error occurred. Please try again."
-      );
-    } finally {
-      setLoading(false);
+    } catch (error) {
+      console.error(error.response?.data?.message || "An error occurred");
     }
   };
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate("/"); // Redirect to the home page
-    }
-  }, [isAuthenticated, navigate]);
+  const longSignupForm = false;
   return (
     <Container
       className="d-flex justify-content-center align-items-center"
@@ -75,56 +41,181 @@ export const SignUp = () => {
     >
       <div className="signup-form">
         <h2 className="text-center mb-4">Sign Up</h2>
-        <Form onSubmit={handleSubmit}>
-          <Form.Group controlId="formUsername" className="mb-3">
-            <Form.Label>Username</Form.Label>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <Form.Group className="mb-3">
+            <Form.Label>Full Name</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Enter username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Enter your full name"
+              {...register("fullName", { required: "Full Name is required" })}
             />
+            {errors.fullName && (
+              <p className="text-danger">{errors.fullName.message}</p>
+            )}
           </Form.Group>
 
-          <Form.Group controlId="formEmail" className="mb-3">
+          <Form.Group className="mb-3">
             <Form.Label>Email</Form.Label>
             <Form.Control
               type="email"
-              placeholder="Enter email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+              {...register("email", {
+                required: "Email is required",
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: "Invalid email address",
+                },
+              })}
+            />
+            {errors.email && (
+              <p className="text-danger">{errors.email.message}</p>
+            )}
+          </Form.Group>
+
+          {longSignupForm && (
+            <Form.Group className="mb-3">
+              <Form.Label>Phone Number</Form.Label>
+              <Form.Control
+                type="tel"
+                placeholder="Enter your phone number"
+                {...register("phoneNumber", {
+                  required: "Phone Number is required",
+                  pattern: {
+                    value: /^[0-9]{10}$/,
+                    message: "Phone Number must be 10 digits",
+                  },
+                })}
+              />
+              {errors.phoneNumber && (
+                <p className="text-danger">{errors.phoneNumber.message}</p>
+              )}
+            </Form.Group>
+          )}
+
+          {longSignupForm && (
+            <Form.Group className="mb-3">
+              <Form.Label>City</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter your city"
+                {...register("city", { required: "City is required" })}
+              />
+              {errors.city && (
+                <p className="text-danger">{errors.city.message}</p>
+              )}
+            </Form.Group>
+          )}
+
+          {longSignupForm && (
+            <Form.Group className="mb-3">
+              <Form.Label>Age</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="Enter your age"
+                {...register("age", {
+                  required: "Age is required",
+                  min: {
+                    value: 18,
+                    message: "You must be at least 18 years old",
+                  },
+                })}
+              />
+              {errors.age && (
+                <p className="text-danger">{errors.age.message}</p>
+              )}
+            </Form.Group>
+          )}
+
+          {longSignupForm && (
+            <Form.Group className="mb-3">
+              <Form.Label>Gender</Form.Label>
+              <Form.Select
+                {...register("gender", { required: "Gender is required" })}
+              >
+                <option value="">Select your gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </Form.Select>
+              {errors.gender && (
+                <p className="text-danger">{errors.gender.message}</p>
+              )}
+            </Form.Group>
+          )}
+
+          {longSignupForm && (
+            <Form.Group className="mb-3">
+              <Form.Label>Study</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter your field of study"
+                {...register("study", { required: "Study field is required" })}
+              />
+              {errors.study && (
+                <p className="text-danger">{errors.study.message}</p>
+              )}
+            </Form.Group>
+          )}
+
+          {longSignupForm && (
+            <Form.Group className="mb-3">
+              <Form.Label>Occupation</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter your occupation"
+                {...register("occupation", {
+                  required: "Occupation is required",
+                })}
+              />
+              {errors.occupation && (
+                <p className="text-danger">{errors.occupation.message}</p>
+              )}
+            </Form.Group>
+          )}
+
+          {longSignupForm && (
+            <Form.Group className="mb-3">
+              <Form.Label>Married</Form.Label>
+              <Form.Select
+                {...register("married", {
+                  required: "Marital status is required",
+                })}
+              >
+                <option value="">Select marital status</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </Form.Select>
+              {errors.married && (
+                <p className="text-danger">{errors.married.message}</p>
+              )}
+            </Form.Group>
+          )}
+
+          <Form.Group className="mb-3">
+            <Form.Label>Username</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter your username (optional)"
+              {...register("username")}
             />
           </Form.Group>
 
-          <Form.Group controlId="formPassword" className="mb-3">
+          <Form.Group className="mb-3">
             <Form.Label>Password</Form.Label>
             <Form.Control
               type="password"
-              placeholder="Enter password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your password"
+              {...register("password")}
             />
           </Form.Group>
 
-          {error && <p className="text-danger">{error}</p>}
-          {success && <p className="text-success">{success}</p>}
-
-          <Button variant="primary" type="submit" block disabled={loading}>
-            {loading ? (
-              <>
-                <Spinner animation="border" size="sm" /> Creating Account...
-              </>
-            ) : (
-              "Sign Up"
-            )}
+          <Button variant="primary" type="submit" block>
+            Sign Up
           </Button>
         </Form>
 
         <p className="mt-3 text-center">
-          Already have an account?{" "}
-          <Link to={`/${urls?.signIn}`} replace className="nav-ec">
-            Sign In
-          </Link>
+          Already have an account? <Link to={`/${urls.signIn}`}>Sign In</Link>
         </p>
       </div>
     </Container>

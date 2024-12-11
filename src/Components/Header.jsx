@@ -30,7 +30,7 @@ export const Header = () => {
         variant={theme === "dark" ? "dark" : "light"}
         expand="lg"
       >
-        <Container fluid>
+        <Container>
           <Navbar.Brand>
             <NavLink to={root} className="nav-link brand">
               Community

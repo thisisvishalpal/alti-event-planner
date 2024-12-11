@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const axiosInstance = axios.create({
   baseURL: "http://localhost:8000",
-  // withCredentials: true,
+  withCredentials: true,
 });
 
 axiosInstance.interceptors.response.use(
@@ -10,7 +10,7 @@ axiosInstance.interceptors.response.use(
   async (error) => {
     if (error.response.status === 401) {
       // Try to refresh the token
-      const refreshResponse = await axios.post("/api/auth/refresh-token");
+      const refreshResponse = await axios.post("/auth/refresh-token");
       if (refreshResponse.status === 200) {
         const newToken = refreshResponse.data.token;
         axios.defaults.headers.common["Authorization"] = `Bearer ${newToken}`;
