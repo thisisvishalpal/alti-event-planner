@@ -1,17 +1,23 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { Card, Row, Col, Button, Image, Form } from "react-bootstrap";
 
-export const Feed = ({ posts }) => {
-  const [likes, setLikes] = useState(posts.map(() => false));
-  const [comments, setComments] = useState(posts.map(() => []));
+export const FeedSection = () => {
+  const feedsState = useSelector(({ userFeeds }) => userFeeds);
+  const { data, loading, error } = feedsState;
+
+  console.log(data, "feeds response from feeds component");
+
+  const [likes, setLikes] = useState(data?.map(() => false));
+  const [comments, setComments] = useState(data?.map(() => []));
 
   const handleLike = (index) => {
-    setLikes((prev) => prev.map((liked, i) => (i === index ? !liked : liked)));
+    setLikes((prev) => prev?.map((liked, i) => (i === index ? !liked : liked)));
   };
 
   const handleAddComment = (index, commentText) => {
     setComments((prev) =>
-      prev.map((commentList, i) =>
+      prev?.map((commentList, i) =>
         i === index ? [...commentList, commentText] : commentList
       )
     );
@@ -20,7 +26,7 @@ export const Feed = ({ posts }) => {
   return (
     <div className="feeds">
       <Row>
-        {posts.map((post, index) => (
+        {data?.map((post, index) => (
           <Col md={6} key={post.id} className="mb-4">
             <Card className="shadow-sm">
               <Card.Body>
@@ -64,7 +70,7 @@ export const Feed = ({ posts }) => {
                 <div className="mt-4">
                   <h6>Comments</h6>
                   <ul className="list-unstyled">
-                    {comments[index].map((comment, i) => (
+                    {comments[index]?.map((comment, i) => (
                       <li key={i} className="mb-2">
                         <strong>{comment.user}:</strong> {comment.text}
                       </li>

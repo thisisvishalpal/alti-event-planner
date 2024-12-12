@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-// import { mockPosts } from "Mock";
 import { axiosInstance } from "Services";
 
 const initialState = {
@@ -26,14 +25,13 @@ const initialState = {
   error: null,
 };
 // Async Thunk to fetch initial state
-export const fetchInitialState = createAsyncThunk(
-  "userInfo/fetchInitialState",
+export const fetchUserInfo = createAsyncThunk(
+  "userInfo/fetchUserInfo",
   async (_, { getState }) => {
-    const { username } = getState().userAuth;
+    const data = getState().userAuth;
     const response = await axiosInstance.get("/user/username", {
-      params: { username: username },
+      params: { username: data.username },
     });
-
     return response?.data?.data;
   }
 );
@@ -42,37 +40,37 @@ const userInfoSlice = createSlice({
   name: "userInfo",
   initialState,
   reducers: {
-    fetchUserInfo(state) {
-      state.loading = true;
-      state.error = null;
-    },
-    fetchUserInfoSuccess(state, action) {
-      state.loading = false;
-      state.data = action.payload;
-    },
-    fetchUserInfoFailure(state, action) {
-      state.loading = false;
-      state.error = action.payload;
-    },
+    // fetchUserInfo(state) {
+    //   state.loading = true;
+    //   state.error = null;
+    // },
+    // fetchUserInfoSuccess(state, action) {
+    //   state.loading = false;
+    //   state.data = action.payload;
+    // },
+    // fetchUserInfoFailure(state, action) {
+    //   state.loading = false;
+    //   state.error = action.payload;
+    // },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchInitialState.pending, (state) => {
+      .addCase(fetchUserInfo.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchInitialState.fulfilled, (state, action) => {
+      .addCase(fetchUserInfo.fulfilled, (state, action) => {
         state.loading = false;
         state.data = action.payload;
       })
-      .addCase(fetchInitialState.rejected, (state, action) => {
+      .addCase(fetchUserInfo.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });
   },
 });
 
-export const { fetchUserInfo, fetchUserInfoSuccess, fetchUserInfoFailure } =
-  userInfoSlice.actions;
+// export const { fetchUserInfo, fetchUserInfoSuccess, fetchUserInfoFailure } =
+//   userInfoSlice.actions;
 
 export default userInfoSlice.reducer;

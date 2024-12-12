@@ -7,38 +7,37 @@ const initialState = {
   error: null,
 };
 // Async Thunk to fetch initial state
-export const fetchUserFeeds = createAsyncThunk(
-  "userFeeds/fetchUserFeeds",
-
-  async (_, { getState }) => {
-    const { username } = getState().userAuth;
-
-    const response = await axiosInstance.get("/user/feeds", {
-      params: { username: username },
+export const fetchUserNotifications = createAsyncThunk(
+  "userNotifications/fetchUserNotifications",
+  async (params) => {
+    console.log(params);
+    const response = await axiosInstance.get("/user/notifications", {
+      params: { username: params },
     });
+
     return response?.data?.data;
   }
 );
 
-const userFeedSlice = createSlice({
-  name: "userFeeds",
+const userNotificationSlice = createSlice({
+  name: "userNotifications",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchUserFeeds.pending, (state) => {
+      .addCase(fetchUserNotifications.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchUserFeeds.fulfilled, (state, action) => {
+      .addCase(fetchUserNotifications.fulfilled, (state, action) => {
         state.loading = false;
         state.data = action.payload;
       })
-      .addCase(fetchUserFeeds.rejected, (state, action) => {
+      .addCase(fetchUserNotifications.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });
   },
 });
 
-export default userFeedSlice.reducer;
+export default userNotificationSlice.reducer;

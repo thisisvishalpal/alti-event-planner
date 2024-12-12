@@ -1,61 +1,51 @@
 import React, { useEffect } from "react";
-import { HttpStatusCode } from "axios";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import { UserInfo, UserPosts } from "Components";
-import {
-  fetchOtherProfile,
-  fetchOtherProfileSuccess,
-  fetchOtherProfileFailure,
-} from "Slices";
-import { axiosInstance } from "Services";
+import { fetchOtherProfile, fetchUserInfo } from "Slices";
 
 export const Profile = () => {
-  const { data, error, loading } = useSelector(({ userInfo }) => userInfo);
+  const dispatch = useDispatch();
+  const { username: usernameParam } = useParams();
+  const { username } = useSelector(({ userAuth }) => userAuth);
+
   const {
-    data: profileData,
-    error: profileError,
-    loading: profileLoading,
+    data: userInfoData,
+    error: userInfoError,
+    loading: userInfoLoading,
+  } = useSelector(({ userInfo }) => userInfo);
+
+  const {
+    data: otherProfileData,
+    error: otherProfileError,
+    loading: otherProfileLoading,
   } = useSelector(({ otherProfile }) => otherProfile);
 
-  const { username } = useParams();
-  const dispatch = useDispatch();
+  const isAccessingSelfProfile = usernameParam
+    ? username === usernameParam
+    : username;
 
-  // console.log(username, "username from profile");
-  const mainLogic = data?.username !== username;
   useEffect(() => {
-    if (mainLogic) {
-      console.log("yes control is coming here");
-      dispatch(fetchOtherProfile());
-      axiosInstance
-        .get("http://localhost:8000/user/username", {
-          params: {
-            username: username,
-          },
-        })
-        .then(({ data }) => {
-          if (data.status === HttpStatusCode?.Ok)
-            dispatch(fetchOtherProfileSuccess(data.data));
-          // console.log(data);
-        })
-        .catch(({ message }) => {
-          dispatch(fetchOtherProfileFailure(message));
-          // console.log(message);
-        });
+    if (isAccessingSelfProfile) {
+      dispatch(fetchUserInfo());
+    } else {
+      dispatch(fetchOtherProfile(usernameParam));
     }
-  }, [username]);
+  }, [usernameParam]);
 
   return (
     <div className="container">
       <UserInfo
-        user={mainLogic ? profileData : data}
-        loading={mainLogic ? profileLoading : loading}
+        user={isAccessingSelfProfile ? userInfoData : otherProfileData}
+        loading={isAccessingSelfProfile ? userInfoLoading : otherProfileLoading}
       />
-      <UserPosts
-        posts={mainLogic ? profileData?.posts : data?.posts}
-        loading={mainLogic ? profileLoading : loading}
-      />
+      {/* <UserPosts
+        posts={
+          isAccessingSelfProfile ? userInfoData?.posts : otherProfileData?.posts
+        }
+        loading={isAccessingSelfProfile ? userInfoLoading : otherProfileLoading}
+      /> */}
     </div>
   );
 };

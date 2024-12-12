@@ -8,7 +8,7 @@ export const UserPosts = ({ posts = [], loading }) => {
         <Spinner />
       ) : (
         <Row>
-          {posts.length ? (
+          {posts.length > 0 ? (
             posts?.map((post) => (
               <Col md={6} lg={4} key={post.id} className="mb-4">
                 <Card className="shadow-sm">

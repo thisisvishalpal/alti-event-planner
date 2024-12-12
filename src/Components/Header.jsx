@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Navbar, Nav, Container, NavDropdown, Button } from "react-bootstrap";
+import { Navbar, Nav, Container } from "react-bootstrap";
 import { NavLink, useNavigate } from "react-router-dom";
 
 import { logout } from "Slices";
@@ -8,21 +8,13 @@ import { useAuthenticated } from "Hooks";
 import { urls } from "Utils";
 
 export const Header = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { theme } = useTheme();
-  const { data } = useSelector(({ userInfo }) => userInfo);
+  const data = useSelector(({ userAuth }) => userAuth);
   const isAuthenticated = useAuthenticated();
-  const { root, signIn, signUp, settings } = urls;
-
-  const handleLogout = () => {
-    dispatch(logout());
-    // axios.post("/api/auth/logout");
-    navigate("/");
-  };
+  const { root, signIn, signUp } = urls;
 
   return (
-    <div className="header">
+    <div className="header sticky-header">
       <Navbar
         collapseOnSelect
         className="no-padding-navbar"

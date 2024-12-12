@@ -1,6 +1,7 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Navbar } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { logout } from "Slices";
 import { urls } from "Utils";
 
 const {
@@ -14,13 +15,19 @@ const {
   signUp,
 } = urls;
 export const Aside = () => {
-  const { data } = useSelector(({ userInfo }) => userInfo);
+  const data = useSelector(({ userAuth }) => userAuth);
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate(root);
+  };
   return (
     <aside
       style={{
         fontSize: "18px",
-        margin: "10px 0",
         padding: "20px",
         borderRadius: "10px",
         boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
@@ -80,7 +87,7 @@ export const Aside = () => {
           </li>
           <hr />
           <li style={{ marginBottom: "10px" }}>
-            <NavLink to={settings} className="nav-link">
+            <NavLink onClick={handleLogout} className="nav-link">
               Logout
             </NavLink>
           </li>

@@ -21,7 +21,7 @@ export const UploadSection = () => {
   };
 
   return (
-    <div className="upload-section" style={{ "max-width": "hw100" }}>
+    <div className="upload-section" style={{ maxWidth: "hw100" }}>
       <Card className="p-3 mb-4 shadow-sm">
         <Form.Control />
         <div className="d-flex justify-content-between mt-3">

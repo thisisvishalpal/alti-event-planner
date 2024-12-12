@@ -26,18 +26,7 @@ export const Layout = () => {
         }
       >
         {/* Aside Section */}
-        {isAuth && (
-          <aside
-            style={{
-              // backgroundColor: "#f8f9fa", // Light background
-              padding: "20px",
-              borderRadius: "10px",
-              boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
-            }}
-          >
-            <Aside />
-          </aside>
-        )}
+        {isAuth && <Aside />}
 
         {/* Main Content */}
         <main>

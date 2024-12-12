@@ -1,13 +1,12 @@
 export { Header } from "./Header";
 export { Footer } from "./Footer";
 export { SwitchSelector } from "./SwitchSelector";
-export { EventList } from "./EventList";
 export { SeatSelectionModal } from "./SeatSelectionModal";
 export { EventCard } from "./EventCard";
 export { UserInfo } from "./UserInfo";
 export { UserPosts } from "./UserPosts";
 export { UploadSection } from "./UploadSection";
-export { Feed } from "./Feed";
+export { FeedSection } from "./Feed";
 export { Aside } from "./Aside";
 export { SearchBar } from "./SearchBar";
 export { UserRow } from "./UserRow";
