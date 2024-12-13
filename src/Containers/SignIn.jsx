@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button, Form, Container, Spinner } from "react-bootstrap";
 
@@ -9,9 +9,11 @@ import { urls } from "Utils";
 const { signUp } = urls;
 
 export const SignIn = () => {
+  const { loading, error: storeError } = useSelector(
+    ({ userAuth }) => userAuth
+  );
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   const dispatch = useDispatch();
@@ -25,7 +27,6 @@ export const SignIn = () => {
       return;
     }
 
-    setLoading(true);
     setError("");
 
     dispatch(signIn({ username, password }));
@@ -60,6 +61,7 @@ export const SignIn = () => {
           </Form.Group>
 
           {error && <p className="text-danger">{error}</p>}
+          {storeError && <p className="text-danger">{storeError}</p>}
 
           <Button variant="primary" type="submit" block disabled={loading}>
             {loading ? (
