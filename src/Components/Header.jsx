@@ -136,10 +136,7 @@ export const Header = () => {
           </Offcanvas.Header>
           <Offcanvas.Body>
             <Card className="d-md-none p-4">
-              <Navigations
-                // handleClick={handleClose}
-                className="d-md-none justify-content-end flex-grow-1 pe-3"
-              />
+              <Navigations className="d-md-none justify-content-end flex-grow-1 pe-3" />
             </Card>
           </Offcanvas.Body>
         </Navbar.Offcanvas>

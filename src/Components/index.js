@@ -8,6 +8,7 @@ export { UserPosts } from "./UserPosts";
 export { UploadSection } from "./UploadSection";
 export { FeedSection } from "./Feed";
 export { Aside } from "./Aside";
+export { RightAside } from "./RightAside";
 export { SearchBar } from "./SearchBar";
 export { UserRow } from "./UserRow";
 export { Navigations } from "./Navigations";
