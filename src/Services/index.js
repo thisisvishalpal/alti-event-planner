@@ -1,1 +1,1 @@
-export { axiosInstance } from "./Interceptors";
+export { axiosInstance } from "./axiosInstance";
