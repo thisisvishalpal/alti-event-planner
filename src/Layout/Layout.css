@@ -1,14 +1,17 @@
+/* Mobile layout: Hide sidebars and show only main content */
 @media (max-width: 768px) {
   div {
-    display: flex;
-    flex-direction: column;
+    grid-template-columns: 1fr; /* Single column layout */
   }
 
   aside {
-    margin-bottom: 20px; /* Add spacing for mobile layout */
+    display: none; /* Hide both aside sections */
+  }
+
+  main {
+    grid-column: 1 / -1; /* Span the entire width of the grid */
   }
 }
-
 aside {
   position: sticky; /* Makes the aside section fixed within its parent container */
   top: 20px; /* Distance from the top of the viewport */
@@ -16,6 +19,21 @@ aside {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Tablet layout: Hide only the second aside (right section) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  div {
+    grid-template-columns: 2fr 4fr; /* Remove the third column */
+  }
+
+  aside:nth-of-type(2) {
+    display: none; /* Hide the second aside (right section) */
+  }
+
+  main {
+    grid-column: 2 / -1; /* Adjust main content to span properly */
+  }
 }
 
 main {

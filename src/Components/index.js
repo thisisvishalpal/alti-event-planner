@@ -1,6 +1,6 @@
-export { Header } from "./Header";
+export { Header, OffcanvasExample } from "./Header";
 export { Footer } from "./Footer";
-export { SwitchSelector } from "./SwitchSelector";
+export { ThemeToggler } from "./ThemeToggler";
 export { SeatSelectionModal } from "./SeatSelectionModal";
 export { EventCard } from "./EventCard";
 export { UserInfo } from "./UserInfo";
@@ -10,3 +10,4 @@ export { FeedSection } from "./Feed";
 export { Aside } from "./Aside";
 export { SearchBar } from "./SearchBar";
 export { UserRow } from "./UserRow";
+export { Navigations } from "./Navigations";

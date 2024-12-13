@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export const SwitchSelector = ({ labelLeft, labelRight, onChange }) => {
+export const ThemeToggler = ({ labelLeft, labelRight, onChange }) => {
   const value = localStorage.getItem("theme") || "light";
   const [isToggled, setIsToggled] = useState(value === "light" ? false : true);
 

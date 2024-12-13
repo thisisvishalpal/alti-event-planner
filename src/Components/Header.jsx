@@ -1,13 +1,14 @@
-import { useDispatch, useSelector } from "react-redux";
-import { Navbar, Nav, Container } from "react-bootstrap";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { Navbar, Nav, Container, Offcanvas, Card } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 
-import { logout } from "Slices";
+import { Navigations } from "Components";
 import { useTheme } from "Theme";
 import { useAuthenticated } from "Hooks";
 import { urls } from "Utils";
 
-export const Header = () => {
+export const OffcanvasExample = () => {
   const { theme } = useTheme();
   const data = useSelector(({ userAuth }) => userAuth);
   const isAuthenticated = useAuthenticated();
@@ -73,5 +74,85 @@ export const Header = () => {
         </Container>
       </Navbar>
     </div>
+  );
+};
+
+export const Header = () => {
+  const { theme } = useTheme();
+
+  const { root } = urls;
+  const { isAuthenticated, username } = useSelector(({ userAuth }) => userAuth);
+  const [showCanvas, setShowCanvas] = useState(false);
+
+  const handleClose = () => setShowCanvas(false); // Close the Offcanvas
+  const handleShow = () => setShowCanvas(true); // Open the Offcanvas
+  // Close the Offcanvas when any child element inside it is clicked
+  const handleChildClick = (event) => {
+    const offcanvasBody = document.querySelector(".offcanvas-body");
+    if (offcanvasBody && offcanvasBody.contains(event.target)) {
+      handleClose();
+    }
+  };
+
+  return (
+    <Navbar
+      bg={theme === "dark" ? "dark" : "light"}
+      variant={theme === "dark" ? "dark" : "light"}
+      key="md"
+      expand="md"
+      className={`mb-3 ${theme === "dark" ? "navbar-dark" : "navbar-light"}`}
+    >
+      <Container>
+        {/* Toggler for authenticated users */}
+        {isAuthenticated && (
+          <Navbar.Toggle
+            aria-controls={`offcanvasNavbar-expand-md`}
+            className="me-2"
+            onClick={handleShow}
+          />
+        )}
+
+        {/* Brand */}
+        <Navbar.Brand to={root} className="nav-link brand">
+          <NavLink to={root} className="nav-link brand">
+            Community
+          </NavLink>
+        </Navbar.Brand>
+
+        {/* Offcanvas Menu */}
+        <Navbar.Offcanvas
+          id={`offcanvasNavbar-expand-md`}
+          aria-labelledby={`offcanvasNavbarLabel-expand-md`}
+          placement="start"
+          className={`offcanvas-${theme}`}
+          show={showCanvas}
+          onHide={handleClose}
+          onClick={handleChildClick}
+        >
+          <Offcanvas.Header closeButton>
+            <Offcanvas.Title id={`offcanvasNavbarLabel-expand-md`}>
+              Menu
+            </Offcanvas.Title>
+          </Offcanvas.Header>
+          <Offcanvas.Body>
+            <Card className="d-md-none p-4">
+              <Navigations
+                // handleClick={handleClose}
+                className="d-md-none justify-content-end flex-grow-1 pe-3"
+              />
+            </Card>
+          </Offcanvas.Body>
+        </Navbar.Offcanvas>
+
+        {/* Links for authenticated users */}
+        {isAuthenticated && (
+          <Nav>
+            <NavLink to={`user/${username}`} className="nav-link">
+              {username}
+            </NavLink>
+          </Nav>
+        )}
+      </Container>
+    </Navbar>
   );
 };

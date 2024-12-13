@@ -1,9 +1,13 @@
+import { ThemeToggler } from "Components";
 import { Form, Col, Row, Card, Button } from "react-bootstrap";
+import { useTheme } from "Theme";
+
 export const Settings = () => {
+  const { toggleTheme } = useTheme();
   return (
     <>
       <div className="mt-4">
-        <Card className="p-3">
+        <Card className="p-4">
           <h5 className="mb-3">User Settings</h5>
 
           {/* Update Password */}
@@ -55,6 +59,14 @@ export const Settings = () => {
               <Button variant="success">Save Changes</Button>
             </div>
           </Form>
+        </Card>
+        <Card className="p-4">
+          <h5 className="mb-3">Theme Settings</h5>
+          <ThemeToggler
+            labelLeft="Light"
+            labelRight="Dark"
+            onChange={toggleTheme}
+          />
         </Card>
       </div>
     </>
