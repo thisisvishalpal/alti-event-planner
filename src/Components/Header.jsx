@@ -158,14 +158,16 @@ export const Header = () => {
         {isAuthenticated && (
           <Nav>
             <NavLink to={`user/${username}`} className="nav-link">
-              {/* {username} */}
-              <Image
-                src={userInfoData?.profilePicture}
-                roundedCircle
-                alt={`${userInfoData?.fullName}'s profile`}
-                className="img-fluid"
-                style={{ width: "30px", height: "30px" }}
-              />
+              <div className="d-flex align-items-center mx-3">
+                <span className="d-none d-md-block mx-3">{username}</span>
+                <Image
+                  src={userInfoData?.profilePicture}
+                  roundedCircle
+                  alt={`${userInfoData?.fullName}'s profile`}
+                  className="img-fluid"
+                  style={{ width: "30px", height: "30px" }}
+                />
+              </div>
             </NavLink>
           </Nav>
         )}
