@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import "./Search.css"; // Add custom styles if necessary
 import { axiosInstance } from "Services";
 import { SearchBar } from "Components";
+import { apiRoutes } from "Utils";
 
 export const Search = () => {
   const [query, setQuery] = useState("");
@@ -16,7 +17,7 @@ export const Search = () => {
       setLoading(true);
       // Simulate an API call for suggestions
       axiosInstance
-        .get(`/user/search`, { params: { query } })
+        .get(apiRoutes.searchUser, { params: { query } })
         .then((response) => {
           setSuggestions(response.data);
           setLoading(false);

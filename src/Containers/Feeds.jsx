@@ -1,18 +1,14 @@
 import React, { useEffect } from "react";
 
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import { UploadSection, FeedSection } from "Components";
 import { fetchUserFeeds } from "Slices";
 
 export const Feeds = () => {
   const dispatch = useDispatch();
-  const userAuth = useSelector((userAuth) => userAuth);
-  const { username } = useParams();
 
   useEffect(() => {
-    // dispatch(fetchUserInfo());
     dispatch(fetchUserFeeds());
   }, []);
 

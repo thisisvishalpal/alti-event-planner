@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { axiosInstance } from "Services";
+import { apiRoutes } from "Utils";
 
 const initialState = {
   data: {
@@ -28,7 +29,7 @@ const initialState = {
 export const fetchOtherProfile = createAsyncThunk(
   "otherProfile/fetchOtherProfile",
   async (params) => {
-    const response = await axiosInstance.get("/user/username", {
+    const response = await axiosInstance.get(apiRoutes.userInfo, {
       params: { username: params },
     });
 

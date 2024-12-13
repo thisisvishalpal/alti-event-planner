@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { axiosInstance } from "Services";
+import { apiRoutes } from "Utils";
 
 const initialState = {
   data: [],
@@ -13,7 +14,7 @@ export const fetchUserFeeds = createAsyncThunk(
   async (_, { getState }) => {
     const { username } = getState().userAuth;
 
-    const response = await axiosInstance.get("/user/feeds", {
+    const response = await axiosInstance.get(apiRoutes.userFeeds, {
       params: { username: username },
     });
     return response?.data?.data;

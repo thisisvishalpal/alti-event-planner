@@ -5,13 +5,13 @@ import { useAuthenticated } from "Hooks";
 import "./Layout.css";
 
 export const Layout = () => {
-  const isAuth = useAuthenticated();
+  const { isAuthenticated } = useAuthenticated();
   return (
     <>
       <Header />
       <div
         style={
-          isAuth
+          isAuthenticated
             ? {
                 display: "grid",
                 gridTemplateColumns: "2fr 4fr 2fr",
@@ -25,14 +25,14 @@ export const Layout = () => {
         }
       >
         {/* Aside Section */}
-        {isAuth && <Aside />}
+        {isAuthenticated && <Aside />}
 
         {/* Main Content */}
         <main>
           <Outlet />
         </main>
 
-        {isAuth && <RightAside />}
+        {isAuthenticated && <RightAside />}
       </div>
       <Footer />
     </>

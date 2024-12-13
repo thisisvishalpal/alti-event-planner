@@ -18,7 +18,7 @@ import { urls } from "Utils";
 export const OffcanvasExample = () => {
   const { theme } = useTheme();
   const data = useSelector(({ userAuth }) => userAuth);
-  const isAuthenticated = useAuthenticated();
+  const { isAuthenticated } = useAuthenticated();
   const { root, signIn, signUp } = urls;
 
   return (

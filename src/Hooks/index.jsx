@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 
 export const useAuthenticated = () => {
-  const { isAuthenticated } = useSelector(({ userAuth }) => userAuth);
+  const { isAuthenticated, loading } = useSelector(({ userAuth }) => userAuth);
 
-  return isAuthenticated;
+  return { isAuthenticated, loading };
 };

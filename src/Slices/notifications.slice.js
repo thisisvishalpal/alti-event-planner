@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { axiosInstance } from "Services";
+import { apiRoutes } from "Utils";
 
 const initialState = {
   data: [],
@@ -11,7 +12,7 @@ export const fetchUserNotifications = createAsyncThunk(
   "userNotifications/fetchUserNotifications",
   async (params) => {
     console.log(params);
-    const response = await axiosInstance.get("/user/notifications", {
+    const response = await axiosInstance.get(apiRoutes.userNotifications, {
       params: { username: params },
     });
 

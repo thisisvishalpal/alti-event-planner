@@ -13,6 +13,7 @@ import {
   Landing,
 } from "Containers";
 import { useAuthenticated } from "Hooks";
+import { Spinner } from "react-bootstrap";
 import { Navigate } from "react-router-dom";
 import { urls } from "Utils";
 
@@ -30,7 +31,7 @@ const {
 } = urls;
 
 export const Routes = () => {
-  const isAuthenticated = useAuthenticated();
+  const { isAuthenticated, loading } = useAuthenticated();
 
   return [
     {

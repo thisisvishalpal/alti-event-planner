@@ -5,7 +5,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { Button, Form, Container } from "react-bootstrap";
 
 import { signIn } from "Slices";
-import { urls } from "Utils";
+import { apiRoutes, urls } from "Utils";
 import { axiosInstance } from "Services";
 
 export const SignUp = () => {
@@ -20,7 +20,7 @@ export const SignUp = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axiosInstance.post("auth/signup", data);
+      const response = await axiosInstance.post(apiRoutes.userSignUp, data);
       if (response.status === 201) {
         const { user } = response.data;
         if (user.username) {
