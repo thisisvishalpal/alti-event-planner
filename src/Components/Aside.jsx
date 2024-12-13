@@ -25,14 +25,7 @@ export const Aside = () => {
     navigate(root);
   };
   return (
-    <aside
-      style={{
-        fontSize: "18px",
-        padding: "20px",
-        borderRadius: "10px",
-        boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
-      }}
-    >
+    <aside>
       <Navbar>
         <ul
           style={{

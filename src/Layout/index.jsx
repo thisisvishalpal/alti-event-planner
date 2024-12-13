@@ -35,14 +35,7 @@ export const Layout = () => {
 
         {/* Right Section */}
         {isAuth && (
-          <aside
-            style={{
-              // backgroundColor: "#f8f9fa", // Light background
-              padding: "20px",
-              borderRadius: "10px",
-              boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
-            }}
-          >
+          <aside>
             {/* Content for the right-side fixed section */}
             <h3>Right Section</h3>
             <p>This is some additional content for authenticated users.</p>

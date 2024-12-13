@@ -17,7 +17,7 @@ export const Feeds = () => {
   }, []);
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-3">
       <UploadSection />
       <h2 className="mb-4">Feeds</h2>
       <FeedSection />
