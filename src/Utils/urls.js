@@ -7,7 +7,7 @@ export const urls = {
   signUp: "signup",
   feeds: "feeds",
   profile: "user/:username",
-  connections: "connections",
+  connections: "/connections",
   notifications: "notifications",
   messages: "messages",
   search: "search",

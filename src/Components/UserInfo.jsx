@@ -22,10 +22,6 @@ export const UserInfo = ({ user, loading }) => {
   } = user;
   const navigate = useNavigate();
 
-  const handleConnectionLink = (prop) => {
-    navigate(urls?.connections, { state: prop });
-  };
-
   return (
     <Card className="shadow-sm p-3 mb-4">
       {loading ? (
@@ -62,13 +58,12 @@ export const UserInfo = ({ user, loading }) => {
                       textDecoration: "none",
                       color: "inherit",
                     }}
+                    to={urls.connections}
+                    state={"followers"}
                   >
-                    <h5 onClick={() => handleConnectionLink("followers")}>
-                      {followers}
-                    </h5>
+                    <h5>{followers}</h5>
+                    <p className="text-muted">Followers</p>
                   </Link>
-
-                  <p className="text-muted">Followers</p>
                 </Col>
                 <Col>
                   <Link
@@ -76,12 +71,12 @@ export const UserInfo = ({ user, loading }) => {
                       textDecoration: "none",
                       color: "inherit",
                     }}
+                    to={urls.connections}
+                    state={"following"}
                   >
-                    <h5 onClick={() => handleConnectionLink("following")}>
-                      {following}
-                    </h5>
+                    <h5>{following}</h5>
+                    <p className="text-muted">Following</p>
                   </Link>
-                  <p className="text-muted">Following</p>
                 </Col>
               </Row>
 

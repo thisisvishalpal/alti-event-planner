@@ -1,6 +1,13 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { Navbar, Nav, Container, Offcanvas, Card } from "react-bootstrap";
+import {
+  Navbar,
+  Nav,
+  Container,
+  Offcanvas,
+  Card,
+  Image,
+} from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 
 import { Navigations } from "Components";
@@ -94,6 +101,12 @@ export const Header = () => {
     }
   };
 
+  const {
+    data: userInfoData,
+    error: userInfoError,
+    loading: userInfoLoading,
+  } = useSelector(({ userInfo }) => userInfo);
+
   return (
     <Navbar
       bg={theme === "dark" ? "dark" : "light"}
@@ -145,7 +158,14 @@ export const Header = () => {
         {isAuthenticated && (
           <Nav>
             <NavLink to={`user/${username}`} className="nav-link">
-              {username}
+              {/* {username} */}
+              <Image
+                src={userInfoData?.profilePicture}
+                roundedCircle
+                alt={`${userInfoData?.fullName}'s profile`}
+                className="img-fluid"
+                style={{ width: "30px", height: "30px" }}
+              />
             </NavLink>
           </Nav>
         )}
