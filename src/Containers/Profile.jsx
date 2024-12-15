@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { UserInfo, UserPosts } from "Components";
 import { fetchOtherProfile, fetchUserInfo } from "Slices";
+import { Container } from "react-bootstrap";
 
 export const Profile = () => {
   const dispatch = useDispatch();
@@ -35,10 +36,11 @@ export const Profile = () => {
   }, [usernameParam]);
 
   return (
-    <div className="container">
+    <Container>
       <UserInfo
         user={isAccessingSelfProfile ? userInfoData : otherProfileData}
         loading={isAccessingSelfProfile ? userInfoLoading : otherProfileLoading}
+        error={isAccessingSelfProfile ? userInfoError : otherProfileError}
       />
       {/* <UserPosts
         posts={
@@ -46,6 +48,6 @@ export const Profile = () => {
         }
         loading={isAccessingSelfProfile ? userInfoLoading : otherProfileLoading}
       /> */}
-    </div>
+    </Container>
   );
 };

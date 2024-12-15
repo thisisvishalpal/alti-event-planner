@@ -15,6 +15,7 @@ export function App() {
   useEffect(() => {
     dispatch(validateToken());
   }, []);
+
   const Router = createBrowserRouter([
     {
       path: urls?.root,

@@ -13,6 +13,7 @@ export const Layout = () => {
         style={
           isAuthenticated
             ? {
+                minWidth: "100vw",
                 display: "grid",
                 gridTemplateColumns: "2fr 4fr 2fr",
                 gap: "20px",
@@ -21,6 +22,7 @@ export const Layout = () => {
               }
             : {
                 minHeight: "100vh",
+                minWidth: "100vw",
               }
         }
       >

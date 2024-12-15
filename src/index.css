@@ -1,3 +1,15 @@
+/* :root {
+  --primary-color: #000000;
+  --background-color: #ffffff;
+  --link-color: #007bff;
+}
+
+.dark-theme {
+  --primary-color: #ffffff;
+  --background-color: #21252b;
+  --link-color: #80bfff;
+} */
+
 body {
   /* width: 100%; */
   /* background-color: grey; */
@@ -43,10 +55,16 @@ code {
 
 /* Nav link styles */
 .nav-link {
-  color: white;
   text-decoration: none;
   padding: 10px;
   display: inline-block;
+}
+
+.nav-link-dark {
+  color: white !important;
+}
+.nav-link-light {
+  color: black !important;
 }
 
 .nav-link:hover {
@@ -57,15 +75,15 @@ code {
   transition: background-color 0.3s ease; /* Example: Smooth transition */
 }
 
-/* .nav-link.active {
-  font-weight: bold;
-  color: #007bff;
-} */
-/* Active link styling */
-.active {
+.nav-link.active {
   font-weight: bold;
   color: #007bff;
 }
+/* Active link styling */
+/* .active {
+  font-weight: bold;
+  color: #007bff;
+} */
 
 /* Username specific styles */
 .username {

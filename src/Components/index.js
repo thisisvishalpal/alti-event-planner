@@ -1,7 +1,6 @@
 export { Header, OffcanvasExample } from "./Header";
 export { Footer } from "./Footer";
 export { ThemeToggler } from "./ThemeToggler";
-export { SeatSelectionModal } from "./SeatSelectionModal";
 export { EventCard } from "./EventCard";
 export { UserInfo } from "./UserInfo";
 export { UserPosts } from "./UserPosts";
@@ -13,3 +12,4 @@ export { SearchBar } from "./SearchBar";
 export { UserRow } from "./UserRow";
 export { Navigations } from "./Navigations";
 export { Spinner } from "./Spinner";
+export { SpinnerTwo } from "./SpinnerTwo";

@@ -1,4 +1,4 @@
-import { Suspense, useState, useEffect } from "react";
+import { Suspense } from "react";
 import { Navigate } from "react-router-dom";
 import {
   NotFound,
@@ -15,8 +15,9 @@ import {
   Landing,
 } from "Containers";
 import { Spinner } from "Components";
-import { useAuthenticated } from "Hooks";
+
 import { urls } from "Utils";
+import { Placeholder } from "./Placeholder";
 
 const {
   root,
@@ -30,28 +31,6 @@ const {
   signUp,
   settings,
 } = urls;
-
-const Placeholder = ({ children, fallBack }) => {
-  const [showSpinner, setShowSpinner] = useState(true);
-  const { isAuthenticated, loading } = useAuthenticated();
-
-  useEffect(() => {
-    if (!loading) {
-      const timer = setTimeout(() => setShowSpinner(false), 300); // Minimum spinner time
-      return () => clearTimeout(timer);
-    }
-  }, [loading, fallBack]);
-
-  if (showSpinner || loading) {
-    return <Spinner />;
-  }
-
-  if (!isAuthenticated) {
-    return fallBack;
-  }
-
-  return children;
-};
 
 export const LoggedInRoutes = [
   {

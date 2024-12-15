@@ -37,7 +37,7 @@ export const SignUp = () => {
   return (
     <Container
       className="d-flex justify-content-center align-items-center"
-      style={{ minHeight: "100vh" }}
+      style={{ minHeight: "90vh" }}
     >
       <div className="signup-form">
         <h2 className="text-center mb-4">Sign Up</h2>

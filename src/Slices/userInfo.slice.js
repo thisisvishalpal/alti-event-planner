@@ -28,12 +28,22 @@ const initialState = {
 // Async Thunk to fetch initial state
 export const fetchUserInfo = createAsyncThunk(
   "userInfo/fetchUserInfo",
-  async (_, { getState }) => {
-    const data = getState().userAuth;
-    const response = await axiosInstance.get(apiRoutes.userInfo, {
-      params: { username: data.username },
-    });
-    return response?.data?.data;
+  async (_, { getState, rejectWithValue }) => {
+    try {
+      const data = getState().userAuth;
+      const response = await axiosInstance.get(apiRoutes.userInfo, {
+        params: { username: data.username },
+      });
+      return response?.data?.data;
+    } catch (error) {
+      if (error.response) {
+        return rejectWithValue(error.response.data.error);
+      } else if (error.request) {
+        return rejectWithValue("No response from the server");
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
   }
 );
 
@@ -66,7 +76,7 @@ const userInfoSlice = createSlice({
       })
       .addCase(fetchUserInfo.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.payload;
       });
   },
 });

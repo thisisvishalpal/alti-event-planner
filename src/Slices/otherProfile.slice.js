@@ -28,12 +28,21 @@ const initialState = {
 // Async Thunk to fetch initial state
 export const fetchOtherProfile = createAsyncThunk(
   "otherProfile/fetchOtherProfile",
-  async (params) => {
-    const response = await axiosInstance.get(apiRoutes.userInfo, {
-      params: { username: params },
-    });
-
-    return response?.data?.data;
+  async (params, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.get(apiRoutes.userInfo, {
+        params: { username: params },
+      });
+      return response?.data?.data;
+    } catch (error) {
+      if (error.response) {
+        return rejectWithValue(error.response.data.error);
+      } else if (error.request) {
+        return rejectWithValue("No response from the server");
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
   }
 );
 
@@ -53,7 +62,7 @@ const otherProfileSlice = createSlice({
       })
       .addCase(fetchOtherProfile.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.payload;
       });
   },
 });

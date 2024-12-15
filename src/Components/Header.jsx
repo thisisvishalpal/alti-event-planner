@@ -108,70 +108,72 @@ export const Header = () => {
   } = useSelector(({ userInfo }) => userInfo);
 
   return (
-    <Navbar
-      bg={theme === "dark" ? "dark" : "light"}
-      variant={theme === "dark" ? "dark" : "light"}
-      key="md"
-      expand="md"
-      className={`mb-3 ${theme === "dark" ? "navbar-dark" : "navbar-light"}`}
-    >
-      <Container>
-        {/* Toggler for authenticated users */}
-        {isAuthenticated && (
-          <Navbar.Toggle
-            aria-controls={`offcanvasNavbar-expand-md`}
-            className="me-2"
-            onClick={handleShow}
-          />
-        )}
+    <div className="sticky-header">
+      <Navbar
+        bg={theme === "dark" ? "dark" : "light"}
+        variant={theme === "dark" ? "dark" : "light"}
+        key="md"
+        expand="md"
+        className={`mb-3 ${theme === "dark" ? "navbar-dark" : "navbar-light"}`}
+      >
+        <Container>
+          {/* Toggler for authenticated users */}
+          {isAuthenticated && (
+            <Navbar.Toggle
+              aria-controls={`offcanvasNavbar-expand-md`}
+              className="me-2"
+              onClick={handleShow}
+            />
+          )}
 
-        {/* Brand */}
-        <Navbar.Brand to={root} className="nav-link brand">
-          <NavLink to={root} className="nav-link brand">
-            Community
-          </NavLink>
-        </Navbar.Brand>
-
-        {/* Offcanvas Menu */}
-        <Navbar.Offcanvas
-          id={`offcanvasNavbar-expand-md`}
-          aria-labelledby={`offcanvasNavbarLabel-expand-md`}
-          placement="start"
-          className={`offcanvas-${theme}`}
-          show={showCanvas}
-          onHide={handleClose}
-          onClick={handleChildClick}
-        >
-          <Offcanvas.Header closeButton>
-            <Offcanvas.Title id={`offcanvasNavbarLabel-expand-md`}>
-              Menu
-            </Offcanvas.Title>
-          </Offcanvas.Header>
-          <Offcanvas.Body>
-            <Card className="d-md-none p-4">
-              <Navigations className="d-md-none justify-content-end flex-grow-1 pe-3" />
-            </Card>
-          </Offcanvas.Body>
-        </Navbar.Offcanvas>
-
-        {/* Links for authenticated users */}
-        {isAuthenticated && (
-          <Nav>
-            <NavLink to={`user/${username}`} className="nav-link">
-              <div className="d-flex align-items-center mx-3">
-                <span className="d-none d-md-block mx-3">{username}</span>
-                <Image
-                  src={userInfoData?.profilePicture}
-                  roundedCircle
-                  alt={`${userInfoData?.fullName}'s profile`}
-                  className="img-fluid"
-                  style={{ width: "30px", height: "30px" }}
-                />
-              </div>
+          {/* Brand */}
+          <Navbar.Brand to={root} className="nav-link brand">
+            <NavLink to={root} className="nav-link brand">
+              Community
             </NavLink>
-          </Nav>
-        )}
-      </Container>
-    </Navbar>
+          </Navbar.Brand>
+
+          {/* Offcanvas Menu */}
+          <Navbar.Offcanvas
+            id={`offcanvasNavbar-expand-md`}
+            aria-labelledby={`offcanvasNavbarLabel-expand-md`}
+            placement="start"
+            className={`offcanvas-${theme}`}
+            show={showCanvas}
+            onHide={handleClose}
+            onClick={handleChildClick}
+          >
+            <Offcanvas.Header closeButton>
+              <Offcanvas.Title id={`offcanvasNavbarLabel-expand-md`}>
+                Menu
+              </Offcanvas.Title>
+            </Offcanvas.Header>
+            <Offcanvas.Body>
+              <Card className="d-md-none p-4">
+                <Navigations className="d-md-none justify-content-end flex-grow-1 pe-3" />
+              </Card>
+            </Offcanvas.Body>
+          </Navbar.Offcanvas>
+
+          {/* Links for authenticated users */}
+          {isAuthenticated && (
+            <Nav>
+              <NavLink to={`user/${username}`} className="nav-link">
+                <div className="d-flex align-items-center mx-3">
+                  <span className="d-none d-md-block mx-3">{username}</span>
+                  <Image
+                    src={userInfoData?.profilePicture}
+                    roundedCircle
+                    alt={`${userInfoData?.fullName}'s profile`}
+                    className="img-fluid"
+                    style={{ width: "30px", height: "30px" }}
+                  />
+                </div>
+              </NavLink>
+            </Nav>
+          )}
+        </Container>
+      </Navbar>
+    </div>
   );
 };
