@@ -114,7 +114,7 @@ export const Header = () => {
         variant={theme === "dark" ? "dark" : "light"}
         key="md"
         expand="md"
-        className={`mb-3 ${theme === "dark" ? "navbar-dark" : "navbar-light"}`}
+        className={`${theme === "dark" ? "navbar-dark" : "navbar-light"}`}
       >
         <Container>
           {/* Toggler for authenticated users */}
