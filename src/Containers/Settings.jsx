@@ -7,7 +7,7 @@ export const Settings = () => {
   return (
     <>
       <div className="mt-4">
-        <Card className="p-4">
+        <Card className="p-4 m-4">
           <h5 className="mb-3">User Settings</h5>
 
           {/* Update Password */}
@@ -60,7 +60,7 @@ export const Settings = () => {
             </div>
           </Form>
         </Card>
-        <Card className="p-4">
+        <Card className="p-4 m-4">
           <h5 className="mb-3">Theme Settings</h5>
           <ThemeToggler
             labelLeft="Light"

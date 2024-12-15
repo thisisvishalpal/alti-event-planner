@@ -6,7 +6,7 @@ import { urls } from "Utils";
 export const UserInfo = ({ user, loading }) => {
   const {
     profilePicture,
-    userName,
+    username,
     fullName,
     city,
     state,
@@ -23,13 +23,13 @@ export const UserInfo = ({ user, loading }) => {
   const navigate = useNavigate();
 
   return (
-    <Card className="shadow-sm p-3 mb-4">
+    <Card className="shadow-sm p-3 m-4 ">
       {loading ? (
         <Spinner />
       ) : (
         <Row>
           {/* Profile Picture */}
-          <Col md={3} className="text-center">
+          <Col md={4} className="text-center">
             <Image
               src={profilePicture}
               roundedCircle
@@ -40,7 +40,7 @@ export const UserInfo = ({ user, loading }) => {
           </Col>
 
           {/* User Details */}
-          <Col md={9}>
+          <Col md={8}>
             <Card.Body>
               {/* Name and Bio */}
               <h3>{fullName}</h3>

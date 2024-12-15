@@ -13,3 +13,15 @@ export const urls = {
   search: "search",
   settings: "settings",
 };
+
+// const menuOptions = [
+//   // { to: signIn, label: "Signin" },
+//   // { to: signUp, label: "Signup" },
+//   { to: root, label: "Feeds" },
+//   { to: `user/${data?.username}`, label: "Profile" },
+//   { to: connections, label: "Connections" },
+//   { to: messages, label: "Messages" },
+//   { to: notifications, label: "Notifications" },
+//   { to: search, label: "Search" },
+//   { to: settings, label: "Settings" },
+// ];

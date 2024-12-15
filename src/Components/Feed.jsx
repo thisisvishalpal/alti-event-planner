@@ -27,7 +27,7 @@ export const FeedSection = () => {
     <div className="feeds">
       <Row>
         {data?.map((post, index) => (
-          <Col md={6} key={post.id} className="mb-4">
+          <Col md={12} key={post.id} className="mb-4">
             <Card className="shadow-sm">
               <Card.Body>
                 {/* Post Header */}

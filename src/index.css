@@ -57,10 +57,10 @@ code {
   transition: background-color 0.3s ease; /* Example: Smooth transition */
 }
 
-.nav-link:not(:last-child) {
-  margin-right: 20px; /* Add right margin to all but the last link */
-}
-
+/* .nav-link.active {
+  font-weight: bold;
+  color: #007bff;
+} */
 /* Active link styling */
 .active {
   font-weight: bold;

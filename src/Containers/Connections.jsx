@@ -79,7 +79,7 @@ export const Connections = () => {
   }, [filter]);
 
   return (
-    <>
+    <div className="m-4">
       <SearchBar
         heading="Search Users"
         value={filter}
@@ -91,6 +91,6 @@ export const Connections = () => {
         followers={filterFollowers}
         following={filterFollowing}
       />
-    </>
+    </div>
   );
 };

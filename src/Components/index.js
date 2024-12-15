@@ -12,3 +12,4 @@ export { RightAside } from "./RightAside";
 export { SearchBar } from "./SearchBar";
 export { UserRow } from "./UserRow";
 export { Navigations } from "./Navigations";
+export { Spinner } from "./Spinner";
