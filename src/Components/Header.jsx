@@ -88,7 +88,9 @@ export const Header = () => {
   const { theme } = useTheme();
 
   const { root } = urls;
-  const { isAuthenticated, username } = useSelector(({ userAuth }) => userAuth);
+  const { isAuthenticated, username, profilePicture } = useSelector(
+    ({ userAuth }) => userAuth
+  );
   const [showCanvas, setShowCanvas] = useState(false);
 
   const handleClose = () => setShowCanvas(false); // Close the Offcanvas
@@ -100,12 +102,6 @@ export const Header = () => {
       handleClose();
     }
   };
-
-  const {
-    data: userInfoData,
-    error: userInfoError,
-    loading: userInfoLoading,
-  } = useSelector(({ userInfo }) => userInfo);
 
   return (
     <div className="sticky-header">
@@ -162,9 +158,9 @@ export const Header = () => {
                 <div className="d-flex align-items-center mx-3">
                   <span className="d-none d-md-block mx-3">{username}</span>
                   <Image
-                    src={userInfoData?.profilePicture}
+                    src={profilePicture}
                     roundedCircle
-                    alt={`${userInfoData?.fullName}'s profile`}
+                    alt={`${username}'s profile`}
                     className="img-fluid"
                     style={{ width: "30px", height: "30px" }}
                   />

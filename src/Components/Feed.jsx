@@ -6,7 +6,7 @@ export const FeedSection = () => {
   const feedsState = useSelector(({ userFeeds }) => userFeeds);
   const { data, loading, error } = feedsState;
 
-  console.log(data, "feeds response from feeds component");
+  // console.log(data, "feeds response from feeds component");
 
   const [likes, setLikes] = useState(data?.map(() => false));
   const [comments, setComments] = useState(data?.map(() => []));

@@ -11,7 +11,6 @@ const initialState = {
 export const fetchUserNotifications = createAsyncThunk(
   "userNotifications/fetchUserNotifications",
   async (params) => {
-    console.log(params);
     const response = await axiosInstance.get(apiRoutes.userNotifications, {
       params: { username: params },
     });

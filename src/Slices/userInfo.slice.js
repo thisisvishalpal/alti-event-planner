@@ -50,20 +50,7 @@ export const fetchUserInfo = createAsyncThunk(
 const userInfoSlice = createSlice({
   name: "userInfo",
   initialState,
-  reducers: {
-    // fetchUserInfo(state) {
-    //   state.loading = true;
-    //   state.error = null;
-    // },
-    // fetchUserInfoSuccess(state, action) {
-    //   state.loading = false;
-    //   state.data = action.payload;
-    // },
-    // fetchUserInfoFailure(state, action) {
-    //   state.loading = false;
-    //   state.error = action.payload;
-    // },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchUserInfo.pending, (state) => {
@@ -80,8 +67,5 @@ const userInfoSlice = createSlice({
       });
   },
 });
-
-// export const { fetchUserInfo, fetchUserInfoSuccess, fetchUserInfoFailure } =
-//   userInfoSlice.actions;
 
 export default userInfoSlice.reducer;

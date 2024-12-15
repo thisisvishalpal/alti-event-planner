@@ -51,10 +51,12 @@ const authSlice = createSlice({
   name: "auth",
   initialState: {
     username: null,
-    token: null,
     isAuthenticated: false,
     loading: false,
     error: null,
+    profilePicture: null,
+    email: null,
+    fullName: null,
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -65,9 +67,10 @@ const authSlice = createSlice({
       .addCase(signIn.fulfilled, (state, action) => {
         state.loading = false;
         state.username = action.payload.username;
-        state.accessToken = action.payload.accessToken;
-        state.refreshToken = action.payload.refreshToken;
         state.isAuthenticated = true;
+        state.profilePicture = action.payload.profilePicture;
+        state.email = action.payload.email;
+        state.fullName = action.payload.fullName;
       })
       .addCase(signIn.rejected, (state, action) => {
         state.loading = false;
@@ -78,7 +81,10 @@ const authSlice = createSlice({
         state.isAuthenticated = false;
       })
       .addCase(validateToken.fulfilled, (state, action) => {
-        state.user = action.payload.user;
+        state.username = action.payload.data.username;
+        state.profilePicture = action.payload.data.profilePicture;
+        state.email = action.payload.data.email;
+        state.fullName = action.payload.data.fullName;
         state.isAuthenticated = true;
         state.loading = false;
       })
@@ -93,8 +99,9 @@ const authSlice = createSlice({
       .addCase(logout.fulfilled, (state, action) => {
         state.loading = false;
         state.username = null;
-        state.accessToken = null;
-        state.refreshToken = null;
+        state.profilePicture = null;
+        state.email = null;
+        state.fullName = null;
         state.isAuthenticated = false;
       })
       .addCase(logout.rejected, (state, action) => {
