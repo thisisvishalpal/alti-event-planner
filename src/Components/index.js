@@ -1,11 +1,8 @@
 export { Header, OffcanvasExample } from "./Header";
 export { Footer } from "./Footer";
 export { ThemeToggler } from "./ThemeToggler";
-export { EventCard } from "./EventCard";
-export { UserInfo } from "./UserInfo";
-export { UserPosts } from "./UserPosts";
-export { UploadSection } from "./UploadSection";
-export { FeedSection } from "./Feed";
+export { UserInfo, UserPosts, ActionButton } from "./Profile";
+export { UploadSection, FeedSection } from "./Feeds";
 export { Aside } from "./Aside";
 export { RightAside } from "./RightAside";
 export { SearchBar } from "./SearchBar";

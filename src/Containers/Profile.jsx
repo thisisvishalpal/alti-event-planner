@@ -1,15 +1,16 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-
-import { UserInfo, UserPosts } from "Components";
-import { fetchOtherProfile, fetchUserInfo } from "Slices";
 import { Container } from "react-bootstrap";
+
+import { useProfile } from "Hooks";
+import { UserInfo, UserPosts } from "Components";
+import { fetchOtherProfile } from "Slices";
 
 export const Profile = () => {
   const dispatch = useDispatch();
+  const { isAccessingSelfProfile } = useProfile();
   const { username: usernameParam } = useParams();
-  const { username } = useSelector(({ userAuth }) => userAuth);
 
   const {
     data: userInfoData,
@@ -23,14 +24,8 @@ export const Profile = () => {
     loading: otherProfileLoading,
   } = useSelector(({ otherProfile }) => otherProfile);
 
-  const isAccessingSelfProfile = usernameParam
-    ? username === usernameParam
-    : username;
-
   useEffect(() => {
-    if (isAccessingSelfProfile) {
-      dispatch(fetchUserInfo());
-    } else {
+    if (!isAccessingSelfProfile) {
       dispatch(fetchOtherProfile(usernameParam));
     }
   }, [usernameParam]);

@@ -5,16 +5,24 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 //Importing local files
 import { Layout } from "Layout";
 import { Routes } from "Routes";
-import { validateToken } from "Slices";
+import { fetchUserInfo, validateToken } from "Slices";
 import { ThemeProvider } from "Theme";
 import { urls } from "Utils";
+import { useAuthenticated } from "Hooks";
 
 export function App() {
   const dispatch = useDispatch();
+  const { username } = useAuthenticated();
 
   useEffect(() => {
     dispatch(validateToken());
   }, []);
+
+  useEffect(() => {
+    if (username) {
+      dispatch(fetchUserInfo());
+    }
+  }, [username]);
 
   const Router = createBrowserRouter([
     {

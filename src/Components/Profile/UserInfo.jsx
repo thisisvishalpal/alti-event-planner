@@ -1,12 +1,10 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Card, Row, Col, Image, Button, Alert } from "react-bootstrap";
-import { SpinnerTwo } from "Components";
+import { Card, Row, Col, Image, Alert } from "react-bootstrap";
+import { ActionButton, SpinnerTwo } from "Components";
 import { urls } from "Utils";
 
 export const UserInfo = ({ user = {}, loading, error }) => {
-  const navigate = useNavigate();
-
   // Handle undefined or missing user details gracefully
   const {
     profilePicture = "https://via.placeholder.com/150", // Placeholder image for missing profile picture
@@ -96,22 +94,7 @@ export const UserInfo = ({ user = {}, loading, error }) => {
               </Col>
             </Row>
 
-            {/* Action Buttons */}
-            <div className="text-end">
-              <Button
-                variant="primary"
-                onClick={() => navigate("/settings")}
-                className="me-2"
-              >
-                Edit Profile
-              </Button>
-              <Button
-                variant="outline-secondary"
-                onClick={() => navigate("/settings")}
-              >
-                Settings
-              </Button>
-            </div>
+            <ActionButton />
           </Card.Body>
         </Col>
       </Row>

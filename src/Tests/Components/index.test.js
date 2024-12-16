@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import { SwitchSelector, Footer, EventCard } from "Components";
+import { SwitchSelector, Footer } from "Components";
 
 describe("SwitchSelector Component", () => {
   it("matches the snapshot", () => {
