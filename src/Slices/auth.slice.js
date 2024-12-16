@@ -29,7 +29,7 @@ export const validateToken = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.get(apiRoutes.userValidateToken);
-      return response.data;
+      return response.data.data;
     } catch (error) {
       if (error.response) {
         return rejectWithValue(error.response.data.error);
@@ -81,10 +81,10 @@ const authSlice = createSlice({
         state.isAuthenticated = false;
       })
       .addCase(validateToken.fulfilled, (state, action) => {
-        state.username = action.payload.data.username;
-        state.profilePicture = action.payload.data.profilePicture;
-        state.email = action.payload.data.email;
-        state.fullName = action.payload.data.fullName;
+        state.username = action.payload.username;
+        state.profilePicture = action.payload.profilePicture;
+        state.email = action.payload.email;
+        state.fullName = action.payload.fullName;
         state.isAuthenticated = true;
         state.loading = false;
       })

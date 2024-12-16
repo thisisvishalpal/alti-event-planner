@@ -7,7 +7,7 @@ import { LoggedInRoutes } from "Routes";
 
 const { root } = urls;
 export const Navigations = ({ className }) => {
-  const data = useSelector(({ userAuth }) => userAuth);
+  const { username } = useSelector(({ userAuth }) => userAuth);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ export const Navigations = ({ className }) => {
     navigate(root);
   };
 
-  const menuOptions = [{ to: `user/${data?.username}`, label: "Profile" }];
+  const menuOptions = { to: `user/${username}`, label: "Profile" };
   return (
     <Nav>
       <ul
@@ -26,7 +26,7 @@ export const Navigations = ({ className }) => {
         }}
         className={className}
       >
-        {[...LoggedInRoutes, ...menuOptions].map(
+        {[...LoggedInRoutes, menuOptions].map(
           ({ to, label }, index) =>
             label && (
               <li key={index}>

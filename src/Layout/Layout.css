@@ -14,7 +14,7 @@
 }
 aside {
   position: sticky; /* Makes the aside section fixed within its parent container */
-  top: 97px; /* Distance from the top of the viewport */
+  top: 80x; /* Distance from the top of the viewport */
   align-self: start; /* Align the aside content to the top */
   padding: 20px;
   border-radius: 10px;
