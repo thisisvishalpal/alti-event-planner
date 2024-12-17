@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 //Importing local files
-import { Layout } from "Layout";
+import { Layout } from "Components";
 import { Routes } from "Routes";
 import { fetchUserInfo, validateToken } from "Slices";
 import { ThemeProvider } from "Theme";

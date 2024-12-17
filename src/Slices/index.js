@@ -5,6 +5,7 @@ import userNotifications, {
   fetchUserNotifications,
 } from "./notifications.slice";
 import otherProfile, { fetchOtherProfile } from "./otherProfile.slice";
+import userConnections, { fetchUserConnections } from "./connections.slice";
 
 export {
   userFeeds,
@@ -19,4 +20,6 @@ export {
   fetchUserNotifications,
   otherProfile,
   fetchOtherProfile,
+  userConnections,
+  fetchUserConnections,
 };

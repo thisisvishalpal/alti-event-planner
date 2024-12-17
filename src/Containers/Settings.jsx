@@ -42,6 +42,7 @@ export const Settings = () => {
       <Card className="p-4 m-4">
         <h5 className="mb-3">Account information</h5>
 
+        {/* Username */}
         <Form.Group className="mb-3">
           <Form.Label>Username</Form.Label>
           <Form.Control
@@ -52,6 +53,7 @@ export const Settings = () => {
           />
         </Form.Group>
 
+        {/* Email */}
         <Form.Group className="mb-3">
           <Form.Label>Email</Form.Label>
           <Form.Control
@@ -75,6 +77,7 @@ export const Settings = () => {
       <Card className="p-4 m-4">
         <h5 className="mb-3">Personal information</h5>
         <Form onSubmit={handleSubmit(onSubmit)}>
+          {/* fullname */}
           <Form.Group className="mb-3">
             <Form.Label>Full Name</Form.Label>
             <Form.Control
@@ -88,6 +91,7 @@ export const Settings = () => {
             )}
           </Form.Group>
 
+          {/* Father name */}
           <Form.Group className="mb-3">
             <Form.Label>Father Name</Form.Label>
             <Form.Control
@@ -103,6 +107,7 @@ export const Settings = () => {
             )}
           </Form.Group>
 
+          {/* Phone number */}
           <Form.Group className="mb-3">
             <Form.Label>Phone Number</Form.Label>
             <Form.Control
@@ -122,6 +127,7 @@ export const Settings = () => {
             )}
           </Form.Group>
 
+          {/* Age */}
           <Form.Group className="mb-3">
             <Form.Label>Age</Form.Label>
             <Form.Control
@@ -139,6 +145,7 @@ export const Settings = () => {
             {errors.age && <p className="text-danger">{errors.age.message}</p>}
           </Form.Group>
 
+          {/* Gender */}
           <Form.Group className="mb-3">
             <Form.Label>Gender</Form.Label>
             <Form.Select
@@ -155,6 +162,7 @@ export const Settings = () => {
             )}
           </Form.Group>
 
+          {/* Married */}
           <Form.Group className="mb-3">
             <Form.Label>Married</Form.Label>
             <Form.Select
@@ -172,6 +180,7 @@ export const Settings = () => {
             )}
           </Form.Group>
 
+          {/* City */}
           <Form.Group className="mb-3">
             <Form.Label>City</Form.Label>
             <Form.Control
@@ -185,6 +194,7 @@ export const Settings = () => {
             )}
           </Form.Group>
 
+          {/* Address */}
           <Form.Group className="mb-3">
             <Form.Label>Address</Form.Label>
             <Form.Control
@@ -219,6 +229,7 @@ export const Settings = () => {
       <Card className="p-4 m-4">
         <h5 className="mb-3">Career Information</h5>
 
+        {/* Occupation */}
         <Form.Group className="mb-3">
           <Form.Label>Occupation</Form.Label>
           <Form.Control
@@ -234,6 +245,7 @@ export const Settings = () => {
           )}
         </Form.Group>
 
+        {/* Study */}
         <Form.Group className="mb-3">
           <Form.Label>Study</Form.Label>
           <Form.Control
@@ -247,6 +259,7 @@ export const Settings = () => {
           )}
         </Form.Group>
 
+        {/* Salary per month */}
         <Form.Group className="mb-3">
           <Form.Label>Salary per month</Form.Label>
           <Form.Control

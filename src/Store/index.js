@@ -6,6 +6,7 @@ import {
   userAuth,
   userNotifications,
   otherProfile,
+  userConnections,
 } from "Slices";
 
 export const Store = configureStore({
@@ -15,5 +16,6 @@ export const Store = configureStore({
     userAuth,
     userNotifications,
     otherProfile,
+    userConnections,
   }),
 });

@@ -33,7 +33,7 @@ export const SignUp = () => {
     }
   };
 
-  const longSignupForm = false;
+  const longSignupForm = true;
   return (
     <Container
       className="d-flex justify-content-center align-items-center"

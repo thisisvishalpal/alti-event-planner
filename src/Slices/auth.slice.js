@@ -28,7 +28,7 @@ export const validateToken = createAsyncThunk(
   "auth/validateToken",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axiosInstance.get(apiRoutes.userValidateToken);
+      const response = await axiosInstance.get(apiRoutes.authCheck);
       return response.data.data;
     } catch (error) {
       if (error.response) {
