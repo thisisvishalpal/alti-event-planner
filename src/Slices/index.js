@@ -6,6 +6,7 @@ import userNotifications, {
 } from "./notifications.slice";
 import otherProfile, { fetchOtherProfile } from "./otherProfile.slice";
 import userConnections, { fetchUserConnections } from "./connections.slice";
+import userSearch, { fetchSearch } from "./search.slice";
 
 export {
   userFeeds,
@@ -22,4 +23,6 @@ export {
   fetchOtherProfile,
   userConnections,
   fetchUserConnections,
+  userSearch,
+  fetchSearch,
 };

@@ -7,6 +7,7 @@ import {
   userNotifications,
   otherProfile,
   userConnections,
+  userSearch,
 } from "Slices";
 
 export const Store = configureStore({
@@ -17,5 +18,6 @@ export const Store = configureStore({
     userNotifications,
     otherProfile,
     userConnections,
+    userSearch,
   }),
 });

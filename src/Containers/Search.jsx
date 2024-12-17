@@ -1,34 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { ListGroup, Image, Badge } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import "./Search.css"; // Add custom styles if necessary
-import { axiosInstance } from "Services";
 import { SearchBar } from "Components";
-import { apiRoutes } from "Utils";
+import { fetchSearch } from "Slices";
 
 export const Search = () => {
+  const dispatch = useDispatch();
+  const { data, loading, error } = useSelector(({ userSearch }) => userSearch);
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
-  const [loading, setLoading] = useState(false);
+
+  console.log(data);
 
   useEffect(() => {
-    if (query.length > 1) {
-      setLoading(true);
-      // Simulate an API call for suggestions
-      axiosInstance
-        .get(apiRoutes.searchUser, { params: { query } })
-        .then((response) => {
-          setSuggestions(response.data);
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.error("Error fetching suggestions:", error);
-          setLoading(false);
-        });
-    } else {
-      setSuggestions([]);
-    }
+    dispatch(fetchSearch(query));
   }, [query]);
 
   const handleInputChange = (e) => {
@@ -45,9 +33,9 @@ export const Search = () => {
       />
 
       {loading && <div className="loading">Loading...</div>}
-      {!loading && suggestions.length > 0 && (
+      {!loading && data?.length > 0 && (
         <ListGroup className="suggestions-list">
-          {suggestions.map((user) => (
+          {data?.map((user) => (
             <Link to={`/user/${user?.username}`}>
               <ListGroup.Item key={user.id} className="suggestion-item">
                 <div className="suggestion-details">

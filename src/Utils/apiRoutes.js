@@ -7,6 +7,6 @@ export const apiRoutes = {
   userSignUp: "/auth/signup",
   userLogout: "/auth/logout",
   authCheck: "/auth/auth-check",
-  searchUser: "/search/person",
+  userSearch: "/search/person",
   testCookies: "/test-cookies",
 };
