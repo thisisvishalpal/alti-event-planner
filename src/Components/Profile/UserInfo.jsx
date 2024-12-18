@@ -1,27 +1,33 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Card, Row, Col, Image, Alert } from "react-bootstrap";
-import { ActionButton, SpinnerTwo } from "Components";
-import { urls } from "Utils";
+import React, { useState, useEffect } from "react";
+import { Card, Alert, Collapse } from "react-bootstrap";
+import { useForm } from "react-hook-form";
+
+import {
+  PersonalInfoForm,
+  CareerInformationForm,
+  SpinnerTwo,
+  ProfileUsername,
+} from "Components";
 
 export const UserInfo = ({ user = {}, loading, error }) => {
-  // Handle undefined or missing user details gracefully
-  const {
-    profilePicture = "https://via.placeholder.com/150", // Placeholder image for missing profile picture
-    username = "Unknown",
-    fullName = "No Name Provided",
-    bio = "No bio available",
-    city = "Unknown City",
-    state = "Unknown State",
-    phoneNumber = "N/A",
-    followers = 0,
-    following = 0,
-    posts = [],
-    private: pri = false,
-    gotra = "N/A",
-    age = "N/A",
-    gender = "N/A",
-  } = user || {};
+  const { register, setValue } = useForm();
+  const [showCollapse, setShowCollapse] = useState(false);
+
+  useEffect(() => {
+    setValue("fullName", user.fullName);
+    setValue("fatherName", user.fatherName);
+    setValue("username", user.username);
+    setValue("email", user.email);
+    setValue("phoneNumber", user.phoneNumber);
+    setValue("age", user.age);
+    setValue("gender", user.gender);
+    setValue("occupation", user.occupation);
+    setValue("city", user.city);
+    setValue("study", user.study);
+    setValue("married", user.married);
+  }, [user]);
+
+  const wantToEdit = false;
 
   if (loading) {
     return (
@@ -41,63 +47,29 @@ export const UserInfo = ({ user = {}, loading, error }) => {
 
   return (
     <Card className="shadow-sm p-3 m-2 mt-3" style={{ minHeight: "25vh" }}>
-      <Row>
-        {/* Profile Picture */}
-        <Col md={4} className="text-center">
-          <Image
-            src={profilePicture}
-            roundedCircle
-            alt={`${fullName}'s profile`}
-            className="img-fluid"
-            style={{ width: "150px", height: "150px" }}
+      <ProfileUsername
+        profilePicture={user.profilePicture}
+        fullName={user.fullName}
+        posts={user.posts}
+        toggleCollapse={() => setShowCollapse((prev) => !prev)}
+        followers={user.followers}
+        following={user.following}
+        bio={user.bio}
+      />
+      <Collapse in={showCollapse}>
+        <div>
+          <PersonalInfoForm
+            errors={{}}
+            wantToEdit={wantToEdit}
+            register={register}
           />
-        </Col>
-
-        {/* User Details */}
-        <Col md={8}>
-          <Card.Body>
-            {/* Name and Bio */}
-            <h3>{fullName}</h3>
-            <p className="text-muted">{bio}</p>
-
-            {/* User Stats */}
-            <Row className="text-center my-3">
-              <Col>
-                <h5>{posts?.length}</h5>
-                <p className="text-muted">Posts</p>
-              </Col>
-              <Col>
-                <Link
-                  style={{
-                    textDecoration: "none",
-                    color: "inherit",
-                  }}
-                  to={urls.connections}
-                  state={"followers"}
-                >
-                  <h5>{followers}</h5>
-                  <p className="text-muted">Followers</p>
-                </Link>
-              </Col>
-              <Col>
-                <Link
-                  style={{
-                    textDecoration: "none",
-                    color: "inherit",
-                  }}
-                  to={urls.connections}
-                  state={"following"}
-                >
-                  <h5>{following}</h5>
-                  <p className="text-muted">Following</p>
-                </Link>
-              </Col>
-            </Row>
-
-            <ActionButton />
-          </Card.Body>
-        </Col>
-      </Row>
+          <CareerInformationForm
+            errors={{}}
+            wantToEdit={wantToEdit}
+            register={register}
+          />
+        </div>
+      </Collapse>
     </Card>
   );
 };

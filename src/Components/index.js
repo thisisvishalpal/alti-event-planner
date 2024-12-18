@@ -1,5 +1,5 @@
 export { ThemeToggler } from "./ThemeToggler";
-export { UserInfo, UserPosts, ActionButton } from "./Profile";
+export { UserInfo, UserPosts, ActionButton, ProfileUsername } from "./Profile";
 export { UploadSection, FeedSection } from "./Feeds";
 export {
   Aside,
@@ -15,3 +15,9 @@ export { Navigations } from "./Navigations";
 export { Spinner } from "./Spinner";
 export { SpinnerTwo } from "./SpinnerTwo";
 export { ConnectionTabs } from "./Connections";
+export {
+  UsernameEmailForm,
+  PersonalInfoForm,
+  CareerInformationForm,
+  SecurityForm,
+} from "./FormInput";
