@@ -13,6 +13,7 @@ import {
   Settings,
   AccessDenied,
   Landing,
+  SignupTwo,
 } from "Containers";
 import { Spinner } from "Components";
 
@@ -98,7 +99,7 @@ export const LoggedOutRoutes = [
   {
     path: signUp,
     element: <Navigate to={root} replace />,
-    fallBack: <SignUp />,
+    fallBack: <SignupTwo />,
   },
 ];
 

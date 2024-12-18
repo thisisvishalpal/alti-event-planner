@@ -20,4 +20,7 @@ export {
   PersonalInfoForm,
   CareerInformationForm,
   SecurityForm,
+  SearchFilterForm,
+  SearchTypeSelector,
 } from "./FormInput";
+export { SearchResults } from "./Search";

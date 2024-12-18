@@ -52,7 +52,17 @@ export const CareerInformationForm = ({ errors, wantToEdit, register }) => {
           type="number"
           disabled={!wantToEdit}
           placeholder="Enter your monthly salary"
-          {...register("salary", { required: "Salary field is required" })}
+          {...register("salary", {
+            required: "Salary field is required",
+            min: {
+              value: 0,
+              message: "Salary must be more than 0",
+            },
+            max: {
+              value: 1000000,
+              message: "Salary cannot be more than 10 lacs",
+            },
+          })}
         />
         {errors.salary && (
           <p className="text-danger">{errors.salary.message}</p>

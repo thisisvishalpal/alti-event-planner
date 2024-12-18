@@ -12,8 +12,13 @@ export const UsernameEmailForm = ({ errors, wantToEdit = false, register }) => {
           disabled={!wantToEdit}
           type="text"
           placeholder="Your Username"
-          {...register("username")}
+          {...register("username", {
+            required: "Username is required",
+          })}
         />
+        {errors.username && (
+          <p className="text-danger">{errors.username.message}</p>
+        )}
       </Form.Group>
 
       {/* Email */}

@@ -2,7 +2,7 @@ export { Landing } from "./Landing";
 export { NotFound } from "./NotFound";
 export { Feeds } from "./Feeds";
 export { SignIn } from "./SignIn";
-export { SignUp } from "./SignUp";
+export { SignUp, SignupTwo } from "./SignUp";
 export { Connections } from "./Connections";
 export { Profile } from "./Profile";
 export { Notifications } from "./Notifications";

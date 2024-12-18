@@ -67,6 +67,10 @@ export const PersonalInfoForm = ({ errors, wantToEdit, register }) => {
               value: 18,
               message: "You must be at least 18 years old",
             },
+            max: {
+              value: 99,
+              message: "Age cannot be more than 99 years",
+            },
           })}
         />
         {errors.age && <p className="text-danger">{errors.age.message}</p>}
@@ -82,7 +86,7 @@ export const PersonalInfoForm = ({ errors, wantToEdit, register }) => {
           <option value="">Select your gender</option>
           <option value="male">Male</option>
           <option value="female">Female</option>
-          <option value="Other">Other</option>
+          <option value="other">Other</option>
         </Form.Select>
         {errors.gender && (
           <p className="text-danger">{errors.gender.message}</p>
