@@ -2,7 +2,7 @@ import { Card, Form } from "react-bootstrap";
 
 export const PersonalInfoForm = ({ errors, wantToEdit, register }) => {
   return (
-    <Card className="p-4 m-4">
+    <>
       <h5 className="mb-3">Personal information</h5>
       {/* fullname */}
       <Form.Group className="mb-3">
@@ -100,7 +100,7 @@ export const PersonalInfoForm = ({ errors, wantToEdit, register }) => {
         >
           <option value="">Select marital status</option>
           <option value="yes">Yes</option>
-          <option value="No">No</option>
+          <option value="no">No</option>
         </Form.Select>
         {errors.married && (
           <p className="text-danger">{errors.married.message}</p>
@@ -110,12 +110,18 @@ export const PersonalInfoForm = ({ errors, wantToEdit, register }) => {
       {/* City */}
       <Form.Group className="mb-3">
         <Form.Label>City</Form.Label>
-        <Form.Control
-          type="text"
+
+        <Form.Select
           disabled={!wantToEdit}
-          placeholder="Enter your city"
           {...register("city", { required: "City is required" })}
-        />
+        >
+          <option value="">Select your city</option>
+          <option value="gwalior">Gwalior</option>
+          <option value="bhopal">Bhopal</option>
+          <option value="indore">Indore</option>
+          <option value="morena">Morena</option>
+          <option value="dabra">Dabra</option>
+        </Form.Select>
         {errors.city && <p className="text-danger">{errors.city.message}</p>}
       </Form.Group>
 
@@ -134,6 +140,6 @@ export const PersonalInfoForm = ({ errors, wantToEdit, register }) => {
           <p className="text-danger">{errors.address.message}</p>
         )}
       </Form.Group>
-    </Card>
+    </>
   );
 };

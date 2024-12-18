@@ -2,20 +2,24 @@ import { Form, Card } from "react-bootstrap";
 
 export const CareerInformationForm = ({ errors, wantToEdit, register }) => {
   return (
-    <Card className="p-4 m-4">
+    <>
       <h5 className="mb-3">Career Information</h5>
 
       {/* Occupation */}
       <Form.Group className="mb-3">
         <Form.Label>Occupation</Form.Label>
-        <Form.Control
-          type="text"
+        <Form.Select
           disabled={!wantToEdit}
-          placeholder="Enter your occupation"
-          {...register("occupation", {
-            required: "Occupation is required",
-          })}
-        />
+          {...register("occupation", { required: "Occupation is required" })}
+        >
+          <option value="">Select your occupation</option>
+          <option value="private">Private</option>
+          <option value="government">Government</option>
+          <option value="business">Business</option>
+          <option value="nothing">Nothing</option>
+          <option value="other">Other</option>
+        </Form.Select>
+
         {errors.occupation && (
           <p className="text-danger">{errors.occupation.message}</p>
         )}
@@ -24,12 +28,20 @@ export const CareerInformationForm = ({ errors, wantToEdit, register }) => {
       {/* Study */}
       <Form.Group className="mb-3">
         <Form.Label>Study</Form.Label>
-        <Form.Control
-          type="text"
+        <Form.Select
           disabled={!wantToEdit}
-          placeholder="Enter your field of study"
-          {...register("study", { required: "Study field is required" })}
-        />
+          {...register("study", { required: "Study is required" })}
+        >
+          <option value="">Select your study</option>
+          <option value="5">5th</option>
+          <option value="8">8th</option>
+          <option value="10">10th</option>
+          <option value="12">12th</option>
+          <option value="diploma">Diploma</option>
+          <option value="graduation">Graduation</option>
+          <option value="postgraduation">Post Graduation</option>
+          <option value="phd">PHD</option>
+        </Form.Select>
         {errors.study && <p className="text-danger">{errors.study.message}</p>}
       </Form.Group>
 
@@ -46,6 +58,6 @@ export const CareerInformationForm = ({ errors, wantToEdit, register }) => {
           <p className="text-danger">{errors.salary.message}</p>
         )}
       </Form.Group>
-    </Card>
+    </>
   );
 };

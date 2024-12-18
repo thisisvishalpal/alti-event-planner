@@ -1,15 +1,15 @@
-import { Card, Form } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 
-export const UsernameEmailForm = ({ errors, wantToEdit, register }) => {
+export const UsernameEmailForm = ({ errors, wantToEdit = false, register }) => {
   return (
-    <Card className="p-4 m-4">
+    <>
       <h5 className="mb-3">Account information</h5>
 
       {/* Username */}
       <Form.Group className="mb-3">
         <Form.Label>Username</Form.Label>
         <Form.Control
-          disabled={true}
+          disabled={!wantToEdit}
           type="text"
           placeholder="Your Username"
           {...register("username")}
@@ -22,7 +22,7 @@ export const UsernameEmailForm = ({ errors, wantToEdit, register }) => {
         <Form.Control
           type="email"
           placeholder="Enter your email"
-          disabled={true}
+          disabled={!wantToEdit}
           {...register("email", {
             required: "Email is required",
             pattern: {
@@ -33,6 +33,6 @@ export const UsernameEmailForm = ({ errors, wantToEdit, register }) => {
         />
         {errors.email && <p className="text-danger">{errors.email.message}</p>}
       </Form.Group>
-    </Card>
+    </>
   );
 };

@@ -37,6 +37,8 @@ export const Settings = () => {
     setValue("city", data.city);
     setValue("study", data.study);
     setValue("married", data.married);
+    setValue("salary", data.salary);
+    setValue("address", data.address);
   }, [data]);
   const onSubmit = () => {
     console.log("submit clicked");
@@ -45,21 +47,27 @@ export const Settings = () => {
   return (
     <Container className="mt-4">
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <UsernameEmailForm
-          errors={errors}
-          wantToEdit={wantToEdit}
-          register={register}
-        />
-        <PersonalInfoForm
-          errors={errors}
-          wantToEdit={wantToEdit}
-          register={register}
-        />
-        <CareerInformationForm
-          errors={errors}
-          wantToEdit={wantToEdit}
-          register={register}
-        />
+        <Card className="p-4 m-4">
+          <UsernameEmailForm
+            errors={errors}
+            wantToEdit={false}
+            register={register}
+          />
+        </Card>
+        <Card className="p-4 m-4">
+          <PersonalInfoForm
+            errors={errors}
+            wantToEdit={wantToEdit}
+            register={register}
+          />
+        </Card>
+        <Card className="p-4 m-4">
+          <CareerInformationForm
+            errors={errors}
+            wantToEdit={wantToEdit}
+            register={register}
+          />
+        </Card>
         <div className="text-end">
           <Button
             variant="success"

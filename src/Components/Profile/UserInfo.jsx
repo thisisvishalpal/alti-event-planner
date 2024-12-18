@@ -25,6 +25,8 @@ export const UserInfo = ({ user = {}, loading, error }) => {
     setValue("city", user.city);
     setValue("study", user.study);
     setValue("married", user.married);
+    setValue("address", user.address);
+    setValue("salary", user.salary);
   }, [user]);
 
   const wantToEdit = false;
@@ -58,16 +60,20 @@ export const UserInfo = ({ user = {}, loading, error }) => {
       />
       <Collapse in={showCollapse}>
         <div>
-          <PersonalInfoForm
-            errors={{}}
-            wantToEdit={wantToEdit}
-            register={register}
-          />
-          <CareerInformationForm
-            errors={{}}
-            wantToEdit={wantToEdit}
-            register={register}
-          />
+          <Card className="p-4 m-4">
+            <PersonalInfoForm
+              errors={{}}
+              wantToEdit={wantToEdit}
+              register={register}
+            />
+          </Card>
+          <Card className="p-4 m-4">
+            <CareerInformationForm
+              errors={{}}
+              wantToEdit={wantToEdit}
+              register={register}
+            />
+          </Card>
         </div>
       </Collapse>
     </Card>
