@@ -1,5 +1,12 @@
 export { ThemeToggler } from "./ThemeToggler";
-export { UserInfo, UserPosts, ActionButton, ProfileUsername } from "./Profile";
+export {
+  UserInfo,
+  UserPosts,
+  ActionButton,
+  ProfileUsername,
+  AreYouFollowing,
+  ProfileTabs,
+} from "./Profile";
 export { UploadSection, FeedSection } from "./Feeds";
 export {
   Aside,

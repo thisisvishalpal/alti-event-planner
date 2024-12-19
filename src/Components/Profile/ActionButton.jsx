@@ -2,7 +2,7 @@ import { useProfile } from "Hooks";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-export const ActionButton = ({ toggleCollapse }) => {
+export const ActionButton = ({ following, toggleFollowing }) => {
   const navigate = useNavigate();
   const { isAccessingSelfProfile } = useProfile();
 
@@ -15,16 +15,16 @@ export const ActionButton = ({ toggleCollapse }) => {
       >
         Edit Profile
       </Button>
-      <Button variant="outline-secondary" onClick={toggleCollapse}>
+      <Button variant="outline-secondary" onClick={() => {}}>
         View info
       </Button>
     </div>
   ) : (
     <div className="text-end">
-      <Button variant="primary" onClick={() => {}} className="me-2">
-        Follow
+      <Button variant="primary" onClick={toggleFollowing} className="me-2">
+        {following ? "Following" : "Follow"}
       </Button>
-      <Button variant="outline-secondary" onClick={toggleCollapse}>
+      <Button variant="outline-secondary" onClick={() => {}}>
         View info
       </Button>
     </div>

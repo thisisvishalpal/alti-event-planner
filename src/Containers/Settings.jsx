@@ -15,39 +15,28 @@ import { useTheme } from "Theme";
 export const Settings = () => {
   const { toggleTheme } = useTheme();
   const { data } = useSelector(({ userInfo }) => userInfo);
+
   const [wantToEdit, setWantToEdit] = useState(false);
+  const [activeTab, setActiveTab] = useState("account");
+
   const {
     register,
     handleSubmit,
-    watch,
-    getValues,
     setValue,
     formState: { errors },
   } = useForm();
 
+  // Prefill form values from Redux data
   useEffect(() => {
-    setValue("fullName", data.fullName);
-    setValue("fatherName", data.fatherName);
-    setValue("username", data.username);
-    setValue("email", data.email);
-    setValue("phoneNumber", data.phoneNumber);
-    setValue("age", data.age);
-    setValue("gender", data.gender);
-    setValue("occupation", data.occupation);
-    setValue("city", data.city);
-    setValue("study", data.study);
-    setValue("married", data.married);
-    setValue("salary", data.salary);
-    setValue("address", data.address);
-  }, [data]);
+    if (data) {
+      Object.keys(data).forEach((key) => {
+        setValue(key, data[key]);
+      });
+    }
+  }, [data, setValue]);
+
   const onSubmit = () => {
-    console.log("submit clicked");
-  };
-
-  const [activeTab, setActiveTab] = useState("account");
-
-  const handleTabSelect = (tab) => {
-    setActiveTab(tab);
+    console.log("Form submitted");
   };
 
   return (
@@ -55,12 +44,12 @@ export const Settings = () => {
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Tabs
           activeKey={activeTab}
-          onSelect={handleTabSelect}
+          onSelect={setActiveTab}
           className="mb-3"
           justify
         >
+          {/* Account Tab */}
           <Tab eventKey="account" title="Account">
-            {/* ${followers?.length} */}
             <Card className="p-4 m-4">
               <UsernameEmailForm
                 errors={errors}
@@ -70,8 +59,8 @@ export const Settings = () => {
             </Card>
           </Tab>
 
+          {/* Personal Tab */}
           <Tab eventKey="personal" title="Personal">
-            {/* ${following?.length} */}
             <Card className="p-4 m-4">
               <PersonalInfoForm
                 errors={errors}
@@ -80,6 +69,8 @@ export const Settings = () => {
               />
             </Card>
           </Tab>
+
+          {/* Career Tab */}
           <Tab eventKey="career" title="Career">
             <Card className="p-4 m-4">
               <CareerInformationForm
@@ -89,12 +80,16 @@ export const Settings = () => {
               />
             </Card>
           </Tab>
+
+          {/* Security Tab */}
           <Tab eventKey="security" title="Security">
             <SecurityForm register={register} />
           </Tab>
+
+          {/* Theme Tab */}
           <Tab eventKey="theme" title="Theme">
             <Card className="p-4 m-4">
-              <h5 className="mb-3">Select theme</h5>
+              <h5 className="mb-3">Select Theme</h5>
               <ThemeToggler
                 labelLeft="Light"
                 labelRight="Dark"
@@ -104,6 +99,7 @@ export const Settings = () => {
           </Tab>
         </Tabs>
 
+        {/* Action Buttons */}
         <div className="text-end">
           <Button
             variant="success"
@@ -111,9 +107,9 @@ export const Settings = () => {
             disabled={wantToEdit}
             className="me-2"
           >
-            Edit details
+            Edit Details
           </Button>
-          <Button disabled={!wantToEdit} variant="primary" type="submit">
+          <Button variant="primary" type="submit" disabled={!wantToEdit}>
             Save
           </Button>
         </div>
