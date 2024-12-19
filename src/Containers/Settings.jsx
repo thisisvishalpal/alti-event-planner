@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Form, Card, Button, Container } from "react-bootstrap";
+import { Form, Card, Button, Container, Tab, Tabs } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 
@@ -44,30 +44,66 @@ export const Settings = () => {
     console.log("submit clicked");
   };
 
+  const [activeTab, setActiveTab] = useState("account");
+
+  const handleTabSelect = (tab) => {
+    setActiveTab(tab);
+  };
+
   return (
     <Container className="mt-4">
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Card className="p-4 m-4">
-          <UsernameEmailForm
-            errors={errors}
-            wantToEdit={false}
-            register={register}
-          />
-        </Card>
-        <Card className="p-4 m-4">
-          <PersonalInfoForm
-            errors={errors}
-            wantToEdit={wantToEdit}
-            register={register}
-          />
-        </Card>
-        <Card className="p-4 m-4">
-          <CareerInformationForm
-            errors={errors}
-            wantToEdit={wantToEdit}
-            register={register}
-          />
-        </Card>
+        <Tabs
+          activeKey={activeTab}
+          onSelect={handleTabSelect}
+          className="mb-3"
+          justify
+        >
+          <Tab eventKey="account" title="Account">
+            {/* ${followers?.length} */}
+            <Card className="p-4 m-4">
+              <UsernameEmailForm
+                errors={errors}
+                wantToEdit={false}
+                register={register}
+              />
+            </Card>
+          </Tab>
+
+          <Tab eventKey="personal" title="Personal">
+            {/* ${following?.length} */}
+            <Card className="p-4 m-4">
+              <PersonalInfoForm
+                errors={errors}
+                wantToEdit={wantToEdit}
+                register={register}
+              />
+            </Card>
+          </Tab>
+          <Tab eventKey="career" title="Career">
+            <Card className="p-4 m-4">
+              <CareerInformationForm
+                errors={errors}
+                wantToEdit={wantToEdit}
+                register={register}
+              />
+            </Card>
+          </Tab>
+          <Tab eventKey="security" title="Security">
+            <SecurityForm register={register} />
+          </Tab>
+          <Tab eventKey="theme" title="Theme">
+            <Card className="p-4 m-4">
+              <h5 className="mb-3">Select theme</h5>
+              <ThemeToggler
+                labelLeft="Light"
+                labelRight="Dark"
+                onChange={toggleTheme}
+              />
+            </Card>
+          </Tab>
+        </Tabs>
+
         <div className="text-end">
           <Button
             variant="success"
@@ -82,17 +118,6 @@ export const Settings = () => {
           </Button>
         </div>
       </Form>
-
-      <SecurityForm register={register} />
-
-      <Card className="p-4 m-4">
-        <h5 className="mb-3">Select theme</h5>
-        <ThemeToggler
-          labelLeft="Light"
-          labelRight="Dark"
-          onChange={toggleTheme}
-        />
-      </Card>
     </Container>
   );
 };
