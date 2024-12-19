@@ -6,6 +6,7 @@ export const SearchTypeSelector = ({ searchType, handleToggle }) => {
     <div className="d-flex align-items-center switch-container mb-4">
       <span className="label me-2">By name</span>
       <Form.Check
+        disabled={true}
         type="switch"
         id="custom-switch"
         checked={searchType}
