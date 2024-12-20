@@ -1,6 +1,12 @@
 import { Form } from "react-bootstrap";
 
-export const UsernameEmailForm = ({ errors, wantToEdit = false, register }) => {
+export const UsernameEmailForm = ({
+  errors,
+  wantToEdit = false,
+  register,
+  watch,
+  showNewPassword = true,
+}) => {
   return (
     <>
       <h5 className="mb-3">Account information</h5>
@@ -38,6 +44,59 @@ export const UsernameEmailForm = ({ errors, wantToEdit = false, register }) => {
         />
         {errors.email && <p className="text-danger">{errors.email.message}</p>}
       </Form.Group>
+
+      {/* Language */}
+      <Form.Group className="mb-3">
+        <Form.Label>Language</Form.Label>
+        <Form.Select
+          disabled={!wantToEdit}
+          {...register("language", { required: "Language is required" })}
+        >
+          <option value="">Select your language</option>
+          <option value="english">English</option>
+          <option value="hindi">Hindi</option>
+        </Form.Select>
+        {errors.language && (
+          <p className="text-danger">{errors.language.message}</p>
+        )}
+      </Form.Group>
+
+      {showNewPassword && (
+        <>
+          <Form.Group className="mb-3">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type="password"
+              placeholder="Enter your password"
+              {...register("password", {
+                required: "Password is required",
+                minLength: {
+                  value: 6,
+                  message: "Password must be at least 6 characters long",
+                },
+              })}
+            />
+            {errors.password && (
+              <p className="text-danger">{errors.password.message}</p>
+            )}
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Confirm Password</Form.Label>
+            <Form.Control
+              type="password"
+              placeholder="Confirm your password"
+              {...register("confirmPassword", {
+                required: "Please confirm your password",
+                validate: (value) =>
+                  value === watch("password") || "Passwords do not match",
+              })}
+            />
+            {errors.confirmPassword && (
+              <p className="text-danger">{errors.confirmPassword.message}</p>
+            )}
+          </Form.Group>
+        </>
+      )}
     </>
   );
 };

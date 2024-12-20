@@ -55,6 +55,7 @@ export const Settings = () => {
                 errors={errors}
                 wantToEdit={false}
                 register={register}
+                showNewPassword={false}
               />
             </Card>
           </Tab>

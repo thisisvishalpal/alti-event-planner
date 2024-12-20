@@ -2,7 +2,14 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
-import { Button, Form, Container, ProgressBar, Card } from "react-bootstrap";
+import {
+  Button,
+  Form,
+  Container,
+  ProgressBar,
+  Card,
+  Alert,
+} from "react-bootstrap";
 
 import { signIn } from "Slices";
 import { apiRoutes, urls } from "Utils";
@@ -94,60 +101,43 @@ export const SignUp = () => {
   );
 };
 
-const Stepper = ({ steps, onSubmit }) => {
-  const [currentStep, setCurrentStep] = useState(1);
+export const ActionButton = ({ prevStep, isFirstStep, isLastStep }) => {
+  return (
+    <div className="d-flex justify-content-between">
+      <Button variant="secondary" onClick={prevStep} disabled={isFirstStep}>
+        Previous
+      </Button>
+      {isLastStep ? (
+        <Button variant="success" type="submit">
+          Submit
+        </Button>
+      ) : (
+        <Button variant="primary" type="submit">
+          Next
+        </Button>
+      )}
+    </div>
+  );
+};
+export const SignupTwo = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
 
-  const isLastStep = currentStep === steps.length;
+  const wantToEdit = true;
+  const [currentStep, setCurrentStep] = useState(1);
+  const [serverError, setServerError] = useState([]);
+
   const isFirstStep = currentStep === 1;
 
   const nextStep = () => {
     if (!isLastStep) setCurrentStep(currentStep + 1);
   };
-
-  const prevStep = () => {
-    if (!isFirstStep) setCurrentStep(currentStep - 1);
-  };
-
-  const getProgress = () => (currentStep / steps.length) * 100;
-
-  return (
-    <Container>
-      {/* <h4 className="text-center">
-        Step {currentStep} of {steps.length}
-      </h4> */}
-
-      {/* Step Content */}
-      <div className="mt-4">{steps[currentStep - 1]}</div>
-
-      <ProgressBar now={getProgress()} className="my-4" />
-
-      <div className="d-flex justify-content-between">
-        <Button variant="secondary" onClick={prevStep} disabled={isFirstStep}>
-          Previous
-        </Button>
-        {!isLastStep ? (
-          <Button variant="primary" onClick={nextStep}>
-            Next
-          </Button>
-        ) : (
-          <Button variant="success" onClick={onSubmit}>
-            Submit
-          </Button>
-        )}
-      </div>
-    </Container>
-  );
-};
-
-export const SignupTwo = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     try {
@@ -160,44 +150,39 @@ export const SignupTwo = () => {
         navigate(urls.signIn); // Redirect to Sign In
       }
     } catch (error) {
-      console.error(error.response?.data?.message || "An error occurred");
+      setServerError(error.response.data.errors);
     }
   };
 
-  const wantToEdit = true; // Example flag for conditional rendering
+  const prevStep = () => {
+    setCurrentStep((prevState) => prevState - 1);
+    setServerError([]);
+  };
 
-  const steps = [
-    <PersonalInfoForm
-      errors={errors}
-      wantToEdit={wantToEdit}
-      register={register}
-    />,
-    <CareerInformationForm
-      errors={errors}
-      wantToEdit={wantToEdit}
-      register={register}
-    />,
-    <>
-      <UsernameEmailForm
+  const generateStep = (FormComponent, isLastStep = false, watch) => (
+    <Form onSubmit={handleSubmit(isLastStep ? onSubmit : nextStep)}>
+      <FormComponent
         errors={errors}
         wantToEdit={wantToEdit}
         register={register}
+        watch={watch}
       />
-      <Form.Group className="mb-3">
-        <Form.Label>Password</Form.Label>
-        <Form.Control
-          type="password"
-          placeholder="Enter your password"
-          {...register("password", {
-            required: "Password is required",
-          })}
-        />
-        {errors.password && (
-          <p className="text-danger">{errors.password.message}</p>
-        )}
-      </Form.Group>
-    </>,
+      <ActionButton
+        prevStep={prevStep}
+        isFirstStep={isFirstStep}
+        isLastStep={isLastStep}
+      />
+    </Form>
+  );
+
+  const steps = [
+    generateStep(PersonalInfoForm),
+    generateStep(CareerInformationForm),
+    generateStep(UsernameEmailForm, true, watch),
   ];
+
+  const isLastStep = currentStep === steps.length;
+  const getProgress = () => (currentStep / steps.length) * 100;
 
   return (
     <Container
@@ -216,9 +201,23 @@ export const SignupTwo = () => {
           margin: "50px",
         }}
       >
-        <Form onSubmit={handleSubmit(onSubmit)}>
-          <Stepper steps={steps} onSubmit={handleSubmit(onSubmit)} />
-        </Form>
+        {serverError.length > 0 && (
+          <Alert variant="danger">
+            <ul>
+              {serverError?.map((error) => (
+                <li>{error.msg}</li>
+              ))}
+            </ul>
+          </Alert>
+        )}
+
+        <div className="mt-4">{steps[currentStep - 1]}</div>
+
+        <ProgressBar now={getProgress()} className="my-4" />
+
+        <p className="mt-3 text-center">
+          Already have an account? <Link to={urls.signIn}>Sign In</Link>
+        </p>
       </Card>
     </Container>
   );
