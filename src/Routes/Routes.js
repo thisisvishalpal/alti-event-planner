@@ -9,7 +9,6 @@ import {
   Messages,
   Search,
   SignIn,
-  SignUp,
   Settings,
   AccessDenied,
   Landing,

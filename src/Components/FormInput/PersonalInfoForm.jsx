@@ -1,4 +1,4 @@
-import { Card, Form } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 
 export const PersonalInfoForm = ({ errors, wantToEdit, register }) => {
   return (

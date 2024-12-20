@@ -24,7 +24,6 @@ export const SignUp = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
   const dispatch = useDispatch();
