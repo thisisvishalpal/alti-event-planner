@@ -119,7 +119,6 @@ export const ActionButton = ({ prevStep, isFirstStep, isLastStep }) => {
   );
 };
 export const SignupTwo = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
     register,
@@ -144,9 +143,9 @@ export const SignupTwo = () => {
       if (response.status === 201) {
         const { user } = response.data;
         if (user.username) {
-          dispatch(signIn({ username: user.username }));
+          // dispatch(signIn({ username: user.username }));
+          navigate(urls.signIn);
         }
-        navigate(urls.signIn); // Redirect to Sign In
       }
     } catch (error) {
       setServerError(error.response.data.errors);
@@ -176,7 +175,7 @@ export const SignupTwo = () => {
 
   const steps = [
     generateStep(PersonalInfoForm),
-    generateStep(CareerInformationForm),
+    generateStep(CareerInformationForm, false, watch),
     generateStep(UsernameEmailForm, true, watch),
   ];
 

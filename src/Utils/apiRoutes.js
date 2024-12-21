@@ -8,5 +8,6 @@ export const apiRoutes = {
   userLogout: "/auth/logout",
   authCheck: "/auth/auth-check",
   userSearch: "/search/person",
+  follow: "/connection/follow",
   testCookies: "/test-cookies",
 };

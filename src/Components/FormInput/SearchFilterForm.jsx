@@ -6,23 +6,19 @@ export const SearchFilterForm = ({ errors, wantToEdit, register }) => {
       <h5 className="mb-3">Basic Preference</h5>
       {/* Age */}
       <Form.Group className="mb-3">
-        <Form.Label>Age</Form.Label>
-        <Form.Control
-          type="number"
-          placeholder="Enter your age"
+        <Form.Label>From age to</Form.Label>
+        <Form.Select
           disabled={!wantToEdit}
-          {...register("age", {
-            required: "Age is required",
-            min: {
-              value: 18,
-              message: "You must be at least 18 years old",
-            },
-            max: {
-              value: 99,
-              message: "Age cannot be more than 99 years",
-            },
-          })}
-        />
+          {...register("age", { required: "Age is required" })}
+        >
+          <option value="">Select your prefered age</option>
+          <option value="21-25">21 - 25</option>
+          <option value="26-30">26 - 30</option>
+          <option value="31-35">31 - 35</option>
+          <option value="36-40">36 - 40</option>
+          <option value="41-45">41 - 45</option>
+          <option value="46-50">46 - 50</option>
+        </Form.Select>
         {errors.age && <p className="text-danger">{errors.age.message}</p>}
       </Form.Group>
       {/* Gender */}

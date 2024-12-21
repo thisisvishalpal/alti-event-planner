@@ -1,12 +1,12 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 
-export const SearchTypeSelector = ({ searchType, handleToggle }) => {
+export const SearchTypeSelector = ({ searchType, handleToggle, disabled }) => {
   return (
     <div className="d-flex align-items-center switch-container mb-4">
       <span className="label me-2">By name</span>
       <Form.Check
-        disabled={true}
+        disabled={disabled}
         type="switch"
         id="custom-switch"
         checked={searchType}

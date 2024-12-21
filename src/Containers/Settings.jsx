@@ -23,6 +23,7 @@ export const Settings = () => {
     register,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors },
   } = useForm();
 
@@ -78,6 +79,7 @@ export const Settings = () => {
                 errors={errors}
                 wantToEdit={wantToEdit}
                 register={register}
+                watch={watch}
               />
             </Card>
           </Tab>

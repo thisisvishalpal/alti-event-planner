@@ -12,8 +12,8 @@ const initialState = {
     state: null,
     phoneNumber: null,
     bio: null,
-    followers: null,
-    following: null,
+    followers: [],
+    following: [],
     posts: null,
     private: null,
     gotra: null,
@@ -46,6 +46,27 @@ export const fetchOtherProfile = createAsyncThunk(
   }
 );
 
+export const mutateFollowThem = createAsyncThunk(
+  "userInfo/mutateFollowThem",
+
+  async (prop, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.post(apiRoutes.follow, prop);
+      console.log(response, "from slice");
+      return response.data.data.currentUser;
+    } catch (error) {
+      console.log(error);
+      if (error.response) {
+        return rejectWithValue(error.response.data.error);
+      } else if (error.request) {
+        return rejectWithValue("No response from the server");
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
 const otherProfileSlice = createSlice({
   name: "otherProfile",
   initialState,
@@ -61,6 +82,18 @@ const otherProfileSlice = createSlice({
         state.data = action.payload;
       })
       .addCase(fetchOtherProfile.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(mutateFollowThem.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(mutateFollowThem.fulfilled, (state, action) => {
+        state.loading = false;
+        state.data.followers = [...state.data.followers, action.payload._id];
+      })
+      .addCase(mutateFollowThem.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

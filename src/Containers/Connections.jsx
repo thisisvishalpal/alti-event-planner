@@ -21,21 +21,21 @@ export const Connections = () => {
     setFilter(e.target.value);
   };
 
-  // const followersResults = followers.filter(
-  //   (user) =>
-  //     user.name.toLowerCase().includes(filter.toLowerCase()) ||
-  //     user.username.toLowerCase().includes(filter.toLowerCase())
-  // );
-  // const followingResults = following.filter(
-  //   (user) =>
-  //     user.name.toLowerCase().includes(filter.toLowerCase()) ||
-  //     user.username.toLowerCase().includes(filter.toLowerCase())
-  // );
+  const followersResults = data.followers.filter(
+    (user) =>
+      user.fullName.toLowerCase().includes(filter.toLowerCase()) ||
+      user.username.toLowerCase().includes(filter.toLowerCase())
+  );
+  const followingResults = data.following.filter(
+    (user) =>
+      user.fullName.toLowerCase().includes(filter.toLowerCase()) ||
+      user.username.toLowerCase().includes(filter.toLowerCase())
+  );
 
-  // useEffect(() => {
-  //   setFilterFollowers(followersResults);
-  //   setFilterFollowing(followingResults);
-  // }, [filter, data]);
+  useEffect(() => {
+    setFilterFollowers(followersResults);
+    setFilterFollowing(followingResults);
+  }, [filter, data]);
 
   useEffect(() => {
     dispatch(fetchUserConnections());
@@ -52,8 +52,8 @@ export const Connections = () => {
       <ConnectionTabs
         loading={loading}
         state={location?.state}
-        followers={data.followers}
-        following={data.following}
+        followers={filterFollowers}
+        following={filterFollowing}
       />
     </Container>
   );

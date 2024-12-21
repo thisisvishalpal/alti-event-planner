@@ -21,7 +21,12 @@ export const ActionButton = ({ following, toggleFollowing }) => {
     </div>
   ) : (
     <div className="text-end">
-      <Button variant="primary" onClick={toggleFollowing} className="me-2">
+      <Button
+        variant="primary"
+        disabled={following}
+        onClick={toggleFollowing}
+        className="me-2"
+      >
         {following ? "Following" : "Follow"}
       </Button>
       <Button variant="outline-secondary" onClick={() => {}}>

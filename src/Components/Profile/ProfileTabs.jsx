@@ -9,13 +9,12 @@ import {
   AreYouFollowing,
   CareerInformationForm,
   PersonalInfoForm,
-  UserInfo,
   UserPosts,
 } from "Components";
 import { fetchOtherProfile } from "Slices";
 
 export const ProfileTabs = ({ following }) => {
-  const { register, setValue } = useForm();
+  const { register, setValue, watch } = useForm();
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState("information");
   const { isAccessingSelfProfile } = useProfile();
@@ -23,13 +22,13 @@ export const ProfileTabs = ({ following }) => {
 
   const {
     data: userInfoData,
-    error: userInfoError,
+    // error: userInfoError,
     loading: userInfoLoading,
   } = useSelector(({ userInfo }) => userInfo);
 
   const {
     data: otherProfileData,
-    error: otherProfileError,
+    // error: otherProfileError,
     loading: otherProfileLoading,
   } = useSelector(({ otherProfile }) => otherProfile);
 
@@ -37,7 +36,7 @@ export const ProfileTabs = ({ following }) => {
     if (!isAccessingSelfProfile) {
       dispatch(fetchOtherProfile(usernameParam));
     }
-  }, [usernameParam]);
+  }, [usernameParam, dispatch, isAccessingSelfProfile]);
 
   const finalData = isAccessingSelfProfile ? userInfoData : otherProfileData;
   useEffect(() => {
@@ -48,7 +47,6 @@ export const ProfileTabs = ({ following }) => {
     }
   }, [finalData, setValue]);
   const wantToEdit = false;
-  // const ifYouFollowThem = false;
 
   return (
     <Tabs
@@ -75,22 +73,28 @@ export const ProfileTabs = ({ following }) => {
       </Tab>
       <Tab eventKey="information" title="Information">
         {following || isAccessingSelfProfile ? (
-          <>
-            <Card className="p-4 m-4">
-              <PersonalInfoForm
-                errors={{}}
-                wantToEdit={wantToEdit}
-                register={register}
-              />
-            </Card>
-            <Card className="p-4 m-4">
-              <CareerInformationForm
-                errors={{}}
-                wantToEdit={wantToEdit}
-                register={register}
-              />
-            </Card>
-          </>
+          <Card className="p-4 m-4">
+            <PersonalInfoForm
+              errors={{}}
+              wantToEdit={wantToEdit}
+              register={register}
+            />
+          </Card>
+        ) : (
+          <AreYouFollowing />
+        )}
+      </Tab>
+
+      <Tab eventKey="career" title="Career">
+        {following || isAccessingSelfProfile ? (
+          <Card className="p-4 m-4">
+            <CareerInformationForm
+              errors={{}}
+              wantToEdit={wantToEdit}
+              register={register}
+              watch={watch}
+            />
+          </Card>
         ) : (
           <AreYouFollowing />
         )}

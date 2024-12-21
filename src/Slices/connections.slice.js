@@ -11,10 +11,20 @@ const initialState = {
 // Async Thunk to fetch initial state
 export const fetchUserConnections = createAsyncThunk(
   "userConnections/fetchUserConnections",
-  async () => {
-    const response = await axiosInstance.get(apiRoutes.userConnections);
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.get(apiRoutes.userConnections);
 
-    return response?.data?.data;
+      return response?.data?.data;
+    } catch (error) {
+      if (error.response) {
+        return rejectWithValue(error.response.data.error);
+      } else if (error.request) {
+        return rejectWithValue("No response from the server");
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
   }
 );
 
@@ -34,7 +44,7 @@ const userConnectionSlice = createSlice({
       })
       .addCase(fetchUserConnections.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.payload;
       });
   },
 });

@@ -4,7 +4,10 @@ import userAuth, { validateToken, logout, signIn } from "./auth.slice";
 import userNotifications, {
   fetchUserNotifications,
 } from "./notifications.slice";
-import otherProfile, { fetchOtherProfile } from "./otherProfile.slice";
+import otherProfile, {
+  fetchOtherProfile,
+  mutateFollowThem,
+} from "./otherProfile.slice";
 import userConnections, { fetchUserConnections } from "./connections.slice";
 import userSearch, { fetchSearch } from "./search.slice";
 
@@ -20,6 +23,7 @@ export {
   userNotifications,
   fetchUserNotifications,
   otherProfile,
+  mutateFollowThem,
   fetchOtherProfile,
   userConnections,
   fetchUserConnections,

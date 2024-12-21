@@ -11,12 +11,13 @@ const initialState = {
 // Async Thunk to fetch initial state
 export const fetchSearch = createAsyncThunk(
   "userSearch/fetchSearch",
-  async (params) => {
-    const response = await axiosInstance.get(apiRoutes.userSearch, {
-      params: { query: params },
-    });
-
-    return response?.data?.data;
+  async (params, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.post(apiRoutes.userSearch, params);
+      return response?.data?.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 

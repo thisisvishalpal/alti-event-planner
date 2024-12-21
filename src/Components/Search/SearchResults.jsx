@@ -10,15 +10,15 @@ export const SearchResults = ({ data }) => {
             <div className="suggestion-details">
               <Image
                 src={user.profilePicture}
-                alt={`${user.name}'s profile`}
+                alt={`${user.fullName}'s profile`}
                 roundedCircle
                 className="profile-picture"
               />
               <div className="user-info">
-                <span className="user-name">{user.name}</span>
+                <span className="user-name">{user.fullName}</span>
                 <span className="user-username">@{user.username}</span>
                 <Badge bg="info" className="mutual-connections">
-                  {user.mutualConnections} mutual connections
+                  mutual connections
                 </Badge>
               </div>
             </div>

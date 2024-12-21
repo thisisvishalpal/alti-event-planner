@@ -24,32 +24,6 @@ export const signIn = createAsyncThunk(
   }
 );
 
-// export const signUp = createAsyncThunk(
-//   "auth/signUp",
-//   async (data, { rejectWithValue }) => {
-//     const dispatch = useDispatch();
-//     const navigate = useNavigate();
-
-//     try {
-//       const response = await axiosInstance.post(apiRoutes.userSignUp, data);
-//       const { user } = response.data;
-//       if (user.username) {
-//         dispatch(signIn({ username: user.username }));
-//       }
-//       navigate(urls.signIn); // Redirect to Sign In
-//     } catch (error) {
-//       console.error(error.response?.data?.message || "An error occurred");
-//       if (error.response) {
-//         return rejectWithValue(error.response.data.error);
-//       } else if (error.request) {
-//         return rejectWithValue("No response from the server");
-//       } else {
-//         return rejectWithValue(error.message);
-//       }
-//     }
-//   }
-// );
-
 export const validateToken = createAsyncThunk(
   "auth/validateToken",
   async (_, { rejectWithValue }) => {

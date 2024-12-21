@@ -5,7 +5,7 @@ import { Container, Card } from "react-bootstrap";
 
 import { useProfile } from "Hooks";
 import { ActionButton, ProfileTabs, UserInfo } from "Components";
-import { fetchOtherProfile } from "Slices";
+import { fetchOtherProfile, mutateFollowThem } from "Slices";
 
 export const Profile = () => {
   const [youFollowThem, setYouFollowThem] = useState(false);
@@ -26,10 +26,22 @@ export const Profile = () => {
   } = useSelector(({ otherProfile }) => otherProfile);
 
   useEffect(() => {
+    setYouFollowThem(otherProfileData.followers.includes(userInfoData._id));
+  }, [otherProfileData.followers, userInfoData._id]);
+
+  useEffect(() => {
     if (!isAccessingSelfProfile) {
       dispatch(fetchOtherProfile(usernameParam));
     }
-  }, [usernameParam]);
+  }, [usernameParam, dispatch, isAccessingSelfProfile]);
+
+  const handleFollowThem = async () => {
+    dispatch(
+      mutateFollowThem({
+        userIdToFollow: otherProfileData._id,
+      })
+    );
+  };
 
   return (
     <Container>
@@ -43,7 +55,7 @@ export const Profile = () => {
         />
         <ActionButton
           following={youFollowThem}
-          toggleFollowing={() => setYouFollowThem((prev) => !prev)}
+          toggleFollowing={handleFollowThem}
         />
       </Card>
 

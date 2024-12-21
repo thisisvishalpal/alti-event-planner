@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { Button, Form, Container, Spinner } from "react-bootstrap";
+import { Button, Form, Container, Spinner, Card } from "react-bootstrap";
 
 import { signIn } from "Slices";
 import { urls } from "Utils";
-
-const { signUp } = urls;
 
 export const SignIn = () => {
   const { loading, error: storeError } = useSelector(
@@ -34,10 +32,21 @@ export const SignIn = () => {
 
   return (
     <Container
-      className="d-flex justify-content-center align-items-center"
-      style={{ minHeight: "90vh" }}
+      style={{
+        minHeight: "90vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
     >
-      <div className="signin-form">
+      <Card
+        style={{
+          maxWidth: "500px",
+          width: "100%",
+          padding: "20px",
+          margin: "50px",
+        }}
+      >
         <h2 className="text-center mb-4">Sign In</h2>
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="formUsername" className="mb-3">
@@ -76,11 +85,11 @@ export const SignIn = () => {
 
         <p className="mt-3 text-center">
           Don't have an account?{" "}
-          <Link to={`/${signUp}`} replace style={{ textDecoration: "none" }}>
+          <Link to={urls.signUp} replace style={{ textDecoration: "none" }}>
             Sign Up
           </Link>
         </p>
-      </div>
+      </Card>
     </Container>
   );
 };
