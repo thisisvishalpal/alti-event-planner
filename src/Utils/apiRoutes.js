@@ -10,4 +10,5 @@ export const apiRoutes = {
   userSearch: "/search/person",
   follow: "/connection/follow",
   testCookies: "/test-cookies",
+  uploadPhotos: "/user/upload-post",
 };

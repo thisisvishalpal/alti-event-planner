@@ -42,7 +42,7 @@ export const Connections = () => {
   }, []);
 
   return (
-    <Container className="m-4">
+    <Container className="mt-4">
       <SearchBar
         heading="Search Users"
         value={filter}

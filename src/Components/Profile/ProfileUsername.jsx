@@ -1,3 +1,4 @@
+import { useProfile } from "Hooks";
 import { Row, Col, Image, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
@@ -11,6 +12,8 @@ export const ProfileUsername = ({
   following,
   bio,
 }) => {
+  const { isAccessingSelfProfile } = useProfile();
+
   return (
     <Row>
       {/* Profile Picture */}
@@ -43,7 +46,7 @@ export const ProfileUsername = ({
                   textDecoration: "none",
                   color: "inherit",
                 }}
-                to={urls.connections}
+                to={isAccessingSelfProfile && urls.connections}
                 state={"followers"}
               >
                 <h5>{followers ? followers.length : 0}</h5>
@@ -56,7 +59,7 @@ export const ProfileUsername = ({
                   textDecoration: "none",
                   color: "inherit",
                 }}
-                to={urls.connections}
+                to={isAccessingSelfProfile && urls.connections}
                 state={"following"}
               >
                 <h5>{following ? following.length : 0}</h5>

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Tabs, Tab, Card } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 
@@ -11,14 +10,11 @@ import {
   PersonalInfoForm,
   UserPosts,
 } from "Components";
-import { fetchOtherProfile } from "Slices";
 
 export const ProfileTabs = ({ following }) => {
   const { register, setValue, watch } = useForm();
-  const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState("information");
   const { isAccessingSelfProfile } = useProfile();
-  const { username: usernameParam } = useParams();
 
   const {
     data: userInfoData,
@@ -32,13 +28,8 @@ export const ProfileTabs = ({ following }) => {
     loading: otherProfileLoading,
   } = useSelector(({ otherProfile }) => otherProfile);
 
-  useEffect(() => {
-    if (!isAccessingSelfProfile) {
-      dispatch(fetchOtherProfile(usernameParam));
-    }
-  }, [usernameParam, dispatch, isAccessingSelfProfile]);
-
   const finalData = isAccessingSelfProfile ? userInfoData : otherProfileData;
+
   useEffect(() => {
     if (finalData) {
       Object.keys(finalData).forEach((key) => {

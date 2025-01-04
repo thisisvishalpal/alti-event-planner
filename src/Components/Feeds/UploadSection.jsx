@@ -1,23 +1,55 @@
 import React, { useState } from "react";
 import { Button, Modal, Form, Card } from "react-bootstrap";
+import { axiosInstance } from "Services";
 
 export const UploadSection = () => {
   const [showModal, setShowModal] = useState(false);
   const [activeTab, setActiveTab] = useState("photos");
   const [inputData, setInputData] = useState("");
+  const [message, setMessage] = useState("");
+
+  const [image, setImage] = useState(null);
 
   const handleClose = () => {
     setShowModal(false);
     setInputData("");
+    setMessage("");
   };
   const handleShow = (tab) => {
     setActiveTab(tab);
     setShowModal(true);
   };
-  const handleSubmit = (e) => {
+  const handleImageChange = (e) => {
     e.preventDefault();
-    // console.log(`${activeTab} submitted:`, inputData);
-    handleClose();
+    setImage(e.target.files[0]);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("content", inputData);
+    formData.append("image", image);
+
+    try {
+      const response = await axiosInstance.post("/user/upload-post", formData);
+
+      if (response.status === 200) {
+        setMessage("Post uploaded successfully!");
+        handleClose();
+      } else {
+        setMessage(response.data.message || "Error uploading post.");
+        handleClose();
+      }
+    } catch (error) {
+      handleClose();
+      if (error.response) {
+        setMessage(error.response.data.message || "Error uploading post.");
+      } else if (error.request) {
+        setMessage("No response from the server. Please try again.");
+      } else {
+        setMessage("Error uploading post. Please try again.");
+      }
+    }
   };
 
   return (
@@ -39,6 +71,7 @@ export const UploadSection = () => {
           </Button>
         </div>
       </Card>
+      {message && <p>{message}</p>}
 
       {/* Modal for Uploads */}
       <Modal show={showModal} onHide={handleClose}>
@@ -56,11 +89,18 @@ export const UploadSection = () => {
               <>
                 <Form.Group controlId="photoUpload" className="mb-3">
                   <Form.Label>Upload Photo</Form.Label>
-                  <Form.Control type="file" />
+                  <input
+                    type="file"
+                    id="image"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    required
+                  />
                 </Form.Group>
                 <Form.Group controlId="photoDescription" className="mb-3">
                   <Form.Label>Description</Form.Label>
                   <Form.Control
+                    name="description"
                     type="text"
                     placeholder="Write a caption..."
                     value={inputData}
@@ -110,7 +150,7 @@ export const UploadSection = () => {
                 />
               </Form.Group>
             )}
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" onClick={handleSubmit}>
               Submit
             </Button>
           </Form>
