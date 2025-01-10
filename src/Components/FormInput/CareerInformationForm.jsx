@@ -5,12 +5,13 @@ export const CareerInformationForm = ({
   wantToEdit,
   register,
   watch,
+  showHeading = true,
 }) => {
   const occupation = watch("occupation");
 
   return (
     <>
-      <h5 className="mb-3">Career Information</h5>
+      {showHeading && <h5 className="mb-3">Career Information</h5>}
 
       {/* Occupation */}
       <Form.Group className="mb-3">

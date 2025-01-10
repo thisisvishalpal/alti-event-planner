@@ -27,6 +27,13 @@ export const Settings = () => {
     formState: { errors },
   } = useForm();
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "auto",
+    });
+  }, []);
+
   // Prefill form values from Redux data
   useEffect(() => {
     if (data) {

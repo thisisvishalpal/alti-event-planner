@@ -13,6 +13,13 @@ export const Connections = () => {
     ({ userConnections }) => userConnections
   );
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "auto",
+    });
+  }, []);
+
   const [filterFollowers, setFilterFollowers] = useState(data.followers);
   const [filterFollowing, setFilterFollowing] = useState(data.following);
   const [filter, setFilter] = useState("");

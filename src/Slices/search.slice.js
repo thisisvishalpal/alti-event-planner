@@ -16,7 +16,13 @@ export const fetchSearch = createAsyncThunk(
       const response = await axiosInstance.post(apiRoutes.userSearch, params);
       return response?.data?.data;
     } catch (error) {
-      console.log(error);
+      if (error.response) {
+        return rejectWithValue(error.response.data.message);
+      } else if (error.request) {
+        return rejectWithValue("No response from the server");
+      } else {
+        return rejectWithValue(error.message);
+      }
     }
   }
 );
@@ -24,7 +30,13 @@ export const fetchSearch = createAsyncThunk(
 const searchSlice = createSlice({
   name: "userSearch",
   initialState,
-  reducers: {},
+  reducers: {
+    resetSearch: (state, action) => {
+      state.loading = false;
+      state.error = null;
+      state.data = [];
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchSearch.pending, (state) => {
@@ -32,14 +44,15 @@ const searchSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchSearch.fulfilled, (state, action) => {
-        state.loading = false;
         state.data = action.payload;
+        state.loading = false;
       })
       .addCase(fetchSearch.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.payload;
       });
   },
 });
+export const { resetSearch } = searchSlice.actions;
 
 export default searchSlice.reducer;

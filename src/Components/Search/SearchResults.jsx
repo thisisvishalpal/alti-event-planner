@@ -1,9 +1,10 @@
 import { ListGroup, Image, Badge } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-export const SearchResults = ({ data }) => {
+export const SearchResults = ({ data, loading }) => {
   return (
     <ListGroup className="suggestions-list">
+      {loading && <div className="loading">Loading...</div>}
       {data?.map((user) => (
         <Link to={`/user/${user?.username}`}>
           <ListGroup.Item key={user.id} className="suggestion-item">

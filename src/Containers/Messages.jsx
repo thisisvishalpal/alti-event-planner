@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ListGroup, Form, Button } from "react-bootstrap";
 import "./Messages.css"; // Add styles here if necessary
 
@@ -12,6 +12,13 @@ export const Messages = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "auto",
+    });
+  }, []);
 
   const handleUserSelect = (user) => {
     setSelectedUser(user);

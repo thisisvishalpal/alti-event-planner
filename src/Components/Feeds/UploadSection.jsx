@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Modal, Form, Card } from "react-bootstrap";
 import { axiosInstance } from "Services";
+import { apiRoutes } from "Utils";
 
 export const UploadSection = () => {
   const [showModal, setShowModal] = useState(false);
@@ -31,7 +32,10 @@ export const UploadSection = () => {
     formData.append("image", image);
 
     try {
-      const response = await axiosInstance.post("/user/upload-post", formData);
+      const response = await axiosInstance.post(
+        apiRoutes.uploadPhotos,
+        formData
+      );
 
       if (response.status === 200) {
         setMessage("Post uploaded successfully!");

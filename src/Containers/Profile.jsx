@@ -13,6 +13,13 @@ export const Profile = () => {
   const { isAccessingSelfProfile } = useProfile();
   const { username: usernameParam } = useParams();
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "auto",
+    });
+  }, []);
+
   const {
     data: userInfoData,
     error: userInfoError,

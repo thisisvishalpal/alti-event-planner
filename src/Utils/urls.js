@@ -11,5 +11,6 @@ export const urls = {
   notifications: "notifications",
   messages: "messages",
   search: "search",
+  filter: "filter",
   settings: "settings",
 };

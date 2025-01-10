@@ -134,7 +134,7 @@ export const Header = () => {
             id={`offcanvasNavbar-expand-md`}
             aria-labelledby={`offcanvasNavbarLabel-expand-md`}
             placement="start"
-            className={`offcanvas-${theme}`}
+            className={`offcanvas-${theme} d-md-none`}
             show={showCanvas}
             onHide={handleClose}
             onClick={handleChildClick}

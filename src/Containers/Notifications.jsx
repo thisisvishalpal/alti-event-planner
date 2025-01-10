@@ -13,6 +13,13 @@ export const Notifications = () => {
   const { data, error, loading } = notificationsStore;
 
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "auto",
+    });
+  }, []);
+
+  useEffect(() => {
     dispatch(fetchUserNotifications());
   }, [dispatch]);
 

@@ -9,7 +9,7 @@ import otherProfile, {
   mutateFollowThem,
 } from "./otherProfile.slice";
 import userConnections, { fetchUserConnections } from "./connections.slice";
-import userSearch, { fetchSearch } from "./search.slice";
+import userSearch, { resetSearch, fetchSearch } from "./search.slice";
 
 export {
   userFeeds,
@@ -28,5 +28,6 @@ export {
   userConnections,
   fetchUserConnections,
   userSearch,
+  resetSearch,
   fetchSearch,
 };
