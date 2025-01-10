@@ -11,7 +11,7 @@ export const SearchFilterForm = ({
       {showHeading && <h5 className="mb-3">Basic Preference</h5>}
       {/* Age */}
       <Form.Group className="mb-3">
-        <Form.Label>From age to</Form.Label>
+        <Form.Label>Age</Form.Label>
         <Form.Select
           disabled={!wantToEdit}
           {...register("age", { required: "Age is required" })}

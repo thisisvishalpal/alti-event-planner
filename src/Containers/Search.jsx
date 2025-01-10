@@ -15,7 +15,7 @@ export const Search = () => {
       top: 0,
       behavior: "auto",
     });
-    dispatch(resetSearch());
+    return () => dispatch(resetSearch());
   }, []);
 
   useEffect(() => {

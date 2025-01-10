@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Form, Button, Col, Row } from "react-bootstrap";
+import React, { useEffect } from "react";
+import { Form, Button, Col, Row, Alert } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 
@@ -20,25 +20,16 @@ export const Filter = () => {
 
   const dispatch = useDispatch();
   const { data, loading, error } = useSelector(({ userSearch }) => userSearch);
-  const [showResults, setShowResults] = useState(false);
 
   useEffect(() => {
     window.scrollTo({
       top: 0,
       behavior: "auto",
     });
-    dispatch(resetSearch());
   }, []);
 
   const onSubmit = (data) => {
-    dispatch(fetchSearch(data)).then(() => {
-      setShowResults(true);
-    });
-  };
-
-  const handleShow = () => {
-    dispatch(resetSearch());
-    setShowResults((prev) => !prev);
+    dispatch(fetchSearch(data));
   };
 
   return (
@@ -48,15 +39,24 @@ export const Filter = () => {
           <h3>Filter</h3>
         </Col>
         <Col xs="auto">
-          {(!!data.length || error) && (
-            <Button variant="secondary" size="sm" onClick={handleShow}>
-              {showResults ? "Show filter" : "Show results"}
+          {!!data.length && (
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={() => dispatch(resetSearch())}
+            >
+              Back
             </Button>
           )}
         </Col>
       </Row>
 
-      {!showResults && (
+      {error && (
+        <Alert key="danger" variant="danger">
+          {error}
+        </Alert>
+      )}
+      {!data.length && (
         <Form onSubmit={handleSubmit(onSubmit)}>
           <SearchFilterForm
             showHeading={false}
@@ -81,8 +81,7 @@ export const Filter = () => {
         </Form>
       )}
 
-      {error && <h4>{error}</h4>}
-      {showResults && <SearchResults data={data} loading={loading} />}
+      {data && <SearchResults data={data} loading={loading} />}
     </div>
   );
 };
