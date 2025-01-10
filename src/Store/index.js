@@ -8,6 +8,7 @@ import {
   otherProfile,
   userConnections,
   userSearch,
+  userFilter,
 } from "Slices";
 
 export const Store = configureStore({
@@ -19,5 +20,6 @@ export const Store = configureStore({
     otherProfile,
     userConnections,
     userSearch,
+    userFilter,
   }),
 });

@@ -10,6 +10,7 @@ import otherProfile, {
 } from "./otherProfile.slice";
 import userConnections, { fetchUserConnections } from "./connections.slice";
 import userSearch, { resetSearch, fetchSearch } from "./search.slice";
+import userFilter, { resetFilter, fetchFilter } from "./filter.slice";
 
 export {
   userFeeds,
@@ -30,4 +31,7 @@ export {
   userSearch,
   resetSearch,
   fetchSearch,
+  userFilter,
+  resetFilter,
+  fetchFilter,
 };

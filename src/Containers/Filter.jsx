@@ -8,7 +8,7 @@ import {
   SearchFilterForm,
   SearchResults,
 } from "Components";
-import { fetchSearch, resetSearch } from "Slices";
+import { fetchFilter, resetFilter } from "Slices";
 
 export const Filter = () => {
   const {
@@ -19,7 +19,7 @@ export const Filter = () => {
   } = useForm();
 
   const dispatch = useDispatch();
-  const { data, loading, error } = useSelector(({ userSearch }) => userSearch);
+  const { data, loading, error } = useSelector(({ userFilter }) => userFilter);
 
   useEffect(() => {
     window.scrollTo({
@@ -29,7 +29,7 @@ export const Filter = () => {
   }, []);
 
   const onSubmit = (data) => {
-    dispatch(fetchSearch(data));
+    dispatch(fetchFilter(data));
   };
 
   return (
@@ -43,7 +43,7 @@ export const Filter = () => {
             <Button
               variant="secondary"
               size="sm"
-              onClick={() => dispatch(resetSearch())}
+              onClick={() => dispatch(resetFilter())}
             >
               Back
             </Button>
@@ -71,6 +71,7 @@ export const Filter = () => {
             wantToEdit={true}
             register={register}
             watch={watch}
+            required={false}
           />
 
           <div className="text-end">

@@ -6,6 +6,7 @@ export const CareerInformationForm = ({
   register,
   watch,
   showHeading = true,
+  required = true,
 }) => {
   const occupation = watch("occupation");
 
@@ -18,7 +19,10 @@ export const CareerInformationForm = ({
         <Form.Label>Occupation</Form.Label>
         <Form.Select
           disabled={!wantToEdit}
-          {...register("occupation", { required: "Occupation is required" })}
+          {...register(
+            "occupation",
+            required && { required: "Occupation is required" }
+          )}
         >
           <option value="">Select occupation</option>
           <option value="private">Private</option>
@@ -38,7 +42,7 @@ export const CareerInformationForm = ({
         <Form.Label>Study</Form.Label>
         <Form.Select
           disabled={!wantToEdit}
-          {...register("study", { required: "Study is required" })}
+          {...register("study", required && { required: "Study is required" })}
         >
           <option value="">Select study</option>
           <option value="5">5th</option>
@@ -59,7 +63,10 @@ export const CareerInformationForm = ({
           <Form.Label>Salary per month</Form.Label>
           <Form.Select
             disabled={!wantToEdit}
-            {...register("salary", { required: "Salary is required" })}
+            {...register(
+              "salary",
+              required && { required: "Salary is required" }
+            )}
           >
             <option value="">Select salary</option>
             <option value="0to10000">0 to 10,000</option>

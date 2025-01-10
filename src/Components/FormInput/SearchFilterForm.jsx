@@ -46,10 +46,7 @@ export const SearchFilterForm = ({
       <Form.Group className="mb-3">
         <Form.Label>City</Form.Label>
 
-        <Form.Select
-          disabled={!wantToEdit}
-          {...register("city", { required: "City is required" })}
-        >
+        <Form.Select disabled={!wantToEdit} {...register("city")}>
           <option value="">Select your city</option>
           <option value="gwalior">Gwalior</option>
           <option value="bhopal">Bhopal</option>
