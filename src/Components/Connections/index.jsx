@@ -32,37 +32,15 @@ export const ConnectionTabs = ({
         justify
       >
         <Tab eventKey="followers" title={`Followers ${followers?.length}`}>
-          <ListGroup>
-            {followers?.map(
-              (follower) =>
-                follower.username && (
-                  <UserRow
-                    key={follower?.id}
-                    imageIcon={follower?.profilePicture}
-                    followerName={follower?.fullName}
-                    alt={follower?.fullName}
-                    username={follower?.username}
-                  />
-                )
-            )}
-          </ListGroup>
+          {followers?.map(
+            (follower) => follower.username && <UserRow user={follower} />
+          )}
         </Tab>
 
         <Tab eventKey="following" title={`Following ${following?.length}`}>
-          <ListGroup>
-            {following?.map(
-              (followed) =>
-                followed.username && (
-                  <UserRow
-                    key={followed?.id}
-                    imageIcon={followed?.profilePicture}
-                    followerName={followed?.fullName}
-                    alt={followed?.fullName}
-                    username={followed?.username}
-                  />
-                )
-            )}
-          </ListGroup>
+          {following?.map(
+            (followed) => followed.username && <UserRow user={followed} />
+          )}
         </Tab>
       </Tabs>
     </Container>

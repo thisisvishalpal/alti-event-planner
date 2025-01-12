@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { Button, Form, Container, Spinner, Card } from "react-bootstrap";
+import { Link, useLocation } from "react-router-dom";
+import { Button, Form, Container, Spinner, Card, Alert } from "react-bootstrap";
 
 import { signIn } from "Slices";
 import { urls } from "Utils";
@@ -15,6 +15,8 @@ export const SignIn = () => {
   const [error, setError] = useState("");
 
   const dispatch = useDispatch();
+  const location = useLocation();
+  const { message } = location.state || "";
 
   // Handle form submission
   const handleSubmit = async (e) => {
@@ -47,6 +49,11 @@ export const SignIn = () => {
           margin: "50px",
         }}
       >
+        {message && (
+          <Alert key="danger" variant="success">
+            {message}
+          </Alert>
+        )}
         <h2 className="text-center mb-4">Sign In</h2>
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="formUsername" className="mb-3">

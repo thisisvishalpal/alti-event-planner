@@ -51,7 +51,7 @@ export const Connections = () => {
   return (
     <Container className="mt-4">
       <SearchBar
-        heading="Search Users"
+        heading="Search connections"
         value={filter}
         handleChange={handleInputChange}
         placeholder="Search by name or username"

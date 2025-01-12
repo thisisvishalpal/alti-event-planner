@@ -1,10 +1,8 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { urls } from "Utils";
 
 export const AccessDenied = () => {
-  const { signUp } = urls;
   const navigate = useNavigate();
   return (
     <div style={{ textAlign: "center", padding: "20px" }}>

@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useAuthenticated } from "Hooks";
 import { Spinner } from "Components";
 
-export const Placeholder = ({ children, fallBack }) => {
+export const Placeholder = ({ children, fallBack, isActive }) => {
   const [showSpinner, setShowSpinner] = useState(true);
   const { isAuthenticated, loading } = useAuthenticated();
 
@@ -18,7 +18,7 @@ export const Placeholder = ({ children, fallBack }) => {
     return <Spinner />;
   }
 
-  if (!isAuthenticated) {
+  if (!isAuthenticated || !isActive) {
     return fallBack;
   }
 

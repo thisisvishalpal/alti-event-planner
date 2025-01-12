@@ -27,8 +27,9 @@ export const Navigations = ({ className }) => {
         className={className}
       >
         {[...LoggedInRoutes, menuOptions].map(
-          ({ to, label }, index) =>
-            label && (
+          ({ to, label, isActive }, index) =>
+            label &&
+            isActive && (
               <li key={index}>
                 <NavLink to={to} className="nav-link">
                   {label}

@@ -42,10 +42,7 @@ export const ProfileUsername = ({
             </Col>
             <Col>
               <Link
-                style={{
-                  textDecoration: "none",
-                  color: "inherit",
-                }}
+                className="text-decoration-none text-black"
                 to={isAccessingSelfProfile && urls.connections}
                 state={"followers"}
               >
@@ -55,10 +52,7 @@ export const ProfileUsername = ({
             </Col>
             <Col>
               <Link
-                style={{
-                  textDecoration: "none",
-                  color: "inherit",
-                }}
+                className="text-decoration-none text-black"
                 to={isAccessingSelfProfile && urls.connections}
                 state={"following"}
               >

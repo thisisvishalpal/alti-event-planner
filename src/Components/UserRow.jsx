@@ -1,33 +1,19 @@
-import { ListGroup } from "react-bootstrap";
+import { Card, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-export const UserRow = ({ key, imageIcon, alt, followerName, username }) => {
-  // console.log(followerName);
+export const UserRow = ({ user }) => {
   return (
-    <>
-      <ListGroup.Item key={key}>
-        <Link
-          to={`/user/${username}`}
-          style={{
-            textDecoration: "none",
-            color: "inherit",
-          }}
-        >
-          <div className="d-flex align-items-center">
-            <img
-              src={imageIcon}
-              alt={alt}
-              style={{
-                width: "40px",
-                height: "40px",
-                borderRadius: "50%",
-                marginRight: "10px",
-              }}
-            />
-            <span>{followerName}</span>
-          </div>
-        </Link>
-      </ListGroup.Item>
-    </>
+    <Link to={`/user/${user?.username}`} className="text-decoration-none">
+      <Card key={user.id} className="suggestion-item">
+        <Image
+          src={user.profilePicture}
+          alt={`${user.fullName}'s profile`}
+          className="profile-picture"
+          roundedCircle
+        />
+        <span className="fw-bold">{user.fullName}</span>
+        <span className="text-secondary">@{user.username}</span>
+      </Card>
+    </Link>
   );
 };

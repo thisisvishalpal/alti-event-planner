@@ -1,35 +1,11 @@
-import { ListGroup, Image, Badge, Spinner } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { UserRow } from "Components";
+import { Spinner } from "react-bootstrap";
 
 export const SearchResults = ({ data, loading }) => {
   return (
     <>
       {loading && <Spinner />}
-      {!loading && (
-        <ListGroup className="suggestions-list">
-          {data?.map((user) => (
-            <Link to={`/user/${user?.username}`}>
-              <ListGroup.Item key={user.id} className="suggestion-item">
-                <div className="suggestion-details">
-                  <Image
-                    src={user.profilePicture}
-                    alt={`${user.fullName}'s profile`}
-                    roundedCircle
-                    className="profile-picture"
-                  />
-                  <div className="user-info">
-                    <span className="user-name">{user.fullName}</span>
-                    <span className="user-username">@{user.username}</span>
-                    <Badge bg="info" className="mutual-connections">
-                      mutual connections
-                    </Badge>
-                  </div>
-                </div>
-              </ListGroup.Item>
-            </Link>
-          ))}
-        </ListGroup>
-      )}
+      {!loading && data?.map((user) => <UserRow user={user} />)}
     </>
   );
 };

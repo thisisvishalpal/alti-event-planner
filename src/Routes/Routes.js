@@ -34,11 +34,14 @@ const {
   settings,
 } = urls;
 
+const showThis = false;
+
 export const LoggedInRoutes = [
   {
     path: root,
     element: <Feeds />,
     fallBack: <Landing />,
+    isActive: true,
   },
   {
     to: root,
@@ -46,6 +49,7 @@ export const LoggedInRoutes = [
     element: <Feeds />,
     fallBack: <AccessDenied />,
     label: "Feeds",
+    isActive: true,
   },
   {
     // to: `user/${data?.username}`,
@@ -53,6 +57,7 @@ export const LoggedInRoutes = [
     element: <Profile />,
     fallBack: <AccessDenied />,
     // label: "Profile",
+    isActive: true,
   },
   {
     to: connections,
@@ -60,20 +65,23 @@ export const LoggedInRoutes = [
     element: <Connections />,
     fallBack: <AccessDenied />,
     label: "Connections",
+    isActive: true,
   },
   {
     to: notifications,
     path: notifications,
     element: <Notifications />,
-    fallBack: <AccessDenied />,
+    fallBack: showThis ? <AccessDenied /> : <NotFound />,
     label: "Notifications",
+    isActive: showThis,
   },
   {
     to: messages,
     path: messages,
     element: <Messages />,
-    fallBack: <AccessDenied />,
+    fallBack: showThis ? <AccessDenied /> : <NotFound />,
     label: "Messages",
+    isActive: showThis,
   },
   {
     to: search,
@@ -81,6 +89,7 @@ export const LoggedInRoutes = [
     element: <Search />,
     fallBack: <AccessDenied />,
     label: "Search",
+    isActive: true,
   },
   {
     to: filter,
@@ -88,6 +97,7 @@ export const LoggedInRoutes = [
     element: <Filter />,
     fallBack: <AccessDenied />,
     label: "Filter",
+    isActive: true,
   },
   {
     to: settings,
@@ -95,6 +105,7 @@ export const LoggedInRoutes = [
     element: <Settings />,
     fallBack: <AccessDenied />,
     label: "Settings",
+    isActive: true,
   },
 ];
 
@@ -103,11 +114,13 @@ export const LoggedOutRoutes = [
     path: signIn,
     element: <Navigate to={root} replace />,
     fallBack: <SignIn />,
+    isActive: true,
   },
   {
     path: signUp,
     element: <Navigate to={root} replace />,
     fallBack: <SignupTwo />,
+    isActive: true,
   },
 ];
 
@@ -116,16 +129,19 @@ export const NotFoundRoutes = [
     path: "*",
     element: <NotFound />,
     fallBack: <NotFound />,
+    isActive: true,
   },
 ];
 
 export const Routes = () => {
   return [...LoggedInRoutes, ...LoggedOutRoutes, ...NotFoundRoutes].map(
-    ({ path, element, fallBack }) => ({
+    ({ path, element, fallBack, isActive }) => ({
       path: path,
       element: (
         <Suspense fallback={<Spinner />}>
-          <Placeholder fallBack={fallBack}>{element}</Placeholder>
+          <Placeholder fallBack={fallBack} isActive={isActive}>
+            {element}
+          </Placeholder>
         </Suspense>
       ),
     })

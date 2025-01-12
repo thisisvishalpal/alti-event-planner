@@ -144,7 +144,12 @@ export const SignupTwo = () => {
         const { user } = response.data;
         if (user.username) {
           // dispatch(signIn({ username: user.username }));
-          navigate(urls.signIn);
+          navigate(urls.signIn, {
+            state: {
+              message:
+                "Succesfully signed up, please sign in with credentials !",
+            },
+          });
         }
       }
     } catch (error) {
