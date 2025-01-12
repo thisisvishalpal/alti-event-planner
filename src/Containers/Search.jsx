@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Alert } from "react-bootstrap";
+import { useDebounce } from "use-debounce";
 
 import "./Search.css";
 import { SearchBar, SearchResults } from "Components";
@@ -10,6 +11,7 @@ export const Search = () => {
   const dispatch = useDispatch();
   const { data, error, loading } = useSelector(({ userSearch }) => userSearch);
   const [query, setQuery] = useState("");
+  const [debouncedQuery] = useDebounce(query, 300);
 
   useEffect(() => {
     window.scrollTo({
@@ -19,31 +21,31 @@ export const Search = () => {
   }, []);
 
   useEffect(() => {
-    if (query) {
-      dispatch(fetchSearch({ query }));
+    if (debouncedQuery.trim()) {
+      dispatch(fetchSearch({ query: debouncedQuery }));
     }
-  }, [query, dispatch]);
+  }, [debouncedQuery, dispatch]);
 
   return (
     <div className="user-search">
       <SearchBar
-        heading="Search Users"
+        heading="Search users"
         value={query}
         handleChange={(e) => setQuery(e.target.value)}
         placeholder="Search by name or username"
+        aria-label="Search users"
       />
       {error && (
         <Alert key="searchError" className="mt-3" variant="danger">
           {error}
         </Alert>
       )}
-      {!data.length && (
+      {!data.length && !loading && query && (
         <Alert key="searchWarning" className="mt-3" variant="warning">
-          Try searching your friends !
+          No results found. Try searching for different keywords!
         </Alert>
       )}
-      {loading && <div className="loading">Loading...</div>}
-      {!loading && <SearchResults data={data} />}
+      <SearchResults data={data} loading={loading} />
     </div>
   );
 };
