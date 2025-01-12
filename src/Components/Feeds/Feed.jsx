@@ -6,8 +6,6 @@ export const FeedSection = () => {
   const feedsState = useSelector(({ userFeeds }) => userFeeds);
   const { data, loading, error } = feedsState;
 
-  // console.log(data, "feeds response from feeds component");
-
   const [likes, setLikes] = useState(data?.map(() => false));
   const [comments, setComments] = useState(data?.map(() => []));
 
@@ -47,13 +45,15 @@ export const FeedSection = () => {
 
                 {/* Post Content */}
                 <Card.Text className="mt-3">{post.content}</Card.Text>
-                {post.image && (
-                  <Image
-                    src={post.image}
-                    alt="Post"
-                    className="img-fluid rounded"
-                  />
-                )}
+                <div className="text-center">
+                  {post.image && (
+                    <Image
+                      src={post.image}
+                      alt="Post"
+                      className="img-fluid rounded"
+                    />
+                  )}
+                </div>
 
                 {/* Post Actions */}
                 <div className="mt-3 d-flex justify-content-between">
