@@ -12,9 +12,7 @@ export const ConnectionTabs = ({
 }) => {
   const [activeTab, setActiveTab] = useState(state || "followers");
 
-  const handleTabSelect = (tab) => {
-    setActiveTab(tab);
-  };
+  const handleTabSelect = (tab) => setActiveTab(tab);
 
   if (loading) {
     return <SpinnerTwo />;
@@ -23,6 +21,15 @@ export const ConnectionTabs = ({
   if (error) {
     return <p>{error}</p>;
   }
+
+  // Render tab content based on user data
+  const renderTabContent = (users) => {
+    if (!users.length) {
+      return <p className="text-muted text-center">No users found.</p>;
+    }
+    return users?.map((user) => <UserRow key={user._id} user={user} />);
+  };
+
   return (
     <Container className="mt-4">
       <Tabs
@@ -32,15 +39,11 @@ export const ConnectionTabs = ({
         justify
       >
         <Tab eventKey="followers" title={`Followers ${followers?.length}`}>
-          {followers?.map(
-            (follower) => follower.username && <UserRow user={follower} />
-          )}
+          {renderTabContent(followers)}
         </Tab>
 
         <Tab eventKey="following" title={`Following ${following?.length}`}>
-          {following?.map(
-            (followed) => followed.username && <UserRow user={followed} />
-          )}
+          {renderTabContent(following)}
         </Tab>
       </Tabs>
     </Container>
