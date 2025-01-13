@@ -16,17 +16,13 @@ export const ProfileTabs = ({ following }) => {
   const [activeTab, setActiveTab] = useState("information");
   const { isAccessingSelfProfile } = useProfile();
 
-  const {
-    data: userInfoData,
-    // error: userInfoError,
-    loading: userInfoLoading,
-  } = useSelector(({ userInfo }) => userInfo);
+  const { data: userInfoData, loading: userInfoLoading } = useSelector(
+    ({ userInfo }) => userInfo
+  );
 
-  const {
-    data: otherProfileData,
-    // error: otherProfileError,
-    loading: otherProfileLoading,
-  } = useSelector(({ otherProfile }) => otherProfile);
+  const { data: otherProfileData, loading: otherProfileLoading } = useSelector(
+    ({ otherProfile }) => otherProfile
+  );
 
   const finalData = isAccessingSelfProfile ? userInfoData : otherProfileData;
 

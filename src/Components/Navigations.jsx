@@ -17,7 +17,12 @@ export const Navigations = ({ className }) => {
     navigate(root);
   };
 
-  const menuOptions = { to: `user/${username}`, label: "Profile" };
+  const menuOptions = {
+    to: `user/${username}`,
+    label: "Profile",
+    isActive: true,
+  };
+
   return (
     <Nav>
       <ul

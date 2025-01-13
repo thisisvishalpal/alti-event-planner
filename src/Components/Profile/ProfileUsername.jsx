@@ -4,14 +4,8 @@ import { Link } from "react-router-dom";
 
 import { urls } from "Utils";
 
-export const ProfileUsername = ({
-  profilePicture,
-  fullName,
-  posts,
-  followers,
-  following,
-  bio,
-}) => {
+export const ProfileUsername = ({ user }) => {
+  const { profilePicture, fullName, posts, followers, following, bio } = user;
   const { isAccessingSelfProfile } = useProfile();
 
   return (

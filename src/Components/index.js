@@ -1,6 +1,5 @@
 export { ThemeToggler } from "./ThemeToggler";
 export {
-  UserInfo,
   UserPosts,
   ActionButton,
   ProfileUsername,
