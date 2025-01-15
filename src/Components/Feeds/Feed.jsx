@@ -1,135 +1,153 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { Card, Row, Col, Button, Image, Alert } from "react-bootstrap";
-import { SpinnerTwo } from "Components";
+
 import { FaThumbsUp, FaCommentAlt, FaShare } from "react-icons/fa";
+import { SpinnerTwo } from "Components";
+import { timeAgo } from "Helpers";
 import { useTheme } from "Theme";
 import { PostModal } from "Components/Profile";
+import { Link } from "react-router-dom";
 
-const PostHeader = ({ profilePicture, name, date }) => {
+export const PostHeader = React.memo(
+  ({ profilePicture, fullName, date, username }) => (
+    <Link className="text-decoration-none text-black" to={`user/${username}`}>
+      <div className="d-flex align-items-center modal-header">
+        <Image
+          src={profilePicture}
+          roundedCircle
+          className="me-3"
+          style={{ width: "50px", height: "50px" }}
+        />
+        <div>
+          <h5 className="mb-0">{fullName}</h5>
+          <small className="text-muted">{timeAgo(date)}</small>
+        </div>
+      </div>
+    </Link>
+  )
+);
+
+export const PostContent = React.memo(
+  ({ handleClick = () => {}, post, modal = false, ...rest }) => (
+    <div {...rest}>
+      {!modal && <p>{post.content}</p>}
+      {post.image && (
+        <div className="text-center">
+          <Image
+            style={{ cursor: "pointer" }}
+            src={post.image}
+            alt="Post"
+            onClick={() => handleClick(post)}
+            className={modal ? "modal-image img-fluid" : "img-fluid rounded"}
+          />
+        </div>
+      )}
+    </div>
+  )
+);
+
+export const LikeCommentShare = ({ openModal = () => {}, post = {} }) => {
+  const [likes, setLikes] = useState(0);
+  const [liked, setLiked] = useState(false);
+  const { theme } = useTheme();
+
+  const handleLike = () => {
+    setLiked((prevLiked) => !prevLiked);
+    setLikes((prevLikes) => (liked ? prevLikes - 1 : prevLikes + 1));
+  };
+
+  const allButtons = [
+    {
+      label: liked ? "Liked" : "Like",
+      icon: <FaThumbsUp />,
+      action: handleLike,
+      count: likes,
+    },
+    {
+      label: "Comment",
+      icon: <FaCommentAlt />,
+      action: () => openModal(post),
+    },
+    {
+      label: "Share",
+      icon: <FaShare />,
+      action: () => openModal(post),
+    },
+  ];
+
   return (
-    <Row className="align-items-center">
-      <Col xs={2}>
-        <Image src={profilePicture} roundedCircle className="img-fluid" />
-      </Col>
-      <Col>
-        <h5 className="mb-0">{name}</h5>
-        <small className="text-muted">{date}</small>
-      </Col>
+    <Row className="justify-content-around text-center pt-3">
+      {allButtons.map(({ label, icon, action, count }, idx) => (
+        <Col xs={4} key={idx}>
+          <Button
+            variant={theme === "light" ? "light" : "dark"}
+            className={`w-100 d-flex align-items-center justify-content-center ${
+              label === "Liked" ? "text-primary" : ""
+            }`}
+            onClick={action}
+          >
+            {icon}
+            <span className="ms-2">
+              {label} {count > 0 && `(${count})`}
+            </span>
+          </Button>
+        </Col>
+      ))}
     </Row>
   );
 };
 
-const PostContent = ({ content, image }) => {
-  return (
-    <>
-      <Card.Text className="mt-3">{content}</Card.Text>
-      <div className="text-center">
-        {image && (
-          <Image src={image} alt="Post" className="img-fluid rounded" />
-        )}
-      </div>
-    </>
-  );
-};
-const LikeCommentShare = () => {
-  const [likes, setLikes] = useState(0);
-  const [liked, setLiked] = useState(false);
-
-  const { theme } = useTheme();
-
-  const handleLike = () => {
-    setLiked(!liked);
-    setLikes((prev) => (liked ? prev - 1 : prev + 1));
-  };
-
-  const handleComment = () => {
-    alert("Comment button clicked!");
-  };
-
-  const handleShare = () => {
-    alert("Share button clicked!");
-  };
-
-  return (
-    <div className="like-comment-share">
-      <Row className="justify-content-around text-center pt-3">
-        <Col xs={4}>
-          <Button
-            variant={theme === "light" ? "light" : "dark"}
-            className={`w-100 d-flex align-items-center justify-content-center ${
-              liked ? "text-primary" : ""
-            }`}
-            onClick={handleLike}
-          >
-            <FaThumbsUp className="me-2" />
-            {liked ? "Liked" : "Like"} {likes > 0 && `(${likes})`}
-          </Button>
-        </Col>
-        <Col xs={4}>
-          <Button
-            variant={theme === "light" ? "light" : "dark"}
-            className="w-100 d-flex align-items-center justify-content-center"
-            onClick={handleComment}
-          >
-            <FaCommentAlt className="me-2" />
-            Comment
-          </Button>
-        </Col>
-        <Col xs={4}>
-          <Button
-            variant={theme === "light" ? "light" : "dark"}
-            className="w-100 d-flex align-items-center justify-content-center"
-            onClick={handleShare}
-          >
-            <FaShare className="me-2" />
-            Share
-          </Button>
-        </Col>
-      </Row>
-    </div>
-  );
-};
-
 export const FeedSection = () => {
-  const feedsState = useSelector(({ userFeeds }) => userFeeds);
-  const { data, loading, error } = feedsState;
+  const {
+    data = [],
+    loading,
+    error,
+  } = useSelector(({ userFeeds }) => userFeeds);
   const [postModal, setPostModal] = useState(false);
   const [post, setPost] = useState({});
 
-  const openModal = (post) => {
+  const openModal = useCallback((post) => {
+    console.log(post, "post");
     setPost(post);
     setPostModal(true);
-  };
+  }, []);
 
-  const closeModal = () => {
-    setPostModal((prev) => !prev);
+  const closeModal = useCallback(() => {
+    setPostModal(false);
     setPost({});
+  }, []);
+
+  const handleLike = () => {
+    console.log("liked clicked!");
   };
 
   return (
     <>
-      {error && <Alert variant="danger">{error}</Alert>}
+      {error && <Alert variant="danger">{error || "An error occurred."}</Alert>}
       {loading && <SpinnerTwo />}
       {postModal && (
         <PostModal
           handleCloseModal={closeModal}
-          image={post.image}
-          content={post.content}
+          handleLike={handleLike}
+          {...post}
         />
       )}
+      {!loading && !error && data.length === 0 && (
+        <Alert variant="info">No posts available to show.</Alert>
+      )}
       <Row>
-        {data?.map((post, index) => (
-          <Col md={12} key={post.id} className="mb-3">
+        {data.map((post) => (
+          <Col md={12} key={post._id} className="mb-3">
             <Card className="shadow-sm">
-              <Card.Body onClick={() => openModal(post)}>
-                <PostHeader
-                  profilePicture={post.user.profilePicture}
-                  name={post.user.name}
-                  date={post.date}
+              <Card.Body>
+                <PostHeader date={post.createdAt} {...post.author} />
+                <PostContent handleClick={openModal} post={post} />
+                <LikeCommentShare
+                  handleLike={handleLike}
+                  openModal={openModal}
+                  post={post}
                 />
-                <PostContent content={post.content} image={post.image} />
-                <LikeCommentShare />
               </Card.Body>
             </Card>
           </Col>

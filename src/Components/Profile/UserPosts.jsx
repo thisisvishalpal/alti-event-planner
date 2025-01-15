@@ -34,11 +34,7 @@ export const UserPosts = ({ posts = [] }) => {
       </div>
 
       {selectedPost && (
-        <PostModal
-          handleCloseModal={handleCloseModal}
-          image={selectedPost.image}
-          content={selectedPost.content}
-        />
+        <PostModal handleCloseModal={handleCloseModal} {...selectedPost} />
       )}
     </Container>
   );

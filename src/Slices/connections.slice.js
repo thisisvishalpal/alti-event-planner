@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import { axiosInstance } from "Services";
 import { apiRoutes } from "Utils";
+import { logout } from "./auth.slice";
 
 const initialState = {
   data: { followers: [], following: [] },
@@ -11,12 +12,15 @@ const initialState = {
 // Async Thunk to fetch initial state
 export const fetchUserConnections = createAsyncThunk(
   "userConnections/fetchUserConnections",
-  async (_, { rejectWithValue }) => {
+  async (_, { rejectWithValue, dispatch }) => {
     try {
       const response = await axiosInstance.get(apiRoutes.userConnections);
 
       return response?.data?.data;
     } catch (error) {
+      if (error.status === 401) {
+        dispatch(logout());
+      }
       if (error.response) {
         return rejectWithValue(error.response.data.error);
       } else if (error.request) {

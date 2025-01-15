@@ -1,2 +1,2 @@
 export { UploadSection } from "./UploadSection";
-export { FeedSection } from "./Feed";
+export { FeedSection, LikeCommentShare, PostContent, PostHeader } from "./Feed";

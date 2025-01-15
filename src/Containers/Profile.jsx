@@ -75,10 +75,7 @@ export const Profile = () => {
               />
             </Card>
 
-            <ProfileTabs
-              following={youFollowThem}
-              isAccessingSelfProfile={isAccessingSelfProfile}
-            />
+            <ProfileTabs following={youFollowThem} />
           </>
         )}
     </Container>

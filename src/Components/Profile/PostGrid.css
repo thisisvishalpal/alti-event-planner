@@ -37,7 +37,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.8); /* Increased opacity for better focus */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -45,30 +45,96 @@
 }
 
 .modal-content {
-  background: #fff;
-  border-radius: 8px;
-  max-width: 650px;
+  background: #ffffff !important; /* Changed to white for better readability */
+  border-radius: 1% !important;
+  max-width: 1000px;
   width: 90%;
-  padding: 16px;
+  padding: 20px;
   position: relative;
-}
-
-.modal-body {
-  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .modal-image {
   width: 100%;
-  border-radius: 8px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .close-modal {
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: 10px;
+  right: 10px;
   background: transparent;
   border: none;
   font-size: 24px;
   cursor: pointer;
-  color: #666;
+  color: #333;
+  transition: color 0.2s;
+}
+
+.close-modal:hover {
+  color: #000000; /* Darker hover effect */
+}
+
+.modal-header {
+  margin-bottom: 20px;
+}
+
+.comments-section {
+  max-height: 200px;
+  overflow-y: auto; /* Add scroll for large comments */
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #f9f9f9;
+}
+
+.comments-section div {
+  border-bottom: 1px solid #ececec;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+}
+
+.comments-section div:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.modal-footer {
+  /* padding-top: 20px; */
+  border-top: 1px solid #000000;
+}
+
+button[type="submit"] {
+  background: #007bff; /* Bootstrap primary color */
+  border: none;
+  color: #fff;
+  transition: background 0.2s;
+}
+
+button[type="submit"]:hover {
+  background: #0056b3; /* Darker primary color for hover */
+}
+
+/* Adjust alignment for larger screens */
+@media (min-width: 768px) {
+  .modal-content .row {
+    align-items: center; /* Align columns vertically in the center */
+  }
+
+  .modal-content .modal-image {
+    max-height: 100%; /* Limit the image height */
+    object-fit: cover; /* Ensure the image scales properly */
+  }
+
+  .modal-content .modal-footer {
+    display: flex;
+    flex-direction: column; /* Keep content stacked vertically */
+    justify-content: center; /* Center the comments column */
+  }
+
+  .modal-content .comments-section {
+    max-height: 100%; /* Ensure the comment section fits well */
+    overflow-y: auto; /* Allow scrolling for long comments */
+  }
 }

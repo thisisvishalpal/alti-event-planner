@@ -6,7 +6,13 @@ export {
   AreYouFollowing,
   ProfileTabs,
 } from "./Profile";
-export { UploadSection, FeedSection } from "./Feeds";
+export {
+  UploadSection,
+  FeedSection,
+  LikeCommentShare,
+  PostContent,
+  PostHeader,
+} from "./Feeds";
 export {
   Aside,
   RightAside,

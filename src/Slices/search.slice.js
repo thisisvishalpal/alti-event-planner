@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import { axiosInstance } from "Services";
 import { apiRoutes } from "Utils";
+import { logout } from "./auth.slice";
 
 const initialState = {
   data: [],
@@ -11,11 +12,14 @@ const initialState = {
 // Async Thunk to fetch initial state
 export const fetchSearch = createAsyncThunk(
   "userSearch/fetchSearch",
-  async (params, { rejectWithValue }) => {
+  async (params, { rejectWithValue, dispatch }) => {
     try {
       const response = await axiosInstance.post(apiRoutes.userSearch, params);
       return response?.data?.data;
     } catch (error) {
+      if (error.status === 401) {
+        dispatch(logout());
+      }
       if (error.response) {
         return rejectWithValue(error.response.data.message);
       } else if (error.request) {

@@ -1,65 +1,82 @@
-export const PostModal = ({ handleCloseModal, image, content }) => {
+import React from "react";
+import { Row, Col, Form, InputGroup } from "react-bootstrap";
+import { LikeCommentShare, PostContent, PostHeader } from "Components/Feeds";
+
+const AllComments = ({ comments }) => {
+  return (
+    <>
+      {/* <h6>Comments</h6> */}
+      <div className="comments-section mb-3">
+        {comments.length > 0 ? (
+          comments.map((comment, index) => (
+            <div key={index} className="mb-2">
+              <strong>{comment.userName}</strong>
+              <p className="mb-1">{comment.text}</p>
+              <small className="text-muted">{comment.date}</small>
+            </div>
+          ))
+        ) : (
+          <p className="text-muted">
+            Be the first one to comment on this post.
+          </p>
+        )}
+      </div>
+    </>
+  );
+};
+const NewComments = ({ addComment }) => {
+  return (
+    <Form onSubmit={addComment}>
+      <InputGroup className="mb-3" size="sm">
+        <Form.Control
+          placeholder="Recipient's username"
+          aria-label="Recipient's username"
+          aria-describedby="basic-addon2"
+        />
+        <InputGroup.Text id="basic-addon2">post</InputGroup.Text>
+      </InputGroup>
+    </Form>
+  );
+};
+
+export const PostModal = ({
+  handleCloseModal,
+  handleLike = () => {},
+  author,
+  createdAt,
+  image,
+  content,
+  likes,
+  comments,
+}) => {
+  const addComment = () => {
+    console.log("comment created");
+  };
+
   return (
     <div className="modal-overlay" onClick={handleCloseModal}>
-      <div
-        className="modal-content"
-        onClick={(e) => e.stopPropagation()} // Prevent closing modal when clicking inside
-      >
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <button className="close-modal" onClick={handleCloseModal}>
           &times;
         </button>
-        <div className="modal-body">
-          {image && <img src={image} alt={content} className="modal-image" />}
-          <p>{content}</p>
-        </div>
+
+        <Row>
+          <Col md={9} sm={12}>
+            <PostHeader date={createdAt} {...author} />
+            <PostContent
+              post={{ content, image }}
+              modal={true}
+              className="mb-2"
+            />
+            <LikeCommentShare />
+          </Col>
+          <Col md={3} sm={12}>
+            <p>{content}</p>
+            <AllComments comments={comments} />
+            <NewComments addComment={addComment} />
+          </Col>
+        </Row>
       </div>
     </div>
   );
 };
-
-// const CommentForm = () => {
-//   const handleAddComment = (index, commentText) => {
-//     setComments((prev) =>
-//       prev?.map((commentList, i) =>
-//         i === index ? [...commentList, commentText] : commentList
-//       )
-//     );
-//   };
-//   return (
-
-{
-  /* <div className="mt-4">
-  <h6>Comments</h6>
-  <ul className="list-unstyled">
-    {comments[index]?.map((comment, i) => (
-      <li key={i} className="mb-2">
-        <strong>{comment.user}:</strong> {comment.text}
-      </li>
-    ))}
-  </ul>
-</div> */
-}
-//     <Form
-//       onSubmit={(e) => {
-//         e.preventDefault();
-//         const form = e.target;
-//         const commentText = form.elements.comment.value.trim();
-//         if (commentText) {
-//           handleAddComment(index, {
-//             user: "You",
-//             text: commentText,
-//           });
-//           form.reset();
-//         }
-//       }}
-//     >
-//       <Form.Group controlId={`comment-${index}`}>
-//         <Form.Control
-//           type="text"
-//           placeholder="Add a comment..."
-//           name="comment"
-//         />
-//       </Form.Group>
-//     </Form>
-//   );
-// };

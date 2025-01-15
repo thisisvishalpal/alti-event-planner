@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { axiosInstance } from "Services";
 import { apiRoutes } from "Utils";
+import { logout } from "./auth.slice";
 
 const initialState = {
   data: [],
@@ -11,13 +12,27 @@ const initialState = {
 export const fetchUserFeeds = createAsyncThunk(
   "userFeeds/fetchUserFeeds",
 
-  async (_, { getState }) => {
+  async (_, { getState, rejectWithValue, dispatch }) => {
     const { username } = getState().userAuth;
 
-    const response = await axiosInstance.get(apiRoutes.userFeeds, {
-      params: { username: username },
-    });
-    return response?.data?.data;
+    try {
+      const response = await axiosInstance.get(apiRoutes.userFeeds, {
+        params: { username: username },
+      });
+      return response?.data?.data;
+    } catch (error) {
+      if (error.status === 401) {
+        dispatch(logout());
+      }
+      console.log(error, "checking error in slice");
+      if (error.response) {
+        return rejectWithValue(error.response.data.error);
+      } else if (error.request) {
+        return rejectWithValue("No response from the server");
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
   }
 );
 
@@ -37,7 +52,7 @@ const userFeedSlice = createSlice({
       })
       .addCase(fetchUserFeeds.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.payload;
       });
   },
 });
