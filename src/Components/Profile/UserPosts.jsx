@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Container } from "react-bootstrap";
 
 import "./PostGrid.css";
-import { PostModal } from ".";
+import { PostModal } from "Components";
 
 export const UserPosts = ({ posts = [] }) => {
   const [selectedPost, setSelectedPost] = useState(null);

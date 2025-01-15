@@ -6,13 +6,7 @@ export {
   AreYouFollowing,
   ProfileTabs,
 } from "./Profile";
-export {
-  UploadSection,
-  FeedSection,
-  LikeCommentShare,
-  PostContent,
-  PostHeader,
-} from "./Feeds";
+export { UploadSection, FeedSection } from "./Feeds";
 export {
   Aside,
   RightAside,
@@ -36,3 +30,4 @@ export {
   SearchTypeSelector,
 } from "./FormInput";
 export { SearchResults } from "./Search";
+export { PostContent, PostHeader, PostModal, LikeCommentShare } from "./Post";

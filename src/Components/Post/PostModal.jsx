@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col, Form, InputGroup } from "react-bootstrap";
-import { LikeCommentShare, PostContent, PostHeader } from "Components/Feeds";
+import { LikeCommentShare, PostContent, PostHeader } from "Components";
 
 const AllComments = ({ comments }) => {
   return (
@@ -71,7 +71,7 @@ export const PostModal = ({
             <LikeCommentShare />
           </Col>
           <Col md={3} sm={12}>
-            <p>{content}</p>
+            <h5>{content}</h5>
             <AllComments comments={comments} />
             <NewComments addComment={addComment} />
           </Col>
