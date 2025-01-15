@@ -3,7 +3,7 @@ import { Form, InputGroup } from "react-bootstrap";
 export const SearchBar = ({ heading, handleChange, value, placeholder }) => {
   return (
     <>
-      <h5>{heading}</h5>
+      <h3>{heading}</h3>
       <InputGroup>
         <Form.Control
           type="text"

@@ -49,6 +49,7 @@ export const Settings = () => {
 
   return (
     <Container className="mt-4">
+      <h3 className="m-2 mb-3">Settings</h3>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Tabs
           activeKey={activeTab}
@@ -58,7 +59,7 @@ export const Settings = () => {
         >
           {/* Account Tab */}
           <Tab eventKey="account" title="Account">
-            <Card className="p-4 m-4">
+            <Card className="p-4 m-2">
               <UsernameEmailForm
                 errors={errors}
                 wantToEdit={false}
@@ -70,7 +71,7 @@ export const Settings = () => {
 
           {/* Personal Tab */}
           <Tab eventKey="personal" title="Personal">
-            <Card className="p-4 m-4">
+            <Card className="p-4 m-2">
               <PersonalInfoForm
                 errors={errors}
                 wantToEdit={wantToEdit}
@@ -81,7 +82,7 @@ export const Settings = () => {
 
           {/* Career Tab */}
           <Tab eventKey="career" title="Career">
-            <Card className="p-4 m-4">
+            <Card className="p-4 m-2">
               <CareerInformationForm
                 errors={errors}
                 wantToEdit={wantToEdit}
@@ -98,7 +99,7 @@ export const Settings = () => {
 
           {/* Theme Tab */}
           <Tab eventKey="theme" title="Theme">
-            <Card className="p-4 m-4">
+            <Card className="p-4 m-2">
               <h5 className="mb-3">Select Theme</h5>
               <ThemeToggler
                 labelLeft="Light"

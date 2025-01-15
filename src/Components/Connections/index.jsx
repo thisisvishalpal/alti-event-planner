@@ -1,26 +1,12 @@
 import React, { useState } from "react";
 import { Tab, Tabs, Container } from "react-bootstrap";
 
-import { SpinnerTwo, UserRow } from "Components";
+import { UserRow } from "Components";
 
-export const ConnectionTabs = ({
-  state,
-  followers = [],
-  following = [],
-  loading,
-  error,
-}) => {
+export const ConnectionTabs = ({ state, followers = [], following = [] }) => {
   const [activeTab, setActiveTab] = useState(state || "followers");
 
   const handleTabSelect = (tab) => setActiveTab(tab);
-
-  if (loading) {
-    return <SpinnerTwo />;
-  }
-
-  if (error) {
-    return <p>{error}</p>;
-  }
 
   // Render tab content based on user data
   const renderTabContent = (users) => {
@@ -32,12 +18,7 @@ export const ConnectionTabs = ({
 
   return (
     <Container className="mt-4">
-      <Tabs
-        activeKey={activeTab}
-        onSelect={handleTabSelect}
-        className="mb-3"
-        justify
-      >
+      <Tabs activeKey={activeTab} onSelect={handleTabSelect} justify>
         <Tab eventKey="followers" title={`Followers ${followers?.length}`}>
           {renderTabContent(followers)}
         </Tab>

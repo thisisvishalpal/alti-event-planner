@@ -3,7 +3,7 @@ import { Alert, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
-import { SearchBar, ConnectionTabs } from "Components";
+import { SearchBar, ConnectionTabs, SpinnerTwo } from "Components";
 import { fetchUserConnections } from "Slices";
 
 export const Connections = () => {
@@ -55,13 +55,15 @@ export const Connections = () => {
       />
 
       {error && <Alert variant="danger">{error}</Alert>}
+      {loading && <SpinnerTwo />}
 
-      <ConnectionTabs
-        loading={loading}
-        state={location?.state}
-        followers={filterFollowers}
-        following={filterFollowing}
-      />
+      {!error && !loading && (
+        <ConnectionTabs
+          state={location?.state}
+          followers={filterFollowers}
+          following={filterFollowing}
+        />
+      )}
     </Container>
   );
 };

@@ -8,6 +8,7 @@ import {
   AreYouFollowing,
   CareerInformationForm,
   PersonalInfoForm,
+  SpinnerTwo,
   UserPosts,
 } from "Components";
 
@@ -25,6 +26,12 @@ export const ProfileTabs = ({ following }) => {
   );
 
   const finalData = isAccessingSelfProfile ? userInfoData : otherProfileData;
+  const finalPost = isAccessingSelfProfile
+    ? userInfoData?.posts
+    : otherProfileData?.posts;
+  const finalLoading = isAccessingSelfProfile
+    ? userInfoLoading
+    : otherProfileLoading;
 
   useEffect(() => {
     if (finalData) {
@@ -33,7 +40,51 @@ export const ProfileTabs = ({ following }) => {
       });
     }
   }, [finalData, setValue]);
+
   const wantToEdit = false;
+
+  const renderComponent = (compo) => {
+    if (finalLoading) {
+      return <SpinnerTwo />;
+    }
+
+    return following || isAccessingSelfProfile ? compo : <AreYouFollowing />;
+  };
+
+  const tabs = [
+    {
+      eventKey: "posts",
+      title: "Posts",
+      component: <UserPosts posts={finalPost} />,
+    },
+    {
+      eventKey: "information",
+      title: "Information",
+      component: (
+        <Card className="p-4 m-2 mb-4">
+          <PersonalInfoForm
+            errors={{}}
+            wantToEdit={wantToEdit}
+            register={register}
+          />
+        </Card>
+      ),
+    },
+    {
+      eventKey: "career",
+      title: "Career",
+      component: (
+        <Card className="p-4 m-2 mb-2">
+          <CareerInformationForm
+            errors={{}}
+            wantToEdit={wantToEdit}
+            register={register}
+            watch={watch}
+          />
+        </Card>
+      ),
+    },
+  ];
 
   return (
     <Tabs
@@ -42,50 +93,11 @@ export const ProfileTabs = ({ following }) => {
       className="mb-3"
       justify
     >
-      <Tab eventKey="posts" title="Posts">
-        {following || isAccessingSelfProfile ? (
-          <UserPosts
-            posts={
-              isAccessingSelfProfile
-                ? userInfoData?.posts
-                : otherProfileData?.posts
-            }
-            loading={
-              isAccessingSelfProfile ? userInfoLoading : otherProfileLoading
-            }
-          />
-        ) : (
-          <AreYouFollowing />
-        )}
-      </Tab>
-      <Tab eventKey="information" title="Information">
-        {following || isAccessingSelfProfile ? (
-          <Card className="p-4 m-4">
-            <PersonalInfoForm
-              errors={{}}
-              wantToEdit={wantToEdit}
-              register={register}
-            />
-          </Card>
-        ) : (
-          <AreYouFollowing />
-        )}
-      </Tab>
-
-      <Tab eventKey="career" title="Career">
-        {following || isAccessingSelfProfile ? (
-          <Card className="p-4 m-4">
-            <CareerInformationForm
-              errors={{}}
-              wantToEdit={wantToEdit}
-              register={register}
-              watch={watch}
-            />
-          </Card>
-        ) : (
-          <AreYouFollowing />
-        )}
-      </Tab>
+      {tabs.map((tab) => (
+        <Tab eventKey={tab.eventKey} title={tab.title}>
+          {renderComponent(tab.component)}
+        </Tab>
+      ))}
     </Tabs>
   );
 };

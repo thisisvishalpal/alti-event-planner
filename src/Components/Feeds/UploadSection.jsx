@@ -57,9 +57,9 @@ export const UploadSection = () => {
   };
 
   return (
-    <div className="upload-section">
+    <>
       <Card className="p-3 mb-4 shadow-sm">
-        <Form.Control />
+        <Form.Control placeholder="Update your status here !" />
         <div className="d-flex justify-content-between mt-3">
           <Button variant="primary" onClick={() => handleShow("photos")}>
             📸 Upload Photos
@@ -160,6 +160,6 @@ export const UploadSection = () => {
           </Form>
         </Modal.Body>
       </Modal>
-    </div>
+    </>
   );
 };

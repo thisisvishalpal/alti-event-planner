@@ -1,111 +1,140 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { Card, Row, Col, Button, Image, Form } from "react-bootstrap";
+import { Card, Row, Col, Button, Image, Alert } from "react-bootstrap";
+import { SpinnerTwo } from "Components";
+import { FaThumbsUp, FaCommentAlt, FaShare } from "react-icons/fa";
+import { useTheme } from "Theme";
+import { PostModal } from "Components/Profile";
+
+const PostHeader = ({ profilePicture, name, date }) => {
+  return (
+    <Row className="align-items-center">
+      <Col xs={2}>
+        <Image src={profilePicture} roundedCircle className="img-fluid" />
+      </Col>
+      <Col>
+        <h5 className="mb-0">{name}</h5>
+        <small className="text-muted">{date}</small>
+      </Col>
+    </Row>
+  );
+};
+
+const PostContent = ({ content, image }) => {
+  return (
+    <>
+      <Card.Text className="mt-3">{content}</Card.Text>
+      <div className="text-center">
+        {image && (
+          <Image src={image} alt="Post" className="img-fluid rounded" />
+        )}
+      </div>
+    </>
+  );
+};
+const LikeCommentShare = () => {
+  const [likes, setLikes] = useState(0);
+  const [liked, setLiked] = useState(false);
+
+  const { theme } = useTheme();
+
+  const handleLike = () => {
+    setLiked(!liked);
+    setLikes((prev) => (liked ? prev - 1 : prev + 1));
+  };
+
+  const handleComment = () => {
+    alert("Comment button clicked!");
+  };
+
+  const handleShare = () => {
+    alert("Share button clicked!");
+  };
+
+  return (
+    <div className="like-comment-share">
+      <Row className="justify-content-around text-center pt-3">
+        <Col xs={4}>
+          <Button
+            variant={theme === "light" ? "light" : "dark"}
+            className={`w-100 d-flex align-items-center justify-content-center ${
+              liked ? "text-primary" : ""
+            }`}
+            onClick={handleLike}
+          >
+            <FaThumbsUp className="me-2" />
+            {liked ? "Liked" : "Like"} {likes > 0 && `(${likes})`}
+          </Button>
+        </Col>
+        <Col xs={4}>
+          <Button
+            variant={theme === "light" ? "light" : "dark"}
+            className="w-100 d-flex align-items-center justify-content-center"
+            onClick={handleComment}
+          >
+            <FaCommentAlt className="me-2" />
+            Comment
+          </Button>
+        </Col>
+        <Col xs={4}>
+          <Button
+            variant={theme === "light" ? "light" : "dark"}
+            className="w-100 d-flex align-items-center justify-content-center"
+            onClick={handleShare}
+          >
+            <FaShare className="me-2" />
+            Share
+          </Button>
+        </Col>
+      </Row>
+    </div>
+  );
+};
 
 export const FeedSection = () => {
   const feedsState = useSelector(({ userFeeds }) => userFeeds);
   const { data, loading, error } = feedsState;
+  const [postModal, setPostModal] = useState(false);
+  const [post, setPost] = useState({});
 
-  const [likes, setLikes] = useState(data?.map(() => false));
-  const [comments, setComments] = useState(data?.map(() => []));
-
-  const handleLike = (index) => {
-    setLikes((prev) => prev?.map((liked, i) => (i === index ? !liked : liked)));
+  const openModal = (post) => {
+    setPost(post);
+    setPostModal(true);
   };
 
-  const handleAddComment = (index, commentText) => {
-    setComments((prev) =>
-      prev?.map((commentList, i) =>
-        i === index ? [...commentList, commentText] : commentList
-      )
-    );
+  const closeModal = () => {
+    setPostModal((prev) => !prev);
+    setPost({});
   };
 
   return (
-    <div className="feeds">
+    <>
+      {error && <Alert variant="danger">{error}</Alert>}
+      {loading && <SpinnerTwo />}
+      {postModal && (
+        <PostModal
+          handleCloseModal={closeModal}
+          image={post.image}
+          content={post.content}
+        />
+      )}
       <Row>
         {data?.map((post, index) => (
-          <Col md={12} key={post.id} className="mb-4">
+          <Col md={12} key={post.id} className="mb-3">
             <Card className="shadow-sm">
-              <Card.Body>
-                {/* Post Header */}
-                <Row className="align-items-center">
-                  <Col xs={2}>
-                    <Image
-                      src={post.user.profilePicture}
-                      roundedCircle
-                      className="img-fluid"
-                    />
-                  </Col>
-                  <Col>
-                    <h5 className="mb-0">{post.user.name}</h5>
-                    <small className="text-muted">{post.date}</small>
-                  </Col>
-                </Row>
-
-                {/* Post Content */}
-                <Card.Text className="mt-3">{post.content}</Card.Text>
-                <div className="text-center">
-                  {post.image && (
-                    <Image
-                      src={post.image}
-                      alt="Post"
-                      className="img-fluid rounded"
-                    />
-                  )}
-                </div>
-
-                {/* Post Actions */}
-                <div className="mt-3 d-flex justify-content-between">
-                  <Button
-                    variant={likes[index] ? "primary" : "outline-primary"}
-                    onClick={() => handleLike(index)}
-                  >
-                    {likes[index] ? "Liked" : "Like"}
-                  </Button>
-                  <Button variant="outline-secondary">Share</Button>
-                </div>
-
-                {/* Comments Section */}
-                <div className="mt-4">
-                  <h6>Comments</h6>
-                  <ul className="list-unstyled">
-                    {comments[index]?.map((comment, i) => (
-                      <li key={i} className="mb-2">
-                        <strong>{comment.user}:</strong> {comment.text}
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* Add Comment Form */}
-                  <Form
-                    onSubmit={(e) => {
-                      e.preventDefault();
-                      const form = e.target;
-                      const commentText = form.elements.comment.value.trim();
-                      if (commentText) {
-                        handleAddComment(index, {
-                          user: "You",
-                          text: commentText,
-                        });
-                        form.reset();
-                      }
-                    }}
-                  >
-                    <Form.Group controlId={`comment-${index}`}>
-                      <Form.Control
-                        type="text"
-                        placeholder="Add a comment..."
-                        name="comment"
-                      />
-                    </Form.Group>
-                  </Form>
-                </div>
+              <Card.Body onClick={() => openModal(post)}>
+                <PostHeader
+                  profilePicture={post.user.profilePicture}
+                  name={post.user.name}
+                  date={post.date}
+                />
+                <PostContent content={post.content} image={post.image} />
+                <LikeCommentShare />
               </Card.Body>
             </Card>
           </Col>
         ))}
       </Row>
-    </div>
+    </>
   );
 };

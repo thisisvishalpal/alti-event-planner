@@ -23,7 +23,7 @@ export const Feeds = () => {
   return (
     <Container className="mt-3">
       <UploadSection />
-      <h2 className="mb-4">Feeds</h2>
+      <h3 className="mb-4">Feeds</h3>
       <FeedSection />
     </Container>
   );

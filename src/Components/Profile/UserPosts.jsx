@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Container, Spinner } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 
 import "./PostGrid.css";
+import { PostModal } from ".";
 
-const PostGrid = ({ posts }) => {
+export const UserPosts = ({ posts = [] }) => {
   const [selectedPost, setSelectedPost] = useState(null);
 
   const handlePostClick = (post) => {
@@ -15,7 +16,8 @@ const PostGrid = ({ posts }) => {
   };
 
   return (
-    <div>
+    <Container>
+      <h3 className="mb-4">My Posts</h3>
       <div className="post-grid">
         {posts.map((post) => (
           <div
@@ -32,36 +34,12 @@ const PostGrid = ({ posts }) => {
       </div>
 
       {selectedPost && (
-        <div className="modal-overlay" onClick={handleCloseModal}>
-          <div
-            className="modal-content"
-            onClick={(e) => e.stopPropagation()} // Prevent closing modal when clicking inside
-          >
-            <button className="close-modal" onClick={handleCloseModal}>
-              &times;
-            </button>
-            <div className="modal-body">
-              {selectedPost.image && (
-                <img
-                  src={selectedPost.image}
-                  alt={selectedPost.content}
-                  className="modal-image"
-                />
-              )}
-              <p>{selectedPost.content}</p>
-            </div>
-          </div>
-        </div>
+        <PostModal
+          handleCloseModal={handleCloseModal}
+          image={selectedPost.image}
+          content={selectedPost.content}
+        />
       )}
-    </div>
-  );
-};
-
-export const UserPosts = ({ posts = [], loading }) => {
-  return (
-    <Container className="my-posts">
-      <h3 className="mb-4">My Posts</h3>
-      {loading ? <Spinner /> : <PostGrid posts={posts} />}
     </Container>
   );
 };
