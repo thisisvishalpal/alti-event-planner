@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
@@ -187,6 +187,10 @@ export const SignupTwo = () => {
   const isLastStep = currentStep === steps.length;
   const getProgress = () => (currentStep / steps.length) * 100;
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, []);
+
   return (
     <Container
       style={{
@@ -201,7 +205,7 @@ export const SignupTwo = () => {
           maxWidth: "500px",
           width: "100%",
           padding: "20px",
-          margin: "50px",
+          margin: "5px",
         }}
       >
         {serverError.length > 0 && (

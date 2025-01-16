@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { Button, Form, Container, Spinner, Card, Alert } from "react-bootstrap";
@@ -32,6 +32,10 @@ export const SignIn = () => {
     dispatch(signIn({ username, password }));
   };
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, []);
+
   return (
     <Container
       style={{
@@ -46,7 +50,7 @@ export const SignIn = () => {
           maxWidth: "500px",
           width: "100%",
           padding: "20px",
-          margin: "50px",
+          margin: "5px",
         }}
       >
         {message && (

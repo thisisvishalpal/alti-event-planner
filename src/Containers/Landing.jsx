@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Container, Row, Col } from "react-bootstrap";
 import "./Landing.css"; // Optional: Add your custom styles here.
 import { useNavigate } from "react-router-dom";
@@ -6,6 +6,11 @@ import { urls } from "Utils";
 
 export const Landing = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, []);
+
   return (
     <div className="landing-page">
       {/* Hero Section */}
