@@ -1,5 +1,5 @@
 import userFeeds, { fetchUserFeeds } from "./feeds.slice";
-import userInfo, { fetchUserInfo } from "./userInfo.slice";
+import userInfo, { fetchUserInfo, mutateUserUpdate } from "./userInfo.slice";
 import userAuth, { validateToken, logout, signIn } from "./auth.slice";
 import userNotifications, {
   fetchUserNotifications,
@@ -17,6 +17,7 @@ export {
   fetchUserFeeds,
   userInfo,
   fetchUserInfo,
+  mutateUserUpdate,
   userAuth,
   validateToken,
   signIn,

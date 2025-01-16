@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import {
   Form,
   Card,
@@ -8,7 +8,7 @@ import {
   Tabs,
   Alert,
 } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 
 import {
@@ -21,8 +21,10 @@ import {
   UsernameEmailForm,
 } from "Components";
 import { useTheme } from "Theme";
+import { mutateUserUpdate } from "Slices";
 
 export const Settings = () => {
+  const dispatch = useDispatch();
   const { toggleTheme } = useTheme();
   const { data, loading, error } = useSelector(({ userInfo }) => userInfo);
 
@@ -33,8 +35,8 @@ export const Settings = () => {
     handleSubmit,
     setValue,
     watch,
-    formState: { errors },
-  } = useForm();
+    formState: { errors, dirtyFields },
+  } = useForm({ mode: "onChange" });
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
@@ -49,13 +51,23 @@ export const Settings = () => {
     }
   }, [data, setValue]);
 
-  const onSubmit = (formData) => {
-    console.log("Form submitted", formData);
+  const onSubmit = (formValues) => {
+    if (Object.keys(dirtyFields).length > 0) {
+      // Destructure values from data based on dirtyFields keys
+      const updatedValues = Object.keys(dirtyFields).reduce((acc, key) => {
+        if (key in formValues) {
+          acc[key] = formValues[key];
+        }
+        return acc;
+      }, {});
+      dispatch(mutateUserUpdate(updatedValues));
+    }
   };
 
   // Tabs configuration
-  const tabs = useMemo(
-    () => [
+  const tabs =
+    //  useMemo(  () =>
+    [
       {
         eventKey: "account",
         title: "Account",
@@ -116,9 +128,9 @@ export const Settings = () => {
           </>
         ),
       },
-    ],
-    [errors, register, toggleTheme, watch]
-  );
+    ];
+  //   [errors, register, toggleTheme, watch]
+  // );
 
   const renderComponent = (component) => {
     if (loading) return <SpinnerTwo />;
@@ -143,11 +155,15 @@ export const Settings = () => {
           ))}
         </Tabs>
         <div className="text-end">
-          {activeTab !== "account" && (
-            <Button variant="primary" type="submit">
-              Save
-            </Button>
-          )}
+          <Button
+            variant="primary"
+            type="submit"
+            disabled={
+              activeTab === "account" || Object.keys(dirtyFields).length === 0
+            }
+          >
+            Save
+          </Button>
         </div>
       </Form>
     </Container>

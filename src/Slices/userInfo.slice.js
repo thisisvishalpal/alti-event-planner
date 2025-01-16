@@ -51,6 +51,31 @@ export const fetchUserInfo = createAsyncThunk(
   }
 );
 
+export const mutateUserUpdate = createAsyncThunk(
+  "userInfo/mutateUserUpdate",
+  async (body, { getState, dispatch, rejectWithValue }) => {
+    const data = getState().userAuth;
+    try {
+      const response = await axiosInstance.post(apiRoutes.userUpdate, body, {
+        params: { username: data.username },
+      });
+      return response?.data?.data;
+    } catch (error) {
+      console.log(error);
+      if (error.status === 401) {
+        dispatch(logout());
+      }
+      if (error.response) {
+        return rejectWithValue(error.response.data.error);
+      } else if (error.request) {
+        return rejectWithValue("No response from the server");
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
 const userInfoSlice = createSlice({
   name: "userInfo",
   initialState,
@@ -66,6 +91,18 @@ const userInfoSlice = createSlice({
         state.data = action.payload;
       })
       .addCase(fetchUserInfo.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(mutateUserUpdate.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(mutateUserUpdate.fulfilled, (state, action) => {
+        state.loading = false;
+        state.data = action.payload;
+      })
+      .addCase(mutateUserUpdate.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
