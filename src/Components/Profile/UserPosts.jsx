@@ -21,7 +21,7 @@ export const UserPosts = ({ posts = [] }) => {
       <div className="post-grid">
         {posts.map((post) => (
           <div
-            key={post.id}
+            key={post._id}
             className="post-card"
             onClick={() => handlePostClick(post)}
           >

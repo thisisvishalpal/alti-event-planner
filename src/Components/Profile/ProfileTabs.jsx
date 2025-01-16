@@ -87,7 +87,7 @@ export const ProfileTabs = ({ following }) => {
       justify
     >
       {tabs.map((tab) => (
-        <Tab eventKey={tab.eventKey} title={tab.title}>
+        <Tab key={tab.eventKey} eventKey={tab.eventKey} title={tab.title}>
           {renderComponent(tab.component)}
         </Tab>
       ))}
