@@ -6,7 +6,7 @@ import { timeAgo } from "Helpers";
 
 export const PostHeader = React.memo(
   ({ profilePicture, fullName, date, username }) => (
-    <Link className="text-decoration-none text-black" to={`user/${username}`}>
+    <Link className="text-decoration-none text-black" to={`/user/${username}`}>
       <div className="d-flex align-items-center modal-header">
         <Image
           src={profilePicture}

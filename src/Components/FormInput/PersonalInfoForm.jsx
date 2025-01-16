@@ -43,7 +43,7 @@ export const PersonalInfoForm = ({
       <Form.Group className="mb-3">
         <Form.Label>Phone Number</Form.Label>
         <Form.Control
-          type="phone"
+          type="tel"
           placeholder="Enter your phone number"
           disabled={!wantToEdit}
           {...register("phoneNumber", {
@@ -53,6 +53,9 @@ export const PersonalInfoForm = ({
               message: "Phone Number must be 10 digits",
             },
           })}
+          onInput={(e) => {
+            e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-numeric characters
+          }}
         />
         {errors.phoneNumber && (
           <p className="text-danger">{errors.phoneNumber.message}</p>
