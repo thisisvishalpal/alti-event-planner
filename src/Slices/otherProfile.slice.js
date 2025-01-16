@@ -55,8 +55,7 @@ export const mutateFollowThem = createAsyncThunk(
   async (prop, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.post(apiRoutes.follow, prop);
-      console.log(response, "from slice");
-      return response.data.data.currentUser;
+      return response.data.data.userToFollow;
     } catch (error) {
       console.log(error);
       if (error.response) {
@@ -94,7 +93,7 @@ const otherProfileSlice = createSlice({
       })
       .addCase(mutateFollowThem.fulfilled, (state, action) => {
         state.loading = false;
-        state.data.followers = [...state.data.followers, action.payload._id];
+        state.data = action.payload;
       })
       .addCase(mutateFollowThem.rejected, (state, action) => {
         state.loading = false;

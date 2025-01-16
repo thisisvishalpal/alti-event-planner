@@ -47,7 +47,7 @@ export const Profile = () => {
   const isLoading = userInfoLoading || otherProfileLoading;
   const isError = userInfoError || otherProfileError;
 
-  const youFollowThem = false;
+  const youFollowThem = otherProfileData.email ? true : false;
 
   return (
     <Container>
