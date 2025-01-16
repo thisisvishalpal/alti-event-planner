@@ -52,7 +52,6 @@ export const fetchOtherProfile = createAsyncThunk(
 
 export const mutateFollowThem = createAsyncThunk(
   "userInfo/mutateFollowThem",
-
   async (prop, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.post(apiRoutes.follow, prop);

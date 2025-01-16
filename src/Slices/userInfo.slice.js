@@ -59,9 +59,8 @@ export const mutateUserUpdate = createAsyncThunk(
       const response = await axiosInstance.post(apiRoutes.userUpdate, body, {
         params: { username: data.username },
       });
-      return response?.data?.data;
+      return response?.data?.user;
     } catch (error) {
-      console.log(error);
       if (error.status === 401) {
         dispatch(logout());
       }
