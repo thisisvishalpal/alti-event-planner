@@ -1,9 +1,14 @@
 import { Form } from "react-bootstrap";
 
-export const PersonalInfoForm = ({ errors, wantToEdit, register }) => {
+export const PersonalInfoForm = ({
+  showHeading = true,
+  errors,
+  wantToEdit,
+  register,
+}) => {
   return (
     <>
-      <h5 className="mb-3">Personal information</h5>
+      {showHeading && <h5 className="mb-3">Personal information</h5>}
       {/* fullname */}
       <Form.Group className="mb-3">
         <Form.Label>Full Name</Form.Label>

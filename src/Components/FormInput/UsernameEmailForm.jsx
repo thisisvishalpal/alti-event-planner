@@ -1,6 +1,7 @@
 import { Form } from "react-bootstrap";
 
 export const UsernameEmailForm = ({
+  showHeading = true,
   errors,
   wantToEdit = false,
   register,
@@ -9,7 +10,7 @@ export const UsernameEmailForm = ({
 }) => {
   return (
     <>
-      <h5 className="mb-3">Account information</h5>
+      {showHeading && <h5 className="mb-3">Account information</h5>}
 
       {/* Username */}
       <Form.Group className="mb-3">

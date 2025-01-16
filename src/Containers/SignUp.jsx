@@ -169,6 +169,7 @@ export const SignupTwo = () => {
         wantToEdit={wantToEdit}
         register={register}
         watch={watch}
+        showHeading={false}
       />
       <ActionButton
         prevStep={prevStep}
@@ -217,6 +218,7 @@ export const SignupTwo = () => {
             </ul>
           </Alert>
         )}
+        <h2 className="text-center mb-1">Sign up</h2>
 
         <div className="mt-4">{steps[currentStep - 1]}</div>
 
