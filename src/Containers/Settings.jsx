@@ -1,12 +1,22 @@
-import { useEffect, useState } from "react";
-import { Form, Card, Button, Container, Tab, Tabs } from "react-bootstrap";
+import { useEffect, useState, useMemo } from "react";
+import {
+  Form,
+  Card,
+  Button,
+  Container,
+  Tab,
+  Tabs,
+  Alert,
+} from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 
 import {
   CareerInformationForm,
+  LanguageForm,
   PersonalInfoForm,
   SecurityForm,
+  SpinnerTwo,
   ThemeToggler,
   UsernameEmailForm,
 } from "Components";
@@ -14,9 +24,8 @@ import { useTheme } from "Theme";
 
 export const Settings = () => {
   const { toggleTheme } = useTheme();
-  const { data } = useSelector(({ userInfo }) => userInfo);
+  const { data, loading, error } = useSelector(({ userInfo }) => userInfo);
 
-  const [wantToEdit, setWantToEdit] = useState(false);
   const [activeTab, setActiveTab] = useState("account");
 
   const {
@@ -28,23 +37,93 @@ export const Settings = () => {
   } = useForm();
 
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "auto",
-    });
+    window.scrollTo({ top: 0, behavior: "auto" });
   }, []);
 
   // Prefill form values from Redux data
   useEffect(() => {
     if (data) {
-      Object.keys(data).forEach((key) => {
-        setValue(key, data[key]);
+      Object.entries(data).forEach(([key, value]) => {
+        setValue(key, value);
       });
     }
   }, [data, setValue]);
 
-  const onSubmit = () => {
-    console.log("Form submitted");
+  const onSubmit = (formData) => {
+    console.log("Form submitted", formData);
+  };
+
+  // Tabs configuration
+  const tabs = useMemo(
+    () => [
+      {
+        eventKey: "account",
+        title: "Account",
+        component: (
+          <UsernameEmailForm
+            errors={errors}
+            wantToEdit={false}
+            register={register}
+            showNewPassword={false}
+          />
+        ),
+      },
+      {
+        eventKey: "personal",
+        title: "Personal",
+        component: (
+          <PersonalInfoForm
+            errors={errors}
+            wantToEdit={true}
+            register={register}
+          />
+        ),
+      },
+      {
+        eventKey: "career",
+        title: "Career",
+        component: (
+          <CareerInformationForm
+            errors={errors}
+            wantToEdit={true}
+            register={register}
+            watch={watch}
+          />
+        ),
+      },
+      {
+        eventKey: "security",
+        title: "Security",
+        component: <SecurityForm register={register} />,
+      },
+      {
+        eventKey: "theme",
+        title: "Language",
+        component: (
+          <>
+            <h5 className="mb-3">Select Theme</h5>
+            <ThemeToggler
+              labelLeft="Light"
+              labelRight="Dark"
+              onChange={toggleTheme}
+            />
+            <hr />
+            <LanguageForm
+              errors={errors}
+              wantToEdit={true}
+              register={register}
+            />
+          </>
+        ),
+      },
+    ],
+    [errors, register, toggleTheme, watch]
+  );
+
+  const renderComponent = (component) => {
+    if (loading) return <SpinnerTwo />;
+    if (error) return <Alert variant="danger">{error}</Alert>;
+    return <Card className="p-4 m-2">{component}</Card>;
   };
 
   return (
@@ -53,76 +132,22 @@ export const Settings = () => {
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Tabs
           activeKey={activeTab}
-          onSelect={setActiveTab}
+          onSelect={(k) => setActiveTab(k)}
           className="mb-3"
           justify
         >
-          {/* Account Tab */}
-          <Tab eventKey="account" title="Account">
-            <Card className="p-4 m-2">
-              <UsernameEmailForm
-                errors={errors}
-                wantToEdit={false}
-                register={register}
-                showNewPassword={false}
-              />
-            </Card>
-          </Tab>
-
-          {/* Personal Tab */}
-          <Tab eventKey="personal" title="Personal">
-            <Card className="p-4 m-2">
-              <PersonalInfoForm
-                errors={errors}
-                wantToEdit={wantToEdit}
-                register={register}
-              />
-            </Card>
-          </Tab>
-
-          {/* Career Tab */}
-          <Tab eventKey="career" title="Career">
-            <Card className="p-4 m-2">
-              <CareerInformationForm
-                errors={errors}
-                wantToEdit={wantToEdit}
-                register={register}
-                watch={watch}
-              />
-            </Card>
-          </Tab>
-
-          {/* Security Tab */}
-          <Tab eventKey="security" title="Security">
-            <SecurityForm register={register} />
-          </Tab>
-
-          {/* Theme Tab */}
-          <Tab eventKey="theme" title="Theme">
-            <Card className="p-4 m-2">
-              <h5 className="mb-3">Select Theme</h5>
-              <ThemeToggler
-                labelLeft="Light"
-                labelRight="Dark"
-                onChange={toggleTheme}
-              />
-            </Card>
-          </Tab>
+          {tabs.map(({ eventKey, title, component }) => (
+            <Tab eventKey={eventKey} title={title} key={eventKey}>
+              {renderComponent(component)}
+            </Tab>
+          ))}
         </Tabs>
-
-        {/* Action Buttons */}
         <div className="text-end">
-          <Button
-            variant="success"
-            onClick={() => setWantToEdit(true)}
-            disabled={wantToEdit}
-            className="me-2"
-          >
-            Edit Details
-          </Button>
-          <Button variant="primary" type="submit" disabled={!wantToEdit}>
-            Save
-          </Button>
+          {activeTab !== "account" && (
+            <Button variant="primary" type="submit">
+              Save
+            </Button>
+          )}
         </div>
       </Form>
     </Container>

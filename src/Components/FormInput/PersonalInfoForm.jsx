@@ -3,7 +3,7 @@ import { Form } from "react-bootstrap";
 export const PersonalInfoForm = ({
   showHeading = true,
   errors,
-  wantToEdit,
+  wantToEdit = false,
   register,
 }) => {
   return (

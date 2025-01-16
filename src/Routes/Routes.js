@@ -44,7 +44,6 @@ export const LoggedInRoutes = [
     isActive: true,
   },
   {
-    to: root,
     path: feeds,
     element: <Feeds />,
     fallBack: <AccessDenied />,
@@ -52,7 +51,6 @@ export const LoggedInRoutes = [
     isActive: true,
   },
   {
-    // to: `user/${data?.username}`,
     path: profile,
     element: <Profile />,
     fallBack: <AccessDenied />,
@@ -60,7 +58,6 @@ export const LoggedInRoutes = [
     isActive: true,
   },
   {
-    to: connections,
     path: connections,
     element: <Connections />,
     fallBack: <AccessDenied />,
@@ -68,7 +65,6 @@ export const LoggedInRoutes = [
     isActive: true,
   },
   {
-    to: notifications,
     path: notifications,
     element: <Notifications />,
     fallBack: showThis ? <AccessDenied /> : <NotFound />,
@@ -76,7 +72,6 @@ export const LoggedInRoutes = [
     isActive: showThis,
   },
   {
-    to: messages,
     path: messages,
     element: <Messages />,
     fallBack: showThis ? <AccessDenied /> : <NotFound />,
@@ -84,7 +79,6 @@ export const LoggedInRoutes = [
     isActive: showThis,
   },
   {
-    to: search,
     path: search,
     element: <Search />,
     fallBack: <AccessDenied />,
@@ -92,7 +86,6 @@ export const LoggedInRoutes = [
     isActive: true,
   },
   {
-    to: filter,
     path: filter,
     element: <Filter />,
     fallBack: <AccessDenied />,
@@ -100,7 +93,6 @@ export const LoggedInRoutes = [
     isActive: true,
   },
   {
-    to: settings,
     path: settings,
     element: <Settings />,
     fallBack: <AccessDenied />,
@@ -133,8 +125,8 @@ export const NotFoundRoutes = [
   },
 ];
 
-export const Routes = () => {
-  return [...LoggedInRoutes, ...LoggedOutRoutes, ...NotFoundRoutes].map(
+export const Routes = () =>
+  [...LoggedInRoutes, ...LoggedOutRoutes, ...NotFoundRoutes].map(
     ({ path, element, fallBack, isActive }) => ({
       path: path,
       element: (
@@ -146,4 +138,3 @@ export const Routes = () => {
       ),
     })
   );
-};

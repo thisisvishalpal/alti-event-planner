@@ -4,3 +4,4 @@ export { CareerInformationForm } from "./CareerInformationForm";
 export { SecurityForm } from "./SecurityForm";
 export { SearchFilterForm } from "./SearchFilterForm";
 export { SearchTypeSelector } from "./SearchTypeSelector";
+export { LanguageForm } from "./LanguageForm";

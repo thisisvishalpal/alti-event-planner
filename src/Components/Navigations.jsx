@@ -18,7 +18,7 @@ export const Navigations = ({ className }) => {
   };
 
   const menuOptions = {
-    to: `user/${username}`,
+    path: `user/${username}`,
     label: "Profile",
     isActive: true,
   };
@@ -32,11 +32,11 @@ export const Navigations = ({ className }) => {
         className={className}
       >
         {[...LoggedInRoutes, menuOptions].map(
-          ({ to, label, isActive }, index) =>
+          ({ path, label, isActive }, index) =>
             label &&
             isActive && (
               <li key={index}>
-                <NavLink to={to} className="nav-link">
+                <NavLink to={path} className="nav-link">
                   {label}
                 </NavLink>
               </li>

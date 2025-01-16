@@ -2,7 +2,7 @@ import { Form } from "react-bootstrap";
 
 export const CareerInformationForm = ({
   errors,
-  wantToEdit,
+  wantToEdit = false,
   register,
   watch,
   showHeading = true,

@@ -23,6 +23,9 @@ export const UsernameEmailForm = ({
             required: "Username is required",
           })}
         />
+        {!wantToEdit && (
+          <Form.Text>Please contact support to update !</Form.Text>
+        )}
         {errors.username && (
           <p className="text-danger">{errors.username.message}</p>
         )}
@@ -43,23 +46,10 @@ export const UsernameEmailForm = ({
             },
           })}
         />
-        {errors.email && <p className="text-danger">{errors.email.message}</p>}
-      </Form.Group>
-
-      {/* Language */}
-      <Form.Group className="mb-3">
-        <Form.Label>Language</Form.Label>
-        <Form.Select
-          disabled={!wantToEdit}
-          {...register("language", { required: "Language is required" })}
-        >
-          <option value="">Select your language</option>
-          <option value="english">English</option>
-          <option value="hindi">Hindi</option>
-        </Form.Select>
-        {errors.language && (
-          <p className="text-danger">{errors.language.message}</p>
+        {!wantToEdit && (
+          <Form.Text>Please contact to support to update !</Form.Text>
         )}
+        {errors.email && <p className="text-danger">{errors.email.message}</p>}
       </Form.Group>
 
       {showNewPassword && (

@@ -41,8 +41,6 @@ export const ProfileTabs = ({ following }) => {
     }
   }, [finalData, setValue]);
 
-  const wantToEdit = false;
-
   const renderComponent = (compo) => {
     if (finalLoading) {
       return <SpinnerTwo />;
@@ -62,11 +60,7 @@ export const ProfileTabs = ({ following }) => {
       title: "Information",
       component: (
         <Card className="p-4 m-2 mb-4">
-          <PersonalInfoForm
-            errors={{}}
-            wantToEdit={wantToEdit}
-            register={register}
-          />
+          <PersonalInfoForm errors={{}} register={register} />
         </Card>
       ),
     },
@@ -77,7 +71,6 @@ export const ProfileTabs = ({ following }) => {
         <Card className="p-4 m-2 mb-2">
           <CareerInformationForm
             errors={{}}
-            wantToEdit={wantToEdit}
             register={register}
             watch={watch}
           />

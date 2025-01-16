@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Form, Button, Col, Row, Alert } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-
+import { IoMdArrowBack } from "react-icons/io";
 import {
   CareerInformationForm,
   SearchFilterForm,
@@ -26,7 +26,7 @@ export const Filter = () => {
       top: 0,
       behavior: "auto",
     });
-  }, []);
+  }, [data]);
 
   const onSubmit = (data) => {
     dispatch(fetchFilter(data));
@@ -45,7 +45,7 @@ export const Filter = () => {
               size="sm"
               onClick={() => dispatch(resetFilter())}
             >
-              Back
+              <IoMdArrowBack /> Back
             </Button>
           )}
         </Col>

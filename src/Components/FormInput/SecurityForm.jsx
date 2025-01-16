@@ -1,8 +1,8 @@
-import { Form, Card, Row, Col, Button } from "react-bootstrap";
+import { Form, Row, Col, Button } from "react-bootstrap";
 
 export const SecurityForm = ({ register, errors }) => {
   return (
-    <Card className="p-4 m-2">
+    <>
       <h5 className="mb-3">Security</h5>
 
       {/* Update Password */}
@@ -59,6 +59,6 @@ export const SecurityForm = ({ register, errors }) => {
           <Button variant="success">Save Changes</Button>
         </div>
       </Form>
-    </Card>
+    </>
   );
 };
