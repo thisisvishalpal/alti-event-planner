@@ -77,6 +77,7 @@ export const Settings = () => {
             wantToEdit={false}
             register={register}
             showNewPassword={false}
+            showLanguage={false}
           />
         ),
       },

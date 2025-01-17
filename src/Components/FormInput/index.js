@@ -5,3 +5,4 @@ export { SecurityForm } from "./SecurityForm";
 export { SearchFilterForm } from "./SearchFilterForm";
 export { SearchTypeSelector } from "./SearchTypeSelector";
 export { LanguageForm } from "./LanguageForm";
+export { LanguageToggler } from "./LanguageToggler";

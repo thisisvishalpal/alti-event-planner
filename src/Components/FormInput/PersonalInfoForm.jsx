@@ -152,6 +152,20 @@ export const PersonalInfoForm = ({
           <p className="text-danger">{errors.address.message}</p>
         )}
       </Form.Group>
+
+      {/* Bio */}
+      <Form.Group className="mb-3">
+        <Form.Label>Bio</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="Enter your bio"
+          disabled={!wantToEdit}
+          {...register("bio", {
+            required: "Bio is required",
+          })}
+        />
+        {errors.bio && <p className="text-danger">{errors.bio.message}</p>}
+      </Form.Group>
     </>
   );
 };

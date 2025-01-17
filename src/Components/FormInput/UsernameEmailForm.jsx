@@ -1,4 +1,5 @@
 import { Form } from "react-bootstrap";
+import { LanguageForm } from ".";
 
 export const UsernameEmailForm = ({
   showHeading = true,
@@ -7,6 +8,7 @@ export const UsernameEmailForm = ({
   register,
   watch,
   showNewPassword = true,
+  showLanguage = true,
 }) => {
   return (
     <>
@@ -87,6 +89,13 @@ export const UsernameEmailForm = ({
             )}
           </Form.Group>
         </>
+      )}
+      {showLanguage && (
+        <LanguageForm
+          errors={errors}
+          wantToEdit={wantToEdit}
+          register={register}
+        />
       )}
     </>
   );
