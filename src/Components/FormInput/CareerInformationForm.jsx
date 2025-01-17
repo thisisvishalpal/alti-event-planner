@@ -76,6 +76,7 @@ export const CareerInformationForm = ({
             <option value="100000to200000">1 Lac to 2 Lac</option>
             <option value="200000to500000">2 Lac to 5 Lac</option>
           </Form.Select>
+          <Form.Text>Monthly income</Form.Text>
           {errors.salary && (
             <p className="text-danger">{errors.salary.message}</p>
           )}

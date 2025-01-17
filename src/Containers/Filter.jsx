@@ -37,6 +37,9 @@ export const Filter = () => {
       <Row className="mb-3 justify-content-between">
         <Col xs="auto">
           <h3>Filter</h3>
+          <small className="text-muted">
+            This filter will only give unmarried user
+          </small>
         </Col>
         <Col xs="auto">
           {!!data.length && (
