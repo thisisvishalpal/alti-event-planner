@@ -12,17 +12,7 @@ export const SearchResults = ({ data, loading }) => {
     );
   }
 
-  // if (!data?.length) {
-  //   return <div className="text-center my-3">No users found.</div>;
-  // }
-
-  return (
-    <>
-      {data.map((user) => (
-        <UserRow key={user._id} user={user} />
-      ))}
-    </>
-  );
+  return data.map((user) => <UserRow key={user._id} user={user} />);
 };
 
 SearchResults.propTypes = {

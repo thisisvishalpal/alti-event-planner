@@ -15,7 +15,7 @@ export const Filter = () => {
     register,
     handleSubmit,
     watch,
-    formState: { errors },
+    formState: { errors, dirtyFields },
   } = useForm();
 
   const dispatch = useDispatch();
@@ -28,8 +28,16 @@ export const Filter = () => {
     });
   }, [data]);
 
-  const onSubmit = (data) => {
-    dispatch(fetchFilter(data));
+  const onSubmit = (formValues) => {
+    if (Object.keys(dirtyFields).length > 0) {
+      const updatedValues = Object.keys(dirtyFields).reduce((acc, key) => {
+        if (key in formValues) {
+          acc[key] = formValues[key];
+        }
+        return acc;
+      }, {});
+      dispatch(fetchFilter({ married: "no", ...updatedValues }));
+    }
   };
 
   return (

@@ -2,7 +2,7 @@ import { Card, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { shape, string } from "prop-types";
 
-export const UserRow = ({ user }) => {
+export const UserRowTwo = ({ user }) => {
   return (
     <Link to={`/user/${user?.username}`} className="text-decoration-none">
       <Card key={user.id} className="suggestion-item">
@@ -19,7 +19,7 @@ export const UserRow = ({ user }) => {
   );
 };
 
-export const UserRowTwo = ({ user }) => {
+export const UserRow = ({ user }) => {
   return (
     <Link to={`/user/${user?.username}`} className="text-decoration-none">
       <Card className="suggestion-item">
@@ -30,7 +30,7 @@ export const UserRowTwo = ({ user }) => {
             className="profile-picture"
             roundedCircle
           />
-          <div className="ms-3">
+          <div className="ms-4">
             <span className="fw-bold">{user?.fullName || "Unknown User"}</span>
             <br />
             <span className="text-secondary">
