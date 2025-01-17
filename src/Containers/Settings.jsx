@@ -107,7 +107,7 @@ export const Settings = () => {
       {
         eventKey: "security",
         title: "Security",
-        component: <SecurityForm register={register} />,
+        component: <SecurityForm />,
       },
       {
         eventKey: "theme",
@@ -156,15 +156,16 @@ export const Settings = () => {
           ))}
         </Tabs>
         <div className="text-end">
-          <Button
-            variant="primary"
-            type="submit"
-            disabled={
-              activeTab === "account" || Object.keys(dirtyFields).length === 0
-            }
-          >
-            Save
-          </Button>
+          {activeTab !== "security" && activeTab !== "account" && (
+            <Button
+              className="m-2"
+              variant="primary"
+              type="submit"
+              disabled={Object.keys(dirtyFields).length === 0}
+            >
+              Save
+            </Button>
+          )}
         </div>
       </Form>
     </Container>

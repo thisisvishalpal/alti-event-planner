@@ -1,39 +1,44 @@
-import { Form, Row, Col, Button } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
+import { useForm } from "react-hook-form";
 
-export const SecurityForm = ({ register, errors }) => {
+import { ConfirmPassword } from "./ConfirmPasswordForm";
+
+export const SecurityForm = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({ mode: "onChange" });
+
+  const changePassword = () => {};
+
   return (
     <>
       <h5 className="mb-3">Security</h5>
 
       {/* Update Password */}
-      <Form>
+      <Form onSubmit={handleSubmit(changePassword)}>
         <Form.Group className="mb-3">
-          <Form.Label>Password</Form.Label>
+          <Form.Label>Old Password</Form.Label>
           <Form.Control
             type="password"
             placeholder="Enter your password"
-            {...register("password")}
+            {...register("oldPassword", {
+              required: "Password is required",
+              minLength: {
+                value: 6,
+                message: "Password must be at least 6 characters long",
+              },
+            })}
           />
+          {errors.oldPassword && (
+            <p className="text-danger">{errors.oldPassword.message}</p>
+          )}
         </Form.Group>
-        <h6>Update Password</h6>
-        <Row className="mb-3">
-          <Col md={6}>
-            <Form.Group controlId="currentPassword">
-              <Form.Label>Current Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Enter current password"
-              />
-            </Form.Group>
-          </Col>
-          <Col md={6}>
-            <Form.Group controlId="newPassword">
-              <Form.Label>New Password</Form.Label>
-              <Form.Control type="password" placeholder="Enter new password" />
-            </Form.Group>
-          </Col>
-        </Row>
-
+        <ConfirmPassword register={register} watch={watch} errors={errors} />
+      </Form>
+      <Form>
         {/* Notification Preferences */}
         <h6>Notification Preferences</h6>
         <Form.Group className="mb-3" controlId="emailNotifications">
@@ -41,22 +46,31 @@ export const SecurityForm = ({ register, errors }) => {
             type="switch"
             label="Receive email notifications"
             defaultChecked
+            disabled
           />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="smsNotifications">
-          <Form.Check type="switch" label="Receive SMS notifications" />
+          <Form.Check
+            type="switch"
+            disabled
+            label="Receive SMS notifications"
+          />
         </Form.Group>
 
         {/* Privacy Settings */}
         <h6>Privacy Settings</h6>
         <Form.Group className="mb-3" controlId="privacySettings">
-          <Form.Check type="checkbox" label="Make my profile private" />
+          <Form.Check
+            disabled
+            type="checkbox"
+            label="Make my profile private"
+          />
         </Form.Group>
 
         {/* Save Settings Button */}
         <div className="text-end">
-          <Button variant="success">Save Changes</Button>
+          <Button variant="primary">Save Changes</Button>
         </div>
       </Form>
     </>

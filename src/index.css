@@ -232,50 +232,6 @@ button:hover {
   }
 }
 
-/* event card */
-
-/* Card Style */
-.event-card {
-  border-radius: 15px;
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.event-card:hover {
-  transform: translateY(-10px); /* Lift effect */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-/* Event Image */
-.event-image {
-  height: 200px;
-  object-fit: cover;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
-}
-
-/* Event Description */
-.event-card .card-text {
-  font-size: 0.9rem;
-  line-height: 1.4;
-  height: 80px; /* Fixed height for description */
-  overflow: hidden;
-}
-
-/* Button Styling */
-.event-card .btn {
-  background-color: #007bff;
-  border-color: #007bff;
-  font-size: 1rem;
-  padding: 10px;
-  transition: background-color 0.3s ease;
-}
-
-.event-card .btn:hover {
-  background-color: #0056b3;
-  border-color: #0056b3;
-}
-
 /* theme switch  */
 
 .switch-container {

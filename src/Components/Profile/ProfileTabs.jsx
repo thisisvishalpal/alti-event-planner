@@ -68,7 +68,7 @@ export const ProfileTabs = ({ following }) => {
       eventKey: "career",
       title: "Career",
       component: (
-        <Card className="p-4 m-2 mb-2">
+        <Card className="p-4 m-2">
           <CareerInformationForm
             errors={{}}
             register={register}
