@@ -30,6 +30,5 @@ export {
   LanguageForm,
   LanguageToggler,
 } from "./FormInput";
-export { SearchResults } from "./Search";
 export { PostContent, PostHeader, PostModal, LikeCommentShare } from "./Post";
 export { ShowMessage } from "./Generic";

@@ -6,7 +6,8 @@ import { IoMdArrowBack } from "react-icons/io";
 import {
   CareerInformationForm,
   SearchFilterForm,
-  SearchResults,
+  SpinnerTwo,
+  UserRow,
 } from "Components";
 import { fetchFilter, resetFilter } from "Slices";
 
@@ -92,8 +93,8 @@ export const Filter = () => {
           </div>
         </Form>
       )}
-
-      {data && <SearchResults data={data} loading={loading} />}
+      {loading && <SpinnerTwo />}
+      {data && data?.map((user) => <UserRow key={user._id} user={user} />)}
     </div>
   );
 };

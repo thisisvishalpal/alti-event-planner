@@ -4,7 +4,7 @@ import { Alert } from "react-bootstrap";
 import { useDebounce } from "use-debounce";
 
 import "./Search.css";
-import { SearchBar, SearchResults } from "Components";
+import { SearchBar, SpinnerTwo, UserRow } from "Components";
 import { fetchSearch } from "Slices";
 
 export const Search = () => {
@@ -40,12 +40,16 @@ export const Search = () => {
           {error}
         </Alert>
       )}
+
+      {loading && <SpinnerTwo />}
+
       {!data.length && !loading && query && (
         <Alert key="searchWarning" className="mt-3" variant="warning">
           No results found. Try searching for different keywords!
         </Alert>
       )}
-      <SearchResults data={data} loading={loading} />
+
+      {data && data.map((user) => <UserRow key={user._id} user={user} />)}
     </div>
   );
 };
