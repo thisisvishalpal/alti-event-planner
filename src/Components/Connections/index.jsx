@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Tab, Tabs, Container } from "react-bootstrap";
 
-import { UserRow } from "Components";
+import { ShowMessage, UserRow } from "Components";
 
 export const ConnectionTabs = ({ state, followers = [], following = [] }) => {
   const [activeTab, setActiveTab] = useState(state || "followers");
@@ -11,7 +11,12 @@ export const ConnectionTabs = ({ state, followers = [], following = [] }) => {
   // Render tab content based on user data
   const renderTabContent = (users) => {
     if (!users.length) {
-      return <p className="text-muted text-center">No users found.</p>;
+      return (
+        <ShowMessage
+          heading="No users found."
+          secondary="Try connecting with new users."
+        />
+      );
     }
     return users?.map((user) => <UserRow key={user._id} user={user} />);
   };

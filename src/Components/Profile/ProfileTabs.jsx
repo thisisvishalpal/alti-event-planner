@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 
 import { useProfile } from "Hooks";
 import {
-  AreYouFollowing,
+  ShowMessage,
   CareerInformationForm,
   PersonalInfoForm,
   SpinnerTwo,
@@ -46,7 +46,14 @@ export const ProfileTabs = ({ following }) => {
       return <SpinnerTwo />;
     }
 
-    return following || isAccessingSelfProfile ? compo : <AreYouFollowing />;
+    return following || isAccessingSelfProfile ? (
+      compo
+    ) : (
+      <ShowMessage
+        heading="You need to follow this user"
+        secondary="Follow them to see their posts and information."
+      />
+    );
   };
 
   const tabs = [

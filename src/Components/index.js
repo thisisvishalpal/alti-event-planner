@@ -3,7 +3,6 @@ export {
   UserPosts,
   ActionButton,
   ProfileUsername,
-  AreYouFollowing,
   ProfileTabs,
 } from "./Profile";
 export { UploadSection, FeedSection } from "./Feeds";
@@ -33,3 +32,4 @@ export {
 } from "./FormInput";
 export { SearchResults } from "./Search";
 export { PostContent, PostHeader, PostModal, LikeCommentShare } from "./Post";
+export { ShowMessage } from "./Generic";
