@@ -10,7 +10,11 @@ import {
   ProfileUsername,
   SpinnerTwo,
 } from "Components";
-import { fetchOtherProfile, mutateFollowThem } from "Slices";
+import {
+  fetchOtherProfile,
+  mutateFollowThem,
+  mutateUnFollowThem,
+} from "Slices";
 
 export const Profile = () => {
   const dispatch = useDispatch();
@@ -29,6 +33,8 @@ export const Profile = () => {
     loading: otherProfileLoading,
   } = useSelector(({ otherProfile }) => otherProfile, shallowEqual);
 
+  const youFollowThem = otherProfileData.email ? true : false;
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
   }, []);
@@ -40,14 +46,14 @@ export const Profile = () => {
   }, [usernameParam, dispatch, isAccessingSelfProfile]);
 
   const handleFollowThem = () => {
-    dispatch(mutateFollowThem({ userIdToFollow: otherProfileData._id }));
+    youFollowThem
+      ? dispatch(mutateUnFollowThem({ userIdToUnfollow: otherProfileData._id }))
+      : dispatch(mutateFollowThem({ userIdToFollow: otherProfileData._id }));
   };
 
   const finalData = isAccessingSelfProfile ? userInfoData : otherProfileData;
   const isLoading = userInfoLoading || otherProfileLoading;
   const isError = userInfoError || otherProfileError;
-
-  const youFollowThem = otherProfileData.email ? true : false;
 
   return (
     <Container>

@@ -69,6 +69,25 @@ export const mutateFollowThem = createAsyncThunk(
   }
 );
 
+export const mutateUnFollowThem = createAsyncThunk(
+  "otherUser/unFollowThem",
+  async (prop, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.post(apiRoutes.unFollow, prop);
+      return response.data.data.userToUnfollow;
+    } catch (error) {
+      console.log(error);
+      if (error.response) {
+        return rejectWithValue(error.response.data.error);
+      } else if (error.request) {
+        return rejectWithValue("No response from the server");
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
 const otherProfileSlice = createSlice({
   name: "otherProfile",
   initialState,
@@ -96,6 +115,18 @@ const otherProfileSlice = createSlice({
         state.data = action.payload;
       })
       .addCase(mutateFollowThem.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(mutateUnFollowThem.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(mutateUnFollowThem.fulfilled, (state, action) => {
+        state.loading = false;
+        state.data = action.payload;
+      })
+      .addCase(mutateUnFollowThem.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

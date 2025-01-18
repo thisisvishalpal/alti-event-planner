@@ -164,6 +164,7 @@ export const PersonalInfoForm = ({
             required: "Bio is required",
           })}
         />
+        <Form.Text>Bio will always public</Form.Text>
         {errors.bio && <p className="text-danger">{errors.bio.message}</p>}
       </Form.Group>
     </>

@@ -13,24 +13,28 @@ export const ActionButton = ({ following, toggleFollowing }) => {
         onClick={() => navigate("/settings")}
         className="me-2"
       >
-        Edit Profile
+        Edit profile
       </Button>
       <Button variant="outline-secondary" onClick={() => {}}>
-        View info
+        Share profile
       </Button>
     </div>
   ) : (
     <div className="text-end">
       <Button
         variant="primary"
-        disabled={following}
+        // disabled={following}
         onClick={toggleFollowing}
         className="me-2"
       >
-        {following ? "Following" : "Follow"}
+        {following ? "Unfollow" : "Follow"}
       </Button>
-      <Button variant="outline-secondary" onClick={() => {}}>
-        View info
+      <Button
+        disabled={!following}
+        variant="outline-secondary"
+        onClick={() => {}}
+      >
+        Message
       </Button>
     </div>
   );

@@ -7,6 +7,7 @@ import userNotifications, {
 import otherProfile, {
   fetchOtherProfile,
   mutateFollowThem,
+  mutateUnFollowThem,
 } from "./otherProfile.slice";
 import userConnections, { fetchUserConnections } from "./connections.slice";
 import userSearch, { resetSearch, fetchSearch } from "./search.slice";
@@ -26,6 +27,7 @@ export {
   fetchUserNotifications,
   otherProfile,
   mutateFollowThem,
+  mutateUnFollowThem,
   fetchOtherProfile,
   userConnections,
   fetchUserConnections,
