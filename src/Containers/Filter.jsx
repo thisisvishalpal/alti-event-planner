@@ -40,25 +40,22 @@ export const Filter = () => {
 
   return (
     <div className="user-search">
-      <Row className="mb-3 justify-content-between">
-        <Col xs="auto">
-          <h3>Filter</h3>
-          <small className="text-muted">
-            This filter will only give unmarried user
-          </small>
-        </Col>
-        <Col xs="auto">
-          {!!data.length && (
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={() => dispatch(resetFilter())}
-            >
-              <IoMdArrowBack /> Back
-            </Button>
-          )}
-        </Col>
-      </Row>
+      <div className="d-flex justify-content-between">
+        <h3>Filter</h3>
+        {!!data.length && (
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() => dispatch(resetFilter())}
+          >
+            <IoMdArrowBack /> Back
+          </Button>
+        )}
+      </div>
+
+      <small className="text-muted">
+        This filter will only give unmarried user
+      </small>
 
       {error && (
         <Alert key="danger" variant="danger">

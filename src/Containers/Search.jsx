@@ -4,8 +4,8 @@ import { Alert } from "react-bootstrap";
 import { useDebounce } from "use-debounce";
 
 import "./Search.css";
-import { SearchBar, SpinnerTwo, UserRow } from "Components";
-import { fetchSearch } from "Slices";
+import { SearchBar, ShowMessage, SpinnerTwo, UserRow } from "Components";
+import { fetchSearch, resetSearch } from "Slices";
 
 export const Search = () => {
   const dispatch = useDispatch();
@@ -14,15 +14,14 @@ export const Search = () => {
   const [debouncedQuery] = useDebounce(query, 300);
 
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "auto",
-    });
+    window.scrollTo({ top: 0, behavior: "auto" });
   }, []);
 
   useEffect(() => {
     if (debouncedQuery.trim()) {
       dispatch(fetchSearch({ query: debouncedQuery }));
+    } else {
+      dispatch(resetSearch());
     }
   }, [debouncedQuery, dispatch]);
 
@@ -36,18 +35,15 @@ export const Search = () => {
         aria-label="Search users"
       />
       {error && (
-        <Alert key="searchError" className="mt-3" variant="danger">
+        <Alert key="searchError" className="mt-3" variant="warning">
           {error}
         </Alert>
       )}
+      {!query && (
+        <ShowMessage heading="Try search user with name or username" />
+      )}
 
       {loading && <SpinnerTwo />}
-
-      {!data.length && !loading && query && (
-        <Alert key="searchWarning" className="mt-3" variant="warning">
-          No results found. Try searching for different keywords!
-        </Alert>
-      )}
 
       {data && data.map((user) => <UserRow key={user._id} user={user} />)}
     </div>

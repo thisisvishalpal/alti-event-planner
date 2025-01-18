@@ -21,7 +21,7 @@ export const fetchSearch = createAsyncThunk(
         dispatch(logout());
       }
       if (error.response) {
-        return rejectWithValue(error.response.data.message);
+        return rejectWithValue(error.response.data);
       } else if (error.request) {
         return rejectWithValue("No response from the server");
       } else {
@@ -53,7 +53,8 @@ const searchSlice = createSlice({
       })
       .addCase(fetchSearch.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload;
+        state.error = action.payload.message;
+        state.data = action.payload.data;
       });
   },
 });
