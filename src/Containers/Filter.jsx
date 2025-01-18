@@ -23,10 +23,7 @@ export const Filter = () => {
   const { data, loading, error } = useSelector(({ userFilter }) => userFilter);
 
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "auto",
-    });
+    window.scrollTo({ top: 0, behavior: "auto" });
   }, [data]);
 
   const onSubmit = (formValues) => {
