@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { ListGroup, Badge, Spinner, Alert } from "react-bootstrap";
 
 import "./Notifications.css"; // Add styles if needed
@@ -13,10 +14,7 @@ export const Notifications = () => {
   const { data, error, loading } = notificationsStore;
 
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "auto",
-    });
+    window.scrollTo({ top: 0, behavior: "auto" });
   }, []);
 
   useEffect(() => {
@@ -38,7 +36,7 @@ export const Notifications = () => {
 
       {error && (
         <Alert variant="danger" className="error-message">
-          Failed to load notifications. Please try again later.
+          {error}
         </Alert>
       )}
 
@@ -51,38 +49,31 @@ export const Notifications = () => {
       {!loading && !error && data?.length > 0 && (
         <ListGroup>
           {data.map((notification) => (
-            <ListGroup.Item
-              key={notification.id}
-              className={`notification-item ${
-                notification.isRead ? "read" : "unread"
-              }`}
-            >
-              <div className="notification-content">
-                <span className="notification-type">
-                  <Badge bg={notification.isRead ? "secondary" : "primary"}>
-                    {notification.type}
-                  </Badge>
-                </span>
-                <span className="notification-text">
-                  {notification.content}
-                </span>
-              </div>
-              <div className="notification-timestamp">
-                {new Date(notification.timestamp).toLocaleString()}
-              </div>
-            </ListGroup.Item>
+            <Link to={notification.link}>
+              <ListGroup.Item
+                key={notification.id}
+                className={`notification-item ${
+                  notification.isRead ? "read" : "unread"
+                }`}
+              >
+                <div className="notification-content">
+                  <span className="notification-type">
+                    <Badge bg={notification.isRead ? "secondary" : "primary"}>
+                      {notification.type}
+                    </Badge>
+                  </span>
+                  <span className="notification-text">
+                    {notification.message}
+                  </span>
+                </div>
+                <div className="notification-timestamp">
+                  {new Date(notification.createdAt).toLocaleString()}
+                </div>
+              </ListGroup.Item>
+            </Link>
           ))}
         </ListGroup>
       )}
     </div>
   );
 };
-
-// onClick={() => markAsRead(notification.id)}
-// const markAsRead = (id) => {
-//   setNotifications((prev) =>
-//     prev?.map((notif) =>
-//       notif.id === id ? { ...notif, isRead: true } : notif
-//     )
-//   );
-// };

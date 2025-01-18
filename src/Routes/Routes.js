@@ -67,9 +67,9 @@ export const LoggedInRoutes = [
   {
     path: notifications,
     element: <Notifications />,
-    fallBack: showThis ? <AccessDenied /> : <NotFound />,
+    fallBack: <AccessDenied />,
     label: "Notifications",
-    isActive: showThis,
+    isActive: true,
   },
   {
     path: messages,

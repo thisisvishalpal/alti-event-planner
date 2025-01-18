@@ -10,11 +10,8 @@ const initialState = {
 // Async Thunk to fetch initial state
 export const fetchUserNotifications = createAsyncThunk(
   "userNotifications/fetchUserNotifications",
-  async (params) => {
-    const response = await axiosInstance.get(apiRoutes.userNotifications, {
-      params: { username: params },
-    });
-
+  async (_, { rejectWithValue }) => {
+    const response = await axiosInstance.get(apiRoutes.userNotifications);
     return response?.data?.data;
   }
 );

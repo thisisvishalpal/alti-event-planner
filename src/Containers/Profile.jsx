@@ -63,8 +63,8 @@ export const Profile = () => {
   return (
     <Container>
       {isError && (
-        <Alert variant="danger" className="text-center">
-          An error occurred while loading the Profile. Please try again.
+        <Alert variant="danger" className=" mt-3 text-center">
+          {isError}
         </Alert>
       )}
       {isLoading && <SpinnerTwo />}

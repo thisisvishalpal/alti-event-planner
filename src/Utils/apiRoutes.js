@@ -2,7 +2,7 @@ export const apiRoutes = {
   userInfo: "/user/info",
   userUpdate: "/user/info-update",
   userFeeds: "/user/feeds",
-  userNotifications: "/user/notifications",
+  userNotifications: "/notification/getall",
   userConnections: "/user/connections",
   userSignIn: "/auth/signin",
   userSignUp: "/auth/signup",
