@@ -13,7 +13,8 @@ import {
 import {
   fetchOtherProfile,
   mutateFollowThem,
-  mutateUnFollowThem,
+  mutateRemoveFollower,
+  mutateUnfollowThem,
 } from "Slices";
 
 export const Profile = () => {
@@ -47,8 +48,12 @@ export const Profile = () => {
 
   const handleFollowThem = () => {
     youFollowThem
-      ? dispatch(mutateUnFollowThem({ userIdToUnfollow: otherProfileData._id }))
+      ? dispatch(mutateUnfollowThem({ userIdToUnfollow: otherProfileData._id }))
       : dispatch(mutateFollowThem({ userIdToFollow: otherProfileData._id }));
+  };
+
+  const removeFollower = () => {
+    dispatch(mutateRemoveFollower({ followerId: otherProfileData._id }));
   };
 
   const finalData = isAccessingSelfProfile ? userInfoData : otherProfileData;
@@ -70,10 +75,16 @@ export const Profile = () => {
             className="shadow-sm p-3 m-2 mt-3"
             style={{ minHeight: "25vh" }}
           >
-            <ProfileUsername user={finalData} />
+            <ProfileUsername
+              following={youFollowThem}
+              followsYou={otherProfileData.followsYou}
+              user={finalData}
+            />
             <ActionButton
               following={youFollowThem}
+              followsYou={otherProfileData.followsYou}
               toggleFollowing={handleFollowThem}
+              handleRemoveFollower={removeFollower}
             />
           </Card>
 

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import { urls } from "Utils";
 
-export const ProfileUsername = ({ user }) => {
+export const ProfileUsername = ({ user, followsYou, youFollowThem }) => {
   const {
     profilePicture,
     fullName,
@@ -65,6 +65,9 @@ export const ProfileUsername = ({ user }) => {
                 </Link>
               </Col>
             </Row>
+          )}
+          {!youFollowThem && followsYou && (
+            <p>{`${fullName} is following you`}</p>
           )}
         </Card.Body>
       </Col>

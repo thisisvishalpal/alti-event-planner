@@ -69,14 +69,33 @@ export const mutateFollowThem = createAsyncThunk(
   }
 );
 
-export const mutateUnFollowThem = createAsyncThunk(
+export const mutateUnfollowThem = createAsyncThunk(
   "otherUser/unFollowThem",
   async (prop, { rejectWithValue }) => {
     try {
-      const response = await axiosInstance.post(apiRoutes.unFollow, prop);
+      const response = await axiosInstance.post(apiRoutes.unfollow, prop);
       return response.data.data.userToUnfollow;
     } catch (error) {
       console.log(error);
+      if (error.response) {
+        return rejectWithValue(error.response.data.error);
+      } else if (error.request) {
+        return rejectWithValue("No response from the server");
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
+export const mutateRemoveFollower = createAsyncThunk(
+  "otherUser/removeFollower",
+  async (prop, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.post(apiRoutes.removeFollower, prop);
+      console.log(response.data, "from slice");
+      return response.data.data;
+    } catch (error) {
       if (error.response) {
         return rejectWithValue(error.response.data.error);
       } else if (error.request) {
@@ -118,15 +137,27 @@ const otherProfileSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-      .addCase(mutateUnFollowThem.pending, (state) => {
+      .addCase(mutateUnfollowThem.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(mutateUnFollowThem.fulfilled, (state, action) => {
+      .addCase(mutateUnfollowThem.fulfilled, (state, action) => {
         state.loading = false;
         state.data = action.payload;
       })
-      .addCase(mutateUnFollowThem.rejected, (state, action) => {
+      .addCase(mutateUnfollowThem.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(mutateRemoveFollower.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(mutateRemoveFollower.fulfilled, (state, action) => {
+        state.loading = false;
+        state.data = action.payload;
+      })
+      .addCase(mutateRemoveFollower.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

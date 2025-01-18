@@ -10,7 +10,8 @@ export const apiRoutes = {
   authCheck: "/auth/auth-check",
   userSearch: "/search/person",
   follow: "/connection/follow",
-  unFollow: "/connection/unfollow",
+  unfollow: "/connection/unfollow",
+  removeFollower: "/connection/removeFollower",
   testCookies: "/test-cookies",
   uploadPhotos: "/user/upload-post",
 };

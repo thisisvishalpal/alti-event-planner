@@ -2,11 +2,16 @@ import { useProfile } from "Hooks";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-export const ActionButton = ({ following, toggleFollowing }) => {
+export const ActionButton = ({
+  followsYou,
+  following,
+  toggleFollowing,
+  handleRemoveFollower,
+}) => {
   const navigate = useNavigate();
   const { isAccessingSelfProfile } = useProfile();
 
-  return isAccessingSelfProfile ? (
+  const renderSelfProfileActions = () => (
     <div className="text-end">
       <Button
         variant="primary"
@@ -19,23 +24,30 @@ export const ActionButton = ({ following, toggleFollowing }) => {
         Share profile
       </Button>
     </div>
-  ) : (
+  );
+
+  const renderOtherProfileActions = () => (
     <div className="text-end">
-      <Button
-        variant="primary"
-        // disabled={following}
-        onClick={toggleFollowing}
-        className="me-2"
-      >
-        {following ? "Unfollow" : "Follow"}
+      <Button variant="primary" onClick={toggleFollowing} className="me-2">
+        {following ? "Unfollow" : followsYou ? "Follow back" : "Follow"}
       </Button>
-      <Button
-        disabled={!following}
-        variant="outline-secondary"
-        onClick={() => {}}
-      >
-        Message
-      </Button>
+      {following ? (
+        <Button variant="outline-secondary" onClick={() => {}}>
+          Message
+        </Button>
+      ) : followsYou ? (
+        <Button variant="outline-secondary" onClick={handleRemoveFollower}>
+          Remove follower
+        </Button>
+      ) : (
+        <Button variant="outline-secondary" onClick={() => {}}>
+          Block
+        </Button>
+      )}
     </div>
   );
+
+  return isAccessingSelfProfile
+    ? renderSelfProfileActions()
+    : renderOtherProfileActions();
 };
