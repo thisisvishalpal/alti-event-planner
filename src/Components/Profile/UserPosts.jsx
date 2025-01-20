@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Container } from "react-bootstrap";
 
 import "./PostGrid.css";
 import { PostModal } from "Components";
 import { NoPosts } from ".";
+import { useDispatch } from "react-redux";
+import { mutateLikeOwnPost, mutateUnlikeOwnPost } from "Slices";
 
 export const UserPosts = ({ posts = [] }) => {
+  const dispatch = useDispatch();
   const [selectedPost, setSelectedPost] = useState(null);
 
   const handlePostClick = (post) => {
@@ -15,6 +18,16 @@ export const UserPosts = ({ posts = [] }) => {
   const handleCloseModal = () => {
     setSelectedPost(null);
   };
+
+  const handleLike = useCallback(
+    (post) => dispatch(mutateLikeOwnPost({ postId: post._id })),
+    [dispatch]
+  );
+
+  const handleUnlike = useCallback(
+    (post) => dispatch(mutateUnlikeOwnPost({ postId: post._id })),
+    [dispatch]
+  );
 
   return (
     <Container>
@@ -43,7 +56,12 @@ export const UserPosts = ({ posts = [] }) => {
       )}
 
       {selectedPost && (
-        <PostModal handleCloseModal={handleCloseModal} {...selectedPost} />
+        <PostModal
+          handleCloseModal={handleCloseModal}
+          handleLike={handleLike}
+          handleUnlike={handleUnlike}
+          post={selectedPost}
+        />
       )}
     </Container>
   );

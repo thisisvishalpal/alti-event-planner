@@ -41,17 +41,12 @@ const NewComments = ({ addComment }) => {
 
 export const PostModal = ({
   handleCloseModal,
-  handleLike = () => {},
-  author,
-  createdAt,
-  image,
-  content,
-  likes,
-  comments,
+  handleLike,
+  post = {},
+  handleNewComment,
+  handleUnlike,
 }) => {
-  const addComment = () => {
-    console.log("comment created");
-  };
+  const { author, createdAt, image, content, comments } = post;
 
   return (
     <div className="modal-overlay" onClick={handleCloseModal}>
@@ -68,12 +63,16 @@ export const PostModal = ({
               modal={true}
               className="mb-2"
             />
-            <LikeCommentShare />
+            <LikeCommentShare
+              handleLike={handleLike}
+              handleUnlike={handleUnlike}
+              post={post}
+            />
           </Col>
           <Col md={3} sm={12}>
             <h5>{content}</h5>
             <AllComments comments={comments} />
-            <NewComments addComment={addComment} />
+            <NewComments addComment={handleNewComment} />
           </Col>
         </Row>
       </div>

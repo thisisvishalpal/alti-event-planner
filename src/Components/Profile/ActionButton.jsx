@@ -1,12 +1,15 @@
-import { useProfile } from "Hooks";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+
+import { useProfile } from "Hooks";
+import { ShareButton } from "Components";
 
 export const ActionButton = ({
   followsYou,
   following,
   toggleFollowing,
   handleRemoveFollower,
+  shareData,
 }) => {
   const navigate = useNavigate();
   const { isAccessingSelfProfile } = useProfile();
@@ -20,9 +23,8 @@ export const ActionButton = ({
       >
         Edit profile
       </Button>
-      <Button variant="outline-secondary" onClick={() => {}}>
-        Share profile
-      </Button>
+
+      <ShareButton {...shareData} />
     </div>
   );
 

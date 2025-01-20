@@ -60,6 +60,12 @@ export const Profile = () => {
   const isLoading = userInfoLoading || otherProfileLoading;
   const isError = userInfoError || otherProfileError;
 
+  const shareData = {
+    title: "Check this out!",
+    text: "I found something interesting to share with you.",
+    url: `https://alti-event-planner.vercel.app/${usernameParam}`,
+  };
+
   return (
     <Container>
       {isError && (
@@ -85,6 +91,7 @@ export const Profile = () => {
               followsYou={otherProfileData.followsYou}
               toggleFollowing={handleFollowThem}
               handleRemoveFollower={removeFollower}
+              shareData={shareData}
             />
           </Card>
 

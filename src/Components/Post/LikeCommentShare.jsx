@@ -1,24 +1,21 @@
-import { useState } from "react";
 import { FaThumbsUp, FaCommentAlt, FaShare } from "react-icons/fa";
 import { Button, Row, Col } from "react-bootstrap";
 import { useTheme } from "Theme";
 
-export const LikeCommentShare = ({ openModal = () => {}, post = {} }) => {
-  const [likes, setLikes] = useState(0);
-  const [liked, setLiked] = useState(false);
+export const LikeCommentShare = ({
+  handleLike,
+  handleUnlike,
+  openModal = () => {},
+  post = {},
+}) => {
   const { theme } = useTheme();
-
-  const handleLike = () => {
-    setLiked((prevLiked) => !prevLiked);
-    setLikes((prevLikes) => (liked ? prevLikes - 1 : prevLikes + 1));
-  };
 
   const allButtons = [
     {
-      label: liked ? "Liked" : "Like",
+      label: post.isLiked ? "Liked" : "Like",
       icon: <FaThumbsUp />,
-      action: handleLike,
-      count: likes,
+      action: () => (post.isLiked ? handleUnlike(post) : handleLike(post)),
+      count: post.likes,
     },
     {
       label: "Comment",

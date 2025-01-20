@@ -2,6 +2,8 @@ export const apiRoutes = {
   userInfo: "/user/info",
   userUpdate: "/user/info-update",
   userFeeds: "/user/feeds",
+  likePost: "/post/like",
+  unLikePost: "/post/unlike",
   userNotifications: "/notification/getall",
   userConnections: "/user/connections",
   userSignIn: "/auth/signin",

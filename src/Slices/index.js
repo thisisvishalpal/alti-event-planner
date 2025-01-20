@@ -1,5 +1,14 @@
-import userFeeds, { fetchUserFeeds } from "./feeds.slice";
-import userInfo, { fetchUserInfo, mutateUserUpdate } from "./userInfo.slice";
+import userFeeds, {
+  fetchUserFeeds,
+  mutateLikePost,
+  mutateUnlikePost,
+} from "./feeds.slice";
+import userInfo, {
+  fetchUserInfo,
+  mutateUserUpdate,
+  mutateLikeOwnPost,
+  mutateUnlikeOwnPost,
+} from "./userInfo.slice";
 import userAuth, { validateToken, logout, signIn } from "./auth.slice";
 import userNotifications, {
   fetchUserNotifications,
@@ -17,9 +26,13 @@ import userFilter, { resetFilter, fetchFilter } from "./filter.slice";
 export {
   userFeeds,
   fetchUserFeeds,
+  mutateLikePost,
+  mutateUnlikePost,
   userInfo,
   fetchUserInfo,
   mutateUserUpdate,
+  mutateLikeOwnPost,
+  mutateUnlikeOwnPost,
   userAuth,
   validateToken,
   signIn,

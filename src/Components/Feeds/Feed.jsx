@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Card, Row, Col, Alert } from "react-bootstrap";
 
 import {
@@ -9,8 +9,10 @@ import {
   SpinnerTwo,
   PostModal,
 } from "Components";
+import { mutateLikePost, mutateUnlikePost } from "Slices";
 
 export const FeedSection = () => {
+  const dispatch = useDispatch();
   const {
     data = [],
     loading,
@@ -25,13 +27,12 @@ export const FeedSection = () => {
   }, []);
 
   const closeModal = useCallback(() => {
-    setPostModal(false);
     setPost({});
+    setPostModal(false);
   }, []);
 
-  const handleLike = () => {
-    console.log("liked clicked!");
-  };
+  const handleLike = (e) => dispatch(mutateLikePost({ postId: e._id }));
+  const handleUnlike = (e) => dispatch(mutateUnlikePost({ postId: e._id }));
 
   return (
     <>
@@ -41,7 +42,8 @@ export const FeedSection = () => {
         <PostModal
           handleCloseModal={closeModal}
           handleLike={handleLike}
-          {...post}
+          handleUnlike={handleUnlike}
+          post={post}
         />
       )}
       {!loading && !error && data.length === 0 && (
@@ -55,6 +57,7 @@ export const FeedSection = () => {
                 <PostHeader date={post.createdAt} {...post.author} />
                 <PostContent handleClick={openModal} post={post} />
                 <LikeCommentShare
+                  handleUnlike={handleUnlike}
                   handleLike={handleLike}
                   openModal={openModal}
                   post={post}
