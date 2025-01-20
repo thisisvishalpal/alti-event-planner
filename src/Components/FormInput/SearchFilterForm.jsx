@@ -9,6 +9,24 @@ export const SearchFilterForm = ({
   return (
     <>
       {showHeading && <h5 className="mb-3">Basic Preference</h5>}
+
+      {/* Married */}
+      <Form.Group className="mb-3">
+        <Form.Label>Married</Form.Label>
+        <Form.Select
+          disabled={!wantToEdit}
+          {...register("married", {
+            required: "Marital status is required",
+          })}
+        >
+          <option value="">Select marital status</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </Form.Select>
+        {errors.married && (
+          <p className="text-danger">{errors.married.message}</p>
+        )}
+      </Form.Group>
       {/* Age */}
       <Form.Group className="mb-3">
         <Form.Label>Age</Form.Label>

@@ -1,31 +1,43 @@
+import { useCallback } from "react";
+import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
 import { FaThumbsUp, FaCommentAlt, FaShare } from "react-icons/fa";
 import { Button, Row, Col } from "react-bootstrap";
 import { useTheme } from "Theme";
+import { mutateLikePost, mutateUnlikePost } from "Slices";
 
 export const LikeCommentShare = ({
-  handleLike,
-  handleUnlike,
-  openModal = () => {},
-  post = {},
+  handleComment,
+  handleShare,
+  isLiked,
+  likes,
+  postId,
 }) => {
+  const dispatch = useDispatch();
+
+  const handleToggleLike = useCallback(() => {
+    if (isLiked) dispatch(mutateUnlikePost({ postId }));
+    else dispatch(mutateLikePost({ postId }));
+  }, [isLiked, dispatch, postId]);
+
   const { theme } = useTheme();
 
   const allButtons = [
     {
-      label: post.isLiked ? "Liked" : "Like",
+      label: isLiked ? "Liked" : "Like",
       icon: <FaThumbsUp />,
-      action: () => (post.isLiked ? handleUnlike(post) : handleLike(post)),
-      count: post.likes,
+      action: handleToggleLike,
+      count: likes,
     },
     {
       label: "Comment",
       icon: <FaCommentAlt />,
-      action: () => openModal(post),
+      action: handleComment,
     },
     {
       label: "Share",
       icon: <FaShare />,
-      action: () => openModal(post),
+      action: handleShare,
     },
   ];
 
@@ -49,4 +61,12 @@ export const LikeCommentShare = ({
       ))}
     </Row>
   );
+};
+
+LikeCommentShare.propTypes = {
+  handleComment: PropTypes.func.isRequired,
+  handleShare: PropTypes.func.isRequired,
+  isLiked: PropTypes.bool.isRequired,
+  likes: PropTypes.number.isRequired,
+  postId: PropTypes.string.isRequired,
 };

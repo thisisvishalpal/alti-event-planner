@@ -9,6 +9,7 @@ import { fetchUserInfo, validateToken } from "Slices";
 import { ThemeProvider } from "Theme";
 import { urls } from "Utils";
 import { useAuthenticated } from "Hooks";
+import { ModalProvider } from "Context";
 
 export function App() {
   const dispatch = useDispatch();
@@ -34,7 +35,9 @@ export function App() {
 
   return (
     <ThemeProvider>
-      <RouterProvider router={Router} />
+      <ModalProvider>
+        <RouterProvider router={Router} />
+      </ModalProvider>
     </ThemeProvider>
   );
 }

@@ -30,5 +30,13 @@ export {
   LanguageForm,
   LanguageToggler,
 } from "./FormInput";
-export { PostContent, PostHeader, PostModal, LikeCommentShare } from "./Post";
+export {
+  PostContent,
+  PostHeader,
+  PostModal,
+  LikeCommentShare,
+  NewComments,
+  AllComments,
+  PostCard,
+} from "./Post";
 export { ShowMessage, ShareButton } from "./Generic";

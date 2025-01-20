@@ -34,7 +34,7 @@ export const Filter = () => {
         }
         return acc;
       }, {});
-      dispatch(fetchFilter({ married: "no", ...updatedValues }));
+      dispatch(fetchFilter(updatedValues));
     }
   };
 
@@ -52,10 +52,6 @@ export const Filter = () => {
           </Button>
         )}
       </div>
-
-      <small className="text-muted">
-        This filter will only give unmarried user
-      </small>
 
       {error && (
         <Alert key="danger" variant="danger">

@@ -11,7 +11,7 @@ export const PostContent = React.memo(
             style={{ cursor: "pointer" }}
             src={post.image}
             alt="Post"
-            onClick={() => handleClick(post)}
+            onClick={handleClick}
             className={modal ? "modal-image img-fluid" : "img-fluid rounded"}
           />
         </div>
