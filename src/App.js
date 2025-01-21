@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 //Importing local files
 import { Layout } from "Components";
@@ -36,6 +37,7 @@ export function App() {
   return (
     <ThemeProvider>
       <ModalProvider>
+        <SpeedInsights />
         <RouterProvider router={Router} />
       </ModalProvider>
     </ThemeProvider>
