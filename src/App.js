@@ -16,6 +16,8 @@ export function App() {
   const dispatch = useDispatch();
   const { username } = useAuthenticated();
 
+  console.log("yipee, its live 🚀");
+
   useEffect(() => {
     dispatch(validateToken());
   }, []);
