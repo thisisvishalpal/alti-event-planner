@@ -40,3 +40,4 @@ export {
   PostCard,
 } from "./Post";
 export { ShowMessage, ShareButton } from "./Generic";
+export { NotificationRow } from "./Notifications";

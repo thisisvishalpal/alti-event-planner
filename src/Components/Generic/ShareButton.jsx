@@ -1,7 +1,11 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 
-export const ShareButton = ({ title, text, url }) => {
+export const ShareButton = ({ username }) => {
+  const title = "Check this out!";
+  const text = "I found something interesting to share with you.";
+  const url = `https://alti-event-planner.vercel.app/${username}`;
+
   const handleShare = async () => {
     if (navigator.share) {
       try {

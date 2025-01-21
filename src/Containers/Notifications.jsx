@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { ListGroup, Badge, Spinner, Alert } from "react-bootstrap";
+
+import { ListGroup, Spinner, Alert } from "react-bootstrap";
 
 import "./Notifications.css"; // Add styles if needed
 import { fetchUserNotifications } from "Slices";
+import { NotificationRow } from "Components";
 
 export const Notifications = () => {
   const notificationsStore = useSelector(
@@ -49,28 +50,7 @@ export const Notifications = () => {
       {!loading && !error && data?.length > 0 && (
         <ListGroup>
           {data.map((notification) => (
-            <Link to={notification.link}>
-              <ListGroup.Item
-                key={notification.id}
-                className={`notification-item ${
-                  notification.isRead ? "read" : "unread"
-                }`}
-              >
-                <div className="notification-content">
-                  <span className="notification-type">
-                    <Badge bg={notification.isRead ? "secondary" : "primary"}>
-                      {notification.type}
-                    </Badge>
-                  </span>
-                  <span className="notification-text">
-                    {notification.message}
-                  </span>
-                </div>
-                <div className="notification-timestamp">
-                  {new Date(notification.createdAt).toLocaleString()}
-                </div>
-              </ListGroup.Item>
-            </Link>
+            <NotificationRow notification={notification} />
           ))}
         </ListGroup>
       )}

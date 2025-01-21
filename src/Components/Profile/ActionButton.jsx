@@ -9,7 +9,7 @@ export const ActionButton = ({
   following,
   toggleFollowing,
   handleRemoveFollower,
-  shareData,
+  username,
 }) => {
   const navigate = useNavigate();
   const { isAccessingSelfProfile } = useProfile();
@@ -24,7 +24,7 @@ export const ActionButton = ({
         Edit profile
       </Button>
 
-      <ShareButton {...shareData} />
+      <ShareButton username={username} />
     </div>
   );
 
