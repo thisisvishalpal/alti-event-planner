@@ -67,18 +67,18 @@ code {
   color: black !important;
 }
 
-.nav-link:hover {
-  background-color: #4688eb;
-  /* padding: 5px; */
-  color: palevioletred; /* Example: Change color on hover */
-  border-radius: 4px; /* Example: Add border radius on hover */
-  transition: background-color 0.3s ease; /* Example: Smooth transition */
-}
+/* .nav-link:hover { */
+/* background-color: #ffffff; */
+/* padding: 5px; */
+/* color: palevioletred; */
+/* border-radius: 4px; */
+/* transition: background-color 0.3s ease; */
+/* } */
 
-.nav-link.active {
-  font-weight: bold;
-  /* color: #007bff; */
-}
+/* .nav-link.active { */
+/* font-weight: bold; */
+/* color: #007bff; */
+/* } */
 /* Active link styling */
 /* .active {
   font-weight: bold;

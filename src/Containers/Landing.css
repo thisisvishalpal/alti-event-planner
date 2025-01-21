@@ -1,6 +1,9 @@
 .hero-section {
+  /* min-height: 100vh; */
   background: linear-gradient(to right, #6a11cb, #2575fc);
   color: white;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 }
 
 .cta-section {

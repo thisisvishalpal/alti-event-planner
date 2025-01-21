@@ -14,7 +14,7 @@ export const Landing = () => {
   return (
     <div className="landing-page">
       {/* Hero Section */}
-      <section className="hero-section text-center py-5 bg-light">
+      <section className="hero-section text-center">
         <Container>
           <h1 className="display-4 fw-bold">Welcome to SocialConnect</h1>
           <p className="lead">

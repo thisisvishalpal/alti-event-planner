@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Badge, ListGroup } from "react-bootstrap";
+import { timeAgo } from "Helpers";
 
 export const NotificationRow = ({ notification }) => {
   return (
@@ -19,7 +20,7 @@ export const NotificationRow = ({ notification }) => {
           <span className="notification-text">{notification.message}</span>
         </div>
         <div className="notification-timestamp">
-          {new Date(notification.createdAt).toLocaleString()}
+          {timeAgo(notification.createdAt)}
         </div>
       </ListGroup.Item>
     </Link>
