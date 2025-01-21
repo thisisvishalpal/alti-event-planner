@@ -1,8 +1,11 @@
 import { Col, Card } from "react-bootstrap";
 
 import { PostHeader, PostContent, LikeCommentShare } from ".";
+import { useModal } from "Context";
 
-export const PostCard = ({ post, openModal }) => {
+export const PostCard = ({ post }) => {
+  const { openModal } = useModal();
+
   return (
     <Col md={12} key={post._id} className="mb-3">
       <Card className="shadow-sm">

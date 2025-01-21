@@ -10,10 +10,7 @@ export const Feeds = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "auto",
-    });
+    window.scrollTo({ top: 0, behavior: "auto" });
   }, []);
 
   useEffect(() => {

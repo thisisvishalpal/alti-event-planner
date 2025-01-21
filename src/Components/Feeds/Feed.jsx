@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { Row, Alert } from "react-bootstrap";
 
 import { SpinnerTwo, PostModal, PostCard } from "Components";
-import { useModal } from "Context";
 
 export const FeedSection = () => {
   const {
@@ -11,8 +10,6 @@ export const FeedSection = () => {
     loading,
     error,
   } = useSelector(({ userFeeds }) => userFeeds);
-
-  const { openModal } = useModal();
 
   return (
     <>
@@ -27,7 +24,7 @@ export const FeedSection = () => {
 
       <Row>
         {data.map((post) => (
-          <PostCard post={post} openModal={openModal} />
+          <PostCard post={post} />
         ))}
       </Row>
     </>

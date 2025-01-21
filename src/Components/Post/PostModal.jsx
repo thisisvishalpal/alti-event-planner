@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useCallback } from "react";
 import { useModal } from "Context";
 import { Row, Col } from "react-bootstrap";
 import {
@@ -9,14 +9,33 @@ import {
   NewComments,
 } from "Components";
 import { useSelector } from "react-redux";
+import { useProfile } from "Hooks";
+import { useLocation } from "react-router-dom";
 
 export const PostModal = () => {
+  const { pathname } = useLocation();
+  const { isAccessingSelfProfile } = useProfile();
+  const { data: userInfoData } = useSelector(({ userInfo }) => userInfo);
+  const { data: otherProfileData } = useSelector(
+    ({ otherProfile }) => otherProfile
+  );
+  const finalData = isAccessingSelfProfile
+    ? userInfoData.posts
+    : otherProfileData.posts;
+
   const { data } = useSelector(({ userFeeds }) => userFeeds);
   const { isModalOpen, modalData, closeModal } = useModal();
 
-  const finalPost = useMemo(() => {
-    return data.find((post) => post._id === modalData);
-  }, [data, modalData]);
+  const feedFilter = useCallback(
+    () => data.find(({ _id }) => _id === modalData),
+    [data, modalData]
+  );
+  const postFilter = useCallback(
+    () => finalData.find(({ _id }) => _id === modalData),
+    [finalData, modalData]
+  );
+  const finalPost =
+    pathname === "/feeds" || pathname === "/" ? feedFilter() : postFilter();
 
   const commentRef = React.useRef(null);
 
