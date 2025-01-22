@@ -56,8 +56,8 @@
 
 .modal-image {
   width: 100%;
-  border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 }
 
 .close-modal {
@@ -136,5 +136,9 @@ button[type="submit"]:hover {
   .modal-content .comments-section {
     max-height: 100%; /* Ensure the comment section fits well */
     overflow-y: auto; /* Allow scrolling for long comments */
+  }
+
+  .modal-image {
+    border-radius: 5px;
   }
 }

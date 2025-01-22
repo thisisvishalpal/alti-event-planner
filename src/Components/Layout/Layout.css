@@ -68,3 +68,59 @@ main {
   background-color: #f8f9fa !important;
   color: black !important;
 }
+
+/* Common styles for the layout container */
+.layout-auth,
+.layout-unAuth {
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+/* Authenticated layout */
+.layout-auth {
+  display: grid;
+  grid-template-columns: 2fr 4fr 2fr;
+  gap: 20px;
+}
+
+/* Unauthenticated layout */
+.layout-unAuth {
+  display: flex; /* Use flexbox for simpler fallback layout */
+  flex-direction: column;
+}
+
+.feed-post-card {
+  margin-bottom: 10px;
+  /* margin: 10px; */
+  padding: 20px;
+  /* border-radius: 10px; */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.feed-post-card-header {
+  text-decoration: none;
+  color: black;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+/* Hide the both side padding for mobiel screen*/
+@media (min-width: 769px) {
+  .layout-auth {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 769px) {
+  .feed-post-card {
+    padding: 0 !important;
+  }
+  .feed-post-card-header {
+    margin: 0.75rem;
+  }
+  .feed-post-card-description {
+    margin-left: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+}

@@ -42,7 +42,7 @@ export const LikeCommentShare = ({
   ];
 
   return (
-    <Row className="justify-content-around text-center pt-3">
+    <Row className="justify-content-around text-center mt-2">
       {allButtons.map(({ label, icon, action, count }, idx) => (
         <Col xs={4} key={idx}>
           <Button

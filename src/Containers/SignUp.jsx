@@ -43,7 +43,7 @@ export const SignupTwo = () => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm();
+  } = useForm({ mode: "onChange" });
 
   const [currentStep, setCurrentStep] = useState(1);
   const [serverError, setServerError] = useState([]);

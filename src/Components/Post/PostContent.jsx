@@ -4,17 +4,14 @@ import { Image } from "react-bootstrap";
 export const PostContent = React.memo(
   ({ handleClick = () => {}, post, modal = false, ...rest }) => (
     <div {...rest}>
-      {!modal && <h5>{post.content}</h5>}
+      {!modal && <p className="feed-post-card-description">{post.content}</p>}
       {post.image && (
-        <div className="text-center">
-          <Image
-            style={{ cursor: "pointer" }}
-            src={post.image}
-            alt="Post"
-            onClick={handleClick}
-            className={modal ? "modal-image img-fluid" : "img-fluid rounded"}
-          />
-        </div>
+        <Image
+          src={post.image}
+          alt="Post"
+          onClick={handleClick}
+          className={"modal-image"}
+        />
       )}
     </div>
   )
