@@ -10,7 +10,7 @@ import {
 } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 
-import { Navigations } from "Components";
+import { Navigations, ThemeToggler } from "Components";
 import { useTheme } from "Theme";
 import { useAuthenticated } from "Hooks";
 import { urls } from "Utils";
@@ -145,9 +145,11 @@ export const Header = () => {
               </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-              <Card className="d-md-none p-4">
-                <Navigations className="d-md-none justify-content-end flex-grow-1 pe-3" />
-              </Card>
+              <Navigations className="d-md-none justify-content-end flex-grow-1 pe-3" />
+
+              <div className="card-mod mt-2">
+                <ThemeToggler />
+              </div>
             </Offcanvas.Body>
           </Navbar.Offcanvas>
 

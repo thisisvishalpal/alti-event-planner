@@ -17,15 +17,12 @@ import {
   PersonalInfoForm,
   SecurityForm,
   SpinnerTwo,
-  ThemeToggler,
   UsernameEmailForm,
 } from "Components";
-import { useTheme } from "Theme";
 import { mutateUserUpdate } from "Slices";
 
 export const Settings = () => {
   const dispatch = useDispatch();
-  const { toggleTheme } = useTheme();
   const { data, loading, error } = useSelector(({ userInfo }) => userInfo);
 
   const [activeTab, setActiveTab] = useState("account");
@@ -115,12 +112,6 @@ export const Settings = () => {
         component: (
           <>
             <h5 className="mb-3">Select Theme</h5>
-            <ThemeToggler
-              labelLeft="Light"
-              labelRight="Dark"
-              onChange={toggleTheme}
-            />
-            <hr />
             <LanguageForm
               errors={errors}
               wantToEdit={true}

@@ -1,12 +1,10 @@
-import { Navbar } from "react-bootstrap";
-import { Navigations } from "Components";
+import { Navigations, ThemeToggler } from "Components";
 
-export const Aside = () => {
-  return (
-    <aside>
-      <Navbar>
-        <Navigations />
-      </Navbar>
-    </aside>
-  );
-};
+export const Aside = () => (
+  <aside>
+    <Navigations />
+    <div className="card-mod mt-3">
+      <ThemeToggler />
+    </div>
+  </aside>
+);

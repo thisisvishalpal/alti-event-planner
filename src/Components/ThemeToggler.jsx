@@ -1,24 +1,29 @@
 import React, { useState } from "react";
+import { useTheme } from "Theme";
 
-export const ThemeToggler = ({ labelLeft, labelRight, onChange }) => {
+export const ThemeToggler = () => {
+  const { toggleTheme } = useTheme();
   const value = localStorage.getItem("theme") || "light";
   const [isToggled, setIsToggled] = useState(value === "light" ? false : true);
 
   const handleToggle = () => {
     setIsToggled(!isToggled);
-    onChange(!isToggled);
+    toggleTheme(!isToggled);
   };
 
   return (
-    <div className="switch-container">
-      <span className="label">{labelLeft}</span>
-      <div
-        className={`switch ${isToggled ? "toggled" : ""}`}
-        onClick={handleToggle}
-      >
-        <div className="slider" />
+    <>
+      <p>Theme</p>
+      <div className="switch-container">
+        <span className="label">Light</span>
+        <div
+          className={`switch ${isToggled ? "toggled" : ""}`}
+          onClick={handleToggle}
+        >
+          <div className="slider" />
+        </div>
+        <span className="label">Dark</span>
       </div>
-      <span className="label">{labelRight}</span>
-    </div>
+    </>
   );
 };

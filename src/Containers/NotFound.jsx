@@ -1,23 +1,19 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 export const NotFound = () => {
+  const navigate = useNavigate();
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
   }, []);
 
   return (
-    <div style={{ textAlign: "center", padding: "20px", minHeight: "100%" }}>
-      <div>
-        <h1>404</h1>
-        <h2>Page Not Found</h2>
-        <p>
-          Oops! The page you are looking for doesn't exist or has been moved.
-        </p>
-        <Link to="/" className="home-link">
-          Go Back to Home
-        </Link>
-      </div>
+    <div className="access-not-found">
+      <h1>404</h1>
+      <h3>Page Not Found</h3>
+      <p>Oops! The page you are looking for doesn't exist or has been moved.</p>
+      <Button onClick={() => navigate("/")}>Get back to home</Button>
     </div>
   );
 };

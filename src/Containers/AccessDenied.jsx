@@ -5,17 +5,11 @@ import { useNavigate } from "react-router-dom";
 export const AccessDenied = () => {
   const navigate = useNavigate();
   return (
-    <div style={{ textAlign: "center", padding: "20px" }}>
+    <div className="access-not-found">
       <h1>Access Denied</h1>
-      <p>You need to be logged in to access this page.</p>
+      <h3>You need to be logged in to access this page.</h3>
       <p className="mt-3 text-center">Don't have an account? </p>
-      <Button
-        onClick={() => {
-          navigate("/");
-        }}
-      >
-        Get back to home
-      </Button>
+      <Button onClick={() => navigate("/")}>Get back to home</Button>
     </div>
   );
 };

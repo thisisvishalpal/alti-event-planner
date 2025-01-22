@@ -66,7 +66,7 @@ export const SignIn = () => {
               type="text"
               placeholder="Enter username"
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => setUsername(e.target.value.toLowerCase().trim())}
             />
           </Form.Group>
 
