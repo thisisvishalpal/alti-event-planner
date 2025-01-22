@@ -44,13 +44,14 @@ export const LikeCommentShare = ({
   return (
     <Row className="justify-content-around text-center mt-2">
       {allButtons.map(({ label, icon, action, count }, idx) => (
-        <Col xs={4} key={idx}>
+        <Col xs={4} key={idx} className="px-1">
           <Button
             variant={theme === "light" ? "light" : "dark"}
             className={`w-100 d-flex align-items-center justify-content-center ${
               label === "Liked" ? "text-primary" : ""
             }`}
             onClick={action}
+            style={{ padding: "8px 12px" }} // Adjust button padding
           >
             {icon}
             <span className="ms-2">

@@ -113,9 +113,10 @@ main {
 }
 
 @media (max-width: 769px) {
-  .feed-post-card {
+  /* .feed-post-card {
     padding: 0 !important;
-  }
+  } */
+  /* need to find solution until keeping it like this */
   .feed-post-card-header {
     margin: 0.75rem;
   }

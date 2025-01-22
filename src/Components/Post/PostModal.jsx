@@ -71,7 +71,7 @@ export const PostModal = () => {
             />
           </Col>
           <Col md={3} sm={12}>
-            <h5>{content}</h5>
+            <p>{content}</p>
             <AllComments comments={comments} />
             <NewComments
               commentRef={commentRef}
