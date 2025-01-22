@@ -1,26 +1,31 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
-export const LanguageToggler = ({ labelLeft, labelRight, onChange, value }) => {
+export const LanguageToggler = () => {
+  const { data } = useSelector(({ userInfo }) => userInfo);
+  console.log(data.language);
   // const value = localStorage.getItem("language") || "english";
   const [isToggled, setIsToggled] = useState(
-    value === "english" ? false : true
+    "english" === "english" ? false : true
   );
 
   const handleToggle = () => {
     setIsToggled(!isToggled);
-    onChange(!isToggled);
+    // onChange(!isToggled);
   };
 
   return (
-    <div className="switch-container">
-      <span className="label">{labelLeft}</span>
-      <div
-        className={`switch ${isToggled ? "toggled" : ""}`}
-        onClick={handleToggle}
-      >
-        <div className="slider" />
+    <div className="card-mod mt-3">
+      <div className="switch-container">
+        <span className="label">English</span>
+        <div
+          className={`switch ${isToggled ? "toggled" : ""}`}
+          onClick={handleToggle}
+        >
+          <div className="slider" />
+        </div>
+        <span className="label">हिन्दी</span>
       </div>
-      <span className="label">{labelRight}</span>
     </div>
   );
 };

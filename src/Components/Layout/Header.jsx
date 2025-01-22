@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Navbar, Nav, Container, Offcanvas, Image } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 
-import { Navigations, ThemeToggler } from "Components";
+import { LanguageToggler, Navigations, ThemeToggler } from "Components";
 import { useTheme } from "Theme";
 import { useAuthenticated } from "Hooks";
 import { urls } from "Utils";
@@ -139,10 +139,8 @@ export const Header = () => {
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Navigations className="d-md-none justify-content-end flex-grow-1 pe-3" />
-
-              <div className="card-mod mt-2">
-                <ThemeToggler />
-              </div>
+              <ThemeToggler />
+              <LanguageToggler />
             </Offcanvas.Body>
           </Navbar.Offcanvas>
 

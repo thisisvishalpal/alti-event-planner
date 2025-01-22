@@ -1,10 +1,9 @@
-import { Navigations, ThemeToggler } from "Components";
+import { LanguageToggler, Navigations, ThemeToggler } from "Components";
 
 export const Aside = () => (
   <aside>
     <Navigations />
-    <div className="card-mod mt-3">
-      <ThemeToggler />
-    </div>
+    <ThemeToggler />
+    <LanguageToggler />
   </aside>
 );

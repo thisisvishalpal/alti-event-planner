@@ -1,4 +1,3 @@
-export { ThemeToggler } from "./ThemeToggler";
 export {
   UserPosts,
   ActionButton,
@@ -39,5 +38,5 @@ export {
   AllComments,
   PostCard,
 } from "./Post";
-export { ShowMessage, ShareButton } from "./Generic";
+export { ShowMessage, ShareButton, ThemeToggler } from "./Generic";
 export { NotificationRow } from "./Notifications";

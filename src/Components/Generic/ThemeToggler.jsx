@@ -12,18 +12,17 @@ export const ThemeToggler = () => {
   };
 
   return (
-    <>
-      <p>Theme</p>
+    <div className="card-mod mt-3">
       <div className="switch-container">
-        <span className="label">Light</span>
+        <span>Light</span>
         <div
           className={`switch ${isToggled ? "toggled" : ""}`}
           onClick={handleToggle}
         >
           <div className="slider" />
         </div>
-        <span className="label">Dark</span>
+        <span>Dark</span>
       </div>
-    </>
+    </div>
   );
 };
