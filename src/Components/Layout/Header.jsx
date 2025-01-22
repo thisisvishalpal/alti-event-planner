@@ -1,13 +1,6 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import {
-  Navbar,
-  Nav,
-  Container,
-  Offcanvas,
-  Card,
-  Image,
-} from "react-bootstrap";
+import { Navbar, Nav, Container, Offcanvas, Image } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 
 import { Navigations, ThemeToggler } from "Components";
