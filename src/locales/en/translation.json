@@ -3,5 +3,10 @@
   "language": "Choose your language:",
   "button": "Click me",
   "welcomHeading": "Welcome to SocialConnect",
-  "welcomePara": "Connect, share, and stay updated with friends and the world around you."
+  "welcomePara": "Connect, share, and stay updated with friends and the world around you.",
+  "routes": {
+    "feeds": {
+      "title": "Feeds"
+    }
+  }
 }
