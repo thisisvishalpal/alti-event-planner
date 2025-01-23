@@ -6,7 +6,7 @@ export const PostContent = React.memo(
     <div {...rest}>
       {!modal && <p className="feed-post-card-description">{post.content}</p>}
       {post.image && (
-        <div class="feed-post-image-container">
+        <div className="feed-post-image-container">
           <Image
             src={post.image}
             alt="Post"

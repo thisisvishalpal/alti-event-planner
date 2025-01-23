@@ -7,7 +7,7 @@ export const PostCard = ({ post }) => {
   const { openModal } = useModal();
 
   return (
-    <Col md={12} key={post._id} className="feed-post-card">
+    <Col md={12} className="feed-post-card">
       <PostHeader date={post.createdAt} {...post.author} />
       <PostContent handleClick={() => openModal(post._id)} post={post} />
       <LikeCommentShare

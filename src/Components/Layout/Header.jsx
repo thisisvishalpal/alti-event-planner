@@ -139,8 +139,10 @@ export const Header = () => {
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Navigations className="d-md-none justify-content-end flex-grow-1 pe-3" />
-              <ThemeToggler />
-              <LanguageToggler />
+              <div className="card-mod mt-3">
+                <ThemeToggler />
+                <LanguageToggler showHeading />
+              </div>
             </Offcanvas.Body>
           </Navbar.Offcanvas>
 

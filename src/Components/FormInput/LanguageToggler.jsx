@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Form } from "react-bootstrap";
 
-export const LanguageToggler = ({ noStyle = false }) => {
+export const LanguageToggler = ({ showHeading = false }) => {
   const { i18n } = useTranslation();
   const value = localStorage.getItem("language") || "en";
   const [language, setLanguage] = useState(value || "en");
@@ -14,8 +14,9 @@ export const LanguageToggler = ({ noStyle = false }) => {
   };
   return (
     <Form>
-      {/* <Form.Label>asdf</Form.Label> */}
+      {showHeading && <Form.Label>Change language</Form.Label>}
       <Form.Check
+        name="languageToggle"
         type="switch"
         id="custom-switch"
         // label={`${language === "hi" ? "हिन्दी" : "English"}`}

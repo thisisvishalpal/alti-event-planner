@@ -24,7 +24,7 @@ export const FeedSection = () => {
 
       <Row>
         {data.map((post) => (
-          <PostCard post={post} />
+          <PostCard key={post._id} post={post} />
         ))}
       </Row>
     </>
