@@ -6,12 +6,14 @@ export const PostContent = React.memo(
     <div {...rest}>
       {!modal && <p className="feed-post-card-description">{post.content}</p>}
       {post.image && (
-        <Image
-          src={post.image}
-          alt="Post"
-          onClick={handleClick}
-          className={"modal-image"}
-        />
+        <div class="feed-post-image-container">
+          <Image
+            src={post.image}
+            alt="Post"
+            onClick={handleClick}
+            className="modal-image feed-post-image"
+          />
+        </div>
       )}
     </div>
   )

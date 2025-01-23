@@ -116,12 +116,18 @@ main {
   /* .feed-post-card {
     padding: 0 !important;
   } */
-  /* need to find solution until keeping it like this */
-  .feed-post-card-header {
-    margin: 0.75rem;
+
+  .feed-post-image-container {
+    margin: 0 -12px; /* Negative margin equal to the card's padding */
   }
+
+  .feed-post-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  /* need to find solution until keeping it like this */
   .feed-post-card-description {
-    margin-left: 0.75rem;
     margin-bottom: 0.5rem;
   }
 }
