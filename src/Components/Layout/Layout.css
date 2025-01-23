@@ -92,7 +92,7 @@ main {
 .feed-post-card {
   margin-bottom: 10px;
   /* margin: 10px; */
-  padding: 20px;
+  padding: 1rem !important;
   /* border-radius: 10px; */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
@@ -113,12 +113,8 @@ main {
 }
 
 @media (max-width: 769px) {
-  /* .feed-post-card {
-    padding: 0 !important;
-  } */
-
   .feed-post-image-container {
-    margin: 0 -12px; /* Negative margin equal to the card's padding */
+    margin: 0 -1rem; /* Negative margin equal to the card's padding */
   }
 
   .feed-post-image {
@@ -126,7 +122,7 @@ main {
     height: auto;
     display: block;
   }
-  /* need to find solution until keeping it like this */
+
   .feed-post-card-description {
     margin-bottom: 0.5rem;
   }
