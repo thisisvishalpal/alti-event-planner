@@ -1,26 +1,36 @@
 import { Link } from "react-router-dom";
 import { Badge, ListGroup } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+
 import { timeAgo } from "Helpers";
+import { mutateReadNotification } from "Slices";
 
 export const NotificationRow = ({ notification }) => {
+  const dispatch = useDispatch();
+
+  const handleClick = () => console.log("handle click");
+  // dispatch(mutateReadNotification(notification._id));
+
   return (
-    <Link to={notification.link}>
+    <Link className="no-text-deco" to={notification.link}>
       <ListGroup.Item
-        key={notification.id}
         className={`notification-item ${
           notification.isRead ? "read" : "unread"
         }`}
+        onClick={handleClick}
       >
         <div className="notification-content">
-          <span className="notification-type">
-            <Badge bg={notification.isRead ? "secondary" : "primary"}>
-              {notification.type}
-            </Badge>
-          </span>
+          <Badge
+            className="notification-type"
+            bg={notification.isRead ? "secondary" : "primary"}
+          >
+            {notification.type}
+          </Badge>
+
           <span className="notification-text">{notification.message}</span>
-        </div>
-        <div className="notification-timestamp">
-          {timeAgo(notification.createdAt)}
+          <div className="notification-timestamp">
+            {timeAgo(notification.createdAt)}
+          </div>
         </div>
       </ListGroup.Item>
     </Link>

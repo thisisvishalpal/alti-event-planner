@@ -8,11 +8,10 @@ import { fetchUserNotifications } from "Slices";
 import { NotificationRow } from "Components";
 
 export const Notifications = () => {
-  const notificationsStore = useSelector(
+  const dispatch = useDispatch();
+  const { data, error, loading } = useSelector(
     ({ userNotifications }) => userNotifications
   );
-  const dispatch = useDispatch();
-  const { data, error, loading } = notificationsStore;
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
@@ -50,7 +49,10 @@ export const Notifications = () => {
       {!loading && !error && data?.length > 0 && (
         <ListGroup>
           {data.map((notification) => (
-            <NotificationRow notification={notification} />
+            <NotificationRow
+              key={notification._id}
+              notification={notification}
+            />
           ))}
         </ListGroup>
       )}

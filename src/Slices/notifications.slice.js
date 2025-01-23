@@ -16,6 +16,17 @@ export const fetchUserNotifications = createAsyncThunk(
   }
 );
 
+export const mutateReadNotification = createAsyncThunk(
+  "userNotifications/mutateReadNotification",
+  async (param, { rejectWithValue }) => {
+    const response = await axiosInstance.post(
+      apiRoutes.readNotification,
+      param
+    );
+    return response?.data?.data;
+  }
+);
+
 const userNotificationSlice = createSlice({
   name: "userNotifications",
   initialState,

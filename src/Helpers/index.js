@@ -20,9 +20,9 @@ export const timeAgo = (dateString) => {
   const diffMonths = Math.floor(diffDays / 30);
   const diffYears = Math.floor(diffDays / 365);
 
-  if (diffSeconds < 60) return `${diffSeconds} seconds ago`;
+  if (diffSeconds < 60) return `${diffSeconds} secs ago`;
   if (diffMinutes < 60) return `${diffMinutes} mins ago`;
-  if (diffHours < 24) return `${diffHours} hours ago`;
+  if (diffHours < 24) return `${diffHours} hrs ago`;
   if (diffDays < 7) return `${diffDays} days ago`;
   if (diffWeeks < 4) return `${diffWeeks} weeks ago`;
   if (diffMonths < 12) return `${diffMonths} months ago`;

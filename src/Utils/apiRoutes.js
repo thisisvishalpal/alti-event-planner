@@ -5,6 +5,7 @@ export const apiRoutes = {
   likePost: "/post/like",
   unLikePost: "/post/unlike",
   userNotifications: "/notification/getall",
+  readNotification: "/notification/read",
   userConnections: "/user/connections",
   userSignIn: "/auth/signin",
   userSignUp: "/auth/signup",

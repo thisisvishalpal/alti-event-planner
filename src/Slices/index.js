@@ -11,6 +11,7 @@ import userInfo, {
 } from "./userInfo.slice";
 import userAuth, { validateToken, logout, signIn } from "./auth.slice";
 import userNotifications, {
+  mutateReadNotification,
   fetchUserNotifications,
 } from "./notifications.slice";
 import otherProfile, {
@@ -38,6 +39,7 @@ export {
   signIn,
   logout,
   userNotifications,
+  mutateReadNotification,
   fetchUserNotifications,
   otherProfile,
   mutateFollowThem,

@@ -98,8 +98,6 @@ main {
 }
 
 .feed-post-card-header {
-  text-decoration: none;
-  color: black;
   display: flex;
   align-items: center;
   margin-bottom: 1rem;
@@ -126,4 +124,8 @@ main {
   .feed-post-card-description {
     margin-bottom: 0.5rem;
   }
+}
+
+.no-text-deco {
+  text-decoration: none;
 }
