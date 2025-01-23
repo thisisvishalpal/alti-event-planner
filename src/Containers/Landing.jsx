@@ -2,10 +2,13 @@ import React, { useEffect } from "react";
 import { Button, Container, Row, Col } from "react-bootstrap";
 import "./Landing.css"; // Optional: Add your custom styles here.
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
 import { urls } from "Utils";
 
 export const Landing = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
@@ -16,11 +19,8 @@ export const Landing = () => {
       {/* Hero Section */}
       <section className="hero-section text-center">
         <Container>
-          <h1 className="display-4 fw-bold">Welcome to SocialConnect</h1>
-          <p className="lead">
-            Connect, share, and stay updated with friends and the world around
-            you.
-          </p>
+          <h1 className="display-4 fw-bold">{t("welcomHeading")}</h1>
+          <p className="lead">{t("welcomePara")}</p>
           <div className="mt-4">
             <Button
               onClick={() => navigate(urls?.signUp)}

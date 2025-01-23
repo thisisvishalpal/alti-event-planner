@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { SpeedInsights } from "@vercel/speed-insights/react";
+import { useTranslation } from "react-i18next";
 
 //Importing local files
 import { Layout } from "Components";
@@ -15,6 +16,7 @@ import { ModalProvider } from "Context";
 export function App() {
   const dispatch = useDispatch();
   const { username } = useAuthenticated();
+  const { i18n } = useTranslation();
 
   console.log("yipee, its live 🚀");
 
@@ -27,6 +29,11 @@ export function App() {
       dispatch(fetchUserInfo());
     }
   }, [username]);
+
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem("language") || "en";
+    i18n.changeLanguage(savedLanguage);
+  }, []);
 
   const Router = createBrowserRouter([
     {

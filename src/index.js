@@ -7,6 +7,7 @@ import { App } from "./App";
 import { ErrorBoundary } from "ErrorBoundary";
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./Lingual/i18n";
 
 import reportWebVitals from "./reportWebVitals";
 

@@ -161,6 +161,7 @@ export const Header = () => {
               </NavLink>
             </Nav>
           )}
+          {!isAuthenticated && <LanguageToggler />}
         </Container>
       </Navbar>
     </div>

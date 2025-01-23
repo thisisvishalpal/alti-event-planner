@@ -1,31 +1,49 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { Form } from "react-bootstrap";
 
-export const LanguageToggler = () => {
-  const { data } = useSelector(({ userInfo }) => userInfo);
-  console.log(data.language);
-  // const value = localStorage.getItem("language") || "english";
-  const [isToggled, setIsToggled] = useState(
-    "english" === "english" ? false : true
-  );
+export const LanguageToggler = ({ noStyle = false }) => {
+  const { i18n } = useTranslation();
+  const value = localStorage.getItem("language") || "en";
+  const [language, setLanguage] = useState(value || "en");
 
-  const handleToggle = () => {
-    setIsToggled(!isToggled);
-    // onChange(!isToggled);
+  const handleToggle = (event) => {
+    setLanguage(event.target.checked ? "hi" : "en");
+    i18n.changeLanguage(event.target.checked ? "hi" : "en");
+    localStorage.setItem("language", event.target.checked ? "hi" : "en");
   };
-
   return (
-    <div className="card-mod mt-3">
-      <div className="switch-container">
-        <span className="label">English</span>
-        <div
-          className={`switch ${isToggled ? "toggled" : ""}`}
-          onClick={handleToggle}
-        >
-          <div className="slider" />
-        </div>
-        <span className="label">हिन्दी</span>
-      </div>
-    </div>
+    <Form>
+      {/* <Form.Label>asdf</Form.Label> */}
+      <Form.Check
+        type="switch"
+        id="custom-switch"
+        // label={`${language === "hi" ? "हिन्दी" : "English"}`}
+        checked={language === "hi"}
+        onChange={handleToggle}
+      />
+    </Form>
   );
 };
+
+// // LanguageContext.js
+// import React, { createContext, useState, useContext } from "react";
+// import translations from "./translations";
+
+// const LanguageContext = createContext();
+
+// export const LanguageProvider = ({ children }) => {
+//   const [language, setLanguage] = useState("en"); // Default language is English
+
+//   const t = (key) => {
+//     return translations[language][key] || key; // Fallback to the key if translation is missing
+//   };
+
+//   return (
+//     <LanguageContext.Provider value={{ language, setLanguage, t }}>
+//       {children}
+//     </LanguageContext.Provider>
+//   );
+// };
+
+// export const useLanguage = () => useContext(LanguageContext);
