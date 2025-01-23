@@ -13,7 +13,6 @@ import { useForm } from "react-hook-form";
 
 import {
   CareerInformationForm,
-  LanguageForm,
   PersonalInfoForm,
   SecurityForm,
   SpinnerTwo,
@@ -106,21 +105,22 @@ export const Settings = () => {
         title: "Security",
         component: <SecurityForm />,
       },
-      {
-        eventKey: "theme",
-        title: "Language",
-        component: (
-          <>
-            <h5 className="mb-3">Select Theme</h5>
-            <LanguageForm
-              errors={errors}
-              wantToEdit={true}
-              register={register}
-            />
-          </>
-        ),
-      },
     ];
+
+  // {
+  //     eventKey: "theme",
+  //     title: "Language",
+  //     component: (
+  //       <>
+  //         <h5 className="mb-3">Select Theme</h5>
+  //         <LanguageForm
+  //           errors={errors}
+  //           wantToEdit={true}
+  //           register={register}
+  //         />
+  //       </>
+  //     ),
+  //   },
   //   [errors, register, toggleTheme, watch]
   // );
 
