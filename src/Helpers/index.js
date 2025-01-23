@@ -28,6 +28,3 @@ export const timeAgo = (dateString) => {
   if (diffMonths < 12) return `${diffMonths} months ago`;
   return `${diffYears} years ago`;
 };
-
-// // Example Usage
-// console.log(timeAgo("2025-01-04T13:14:28.679Z")); // Output: "2 days ago" (depending on the current date)
