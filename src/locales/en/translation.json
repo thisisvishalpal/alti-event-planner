@@ -23,5 +23,23 @@
     "sideNavigationHeading": "Menu",
     "languageToggler": "Change language",
     "themeToggler": "Change theme"
+  },
+  "signin": {
+    "heading": "Sign in",
+    "username": "Username",
+    "password": "Password",
+    "dontHaveAccount": "Don't have an account ?",
+    "enterUsername": "Enter username",
+    "enterPassword": "Enter password",
+    "button": "Sign in"
+  },
+  "signup": {
+    "heading": "Sign up",
+    "fullName": "Full name",
+    "enterFullName": "Enter your full name"
+  },
+  "landing": {
+    "join": "Join now",
+    "signin": "Sign in"
   }
 }

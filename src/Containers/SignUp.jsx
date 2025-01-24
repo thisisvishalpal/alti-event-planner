@@ -17,6 +17,7 @@ import {
   PersonalInfoForm,
   UsernameEmailForm,
 } from "Components";
+import { useTranslation } from "react-i18next";
 
 export const ActionButton = ({ prevStep, isFirstStep, isLastStep }) => {
   return (
@@ -37,6 +38,7 @@ export const ActionButton = ({ prevStep, isFirstStep, isLastStep }) => {
   );
 };
 export const SignupTwo = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const {
     register,
@@ -135,7 +137,7 @@ export const SignupTwo = () => {
             </ul>
           </Alert>
         )}
-        <h2 className="text-center mb-1">Sign up</h2>
+        <h2 className="text-center mb-1">{t("signup.heading")}</h2>
 
         <div className="mt-4">{steps[currentStep - 1]}</div>
 

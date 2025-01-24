@@ -23,5 +23,23 @@
     "sideNavigationHeading": "मेनू",
     "languageToggler": "भाषा बदलें",
     "themeToggler": "थीम बदलें"
+  },
+  "signin": {
+    "heading": "सिग्न इन",
+    "username": "यूजरनाम",
+    "password": "पासवर्ड",
+    "dontHaveAccount": "कोई खाता नहीं है नया बनायें",
+    "enterUsername": "यूजरनाम डाले",
+    "enterPassword": "पासवर्ड डाले",
+    "button": "सिग्न इन करे"
+  },
+  "signup": {
+    "heading": "सिग्न उप",
+    "fullName": "पूरा नाम",
+    "enterFullName": "अपना पूरा नाम भरें"
+  },
+  "landing": {
+    "join": "अभी जुड़े",
+    "signin": "सिग्न इन"
   }
 }

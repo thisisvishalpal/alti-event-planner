@@ -5,8 +5,10 @@ import { Button, Form, Container, Spinner, Card, Alert } from "react-bootstrap";
 
 import { signIn } from "Slices";
 import { urls } from "Utils";
+import { useTranslation } from "react-i18next";
 
 export const SignIn = () => {
+  const { t } = useTranslation();
   const { loading, error: storeError } = useSelector(
     ({ userAuth }) => userAuth
   );
@@ -58,23 +60,23 @@ export const SignIn = () => {
             {message}
           </Alert>
         )}
-        <h2 className="text-center mb-4">Sign In</h2>
+        <h2 className="text-center mb-4">{t("signin.heading")}</h2>
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="formUsername" className="mb-3">
-            <Form.Label>Username</Form.Label>
+            <Form.Label>{t("signin.username")}</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Enter username"
+              placeholder={t("signin.enterUsername")}
               value={username}
               onChange={(e) => setUsername(e.target.value.toLowerCase().trim())}
             />
           </Form.Group>
 
           <Form.Group controlId="formPassword" className="mb-3">
-            <Form.Label>Password</Form.Label>
+            <Form.Label>{t("signin.password")}</Form.Label>
             <Form.Control
               type="password"
-              placeholder="Enter password"
+              placeholder={t("signin.enterPassword")}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -84,20 +86,14 @@ export const SignIn = () => {
           {storeError && <p className="text-danger">{storeError}</p>}
 
           <Button variant="primary" type="submit" block disabled={loading}>
-            {loading ? (
-              <>
-                <Spinner animation="border" size="sm" /> Logging In...
-              </>
-            ) : (
-              "Sign In"
-            )}
+            {t("signin.button")}
           </Button>
         </Form>
 
         <p className="mt-3 text-center">
-          Don't have an account?{" "}
+          {t("signin.dontHaveAccount")}{" "}
           <Link to={urls.signUp} replace style={{ textDecoration: "none" }}>
-            Sign Up
+            {t("signup.heading")}
           </Link>
         </p>
       </Card>

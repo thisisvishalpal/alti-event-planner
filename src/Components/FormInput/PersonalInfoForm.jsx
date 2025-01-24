@@ -1,4 +1,5 @@
 import { Form } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 
 export const PersonalInfoForm = ({
   showHeading = true,
@@ -6,15 +7,16 @@ export const PersonalInfoForm = ({
   wantToEdit = false,
   register,
 }) => {
+  const { t } = useTranslation();
   return (
     <>
       {showHeading && <h5 className="mb-3">Personal information</h5>}
       {/* fullname */}
       <Form.Group className="mb-3">
-        <Form.Label>Full Name</Form.Label>
+        <Form.Label>{t("signup.fullName")}</Form.Label>
         <Form.Control
           type="text"
-          placeholder="Enter your full name"
+          placeholder={t("signup.enterFullName")}
           disabled={!wantToEdit}
           {...register("fullName", { required: "Full Name is required" })}
         />

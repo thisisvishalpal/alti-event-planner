@@ -28,14 +28,14 @@ export const Landing = () => {
               size="lg"
               className="me-3"
             >
-              Join Now
+              {t("landing.join")}
             </Button>
             <Button
               onClick={() => navigate(urls?.signIn)}
               variant="outline-light"
               size="lg"
             >
-              Sign In
+              {t("landing.signin")}
             </Button>
           </div>
         </Container>
