@@ -7,6 +7,7 @@ import { LanguageToggler, Navigations, ThemeToggler } from "Components";
 import { useTheme } from "Theme";
 import { useAuthenticated } from "Hooks";
 import { urls } from "Utils";
+import { useTranslation } from "react-i18next";
 
 export const OffcanvasExample = () => {
   const { theme } = useTheme();
@@ -78,6 +79,7 @@ export const OffcanvasExample = () => {
 };
 
 export const Header = () => {
+  const { t } = useTranslation();
   const { theme } = useTheme();
 
   const { root } = urls;
@@ -134,7 +136,7 @@ export const Header = () => {
           >
             <Offcanvas.Header closeButton>
               <Offcanvas.Title id={`offcanvasNavbarLabel-expand-md`}>
-                Menu
+                {t("generic.sideNavigationHeading")}
               </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>

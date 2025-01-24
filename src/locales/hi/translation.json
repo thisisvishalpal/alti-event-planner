@@ -19,6 +19,9 @@
     "profile": "प्रोफ़ाइल"
   },
   "generic": {
-    "logout": "लॉग आउट"
+    "logout": "लॉग आउट",
+    "sideNavigationHeading": "मेनू",
+    "languageToggler": "भाषा बदलें",
+    "themeToggler": "थीम बदलें"
   }
 }

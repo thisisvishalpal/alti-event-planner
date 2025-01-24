@@ -19,6 +19,9 @@
     "profile": "Profile"
   },
   "generic": {
-    "logout": "Logout"
+    "logout": "Logout",
+    "sideNavigationHeading": "Menu",
+    "languageToggler": "Change language",
+    "themeToggler": "Change theme"
   }
 }

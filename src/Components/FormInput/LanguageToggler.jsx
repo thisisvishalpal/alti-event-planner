@@ -4,6 +4,7 @@ import { Form } from "react-bootstrap";
 
 export const LanguageToggler = ({ showHeading = false }) => {
   const { i18n } = useTranslation();
+  const { t } = useTranslation();
   const value = localStorage.getItem("language") || "en";
   const [language, setLanguage] = useState(value || "en");
 
@@ -14,7 +15,7 @@ export const LanguageToggler = ({ showHeading = false }) => {
   };
   return (
     <Form>
-      {showHeading && <Form.Label>Change language</Form.Label>}
+      {showHeading && <Form.Label>{t("generic.languageToggler")}</Form.Label>}
       <Form.Check
         name="languageToggle"
         type="switch"

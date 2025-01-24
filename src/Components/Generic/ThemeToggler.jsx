@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 
 import { useTheme } from "Theme";
 
 export const ThemeToggler = () => {
   const { toggleTheme } = useTheme();
+  const { t } = useTranslation();
   const value = localStorage.getItem("theme") || "light";
   const [theme, setTheme] = useState(value === "light" ? "light" : "dark");
 
@@ -15,7 +17,7 @@ export const ThemeToggler = () => {
 
   return (
     <Form>
-      <Form.Label>Change theme</Form.Label>
+      <Form.Label>{t("generic.themeToggler")}</Form.Label>
       <Form.Check
         name="themeToggle"
         type="switch"
