@@ -18,12 +18,20 @@ export const fetchUserNotifications = createAsyncThunk(
 
 export const mutateReadNotification = createAsyncThunk(
   "userNotifications/mutateReadNotification",
-  async (param, { rejectWithValue }) => {
-    const response = await axiosInstance.post(
-      apiRoutes.readNotification,
-      param
-    );
-    return response?.data?.data;
+  async (notificationId, { getState }) => {
+    const { username } = getState().userAuth;
+    try {
+      const response = await axiosInstance.patch(
+        apiRoutes.readNotification,
+        { notificationId },
+        {
+          params: { username: username },
+        }
+      );
+      return response?.data?.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 

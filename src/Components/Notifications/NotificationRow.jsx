@@ -8,8 +8,7 @@ import { mutateReadNotification } from "Slices";
 export const NotificationRow = ({ notification }) => {
   const dispatch = useDispatch();
 
-  const handleClick = () => console.log("handle click");
-  // dispatch(mutateReadNotification(notification._id));
+  const handleClick = () => dispatch(mutateReadNotification(notification._id));
 
   return (
     <Link className="no-text-deco" to={notification.link}>
