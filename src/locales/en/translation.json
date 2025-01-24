@@ -8,5 +8,17 @@
     "feeds": {
       "title": "Feeds"
     }
+  },
+  "navigations": {
+    "feeds": "Feeds",
+    "connections": "Connections",
+    "notifications": "Notifications",
+    "search": "Search",
+    "filter": "Filter",
+    "settings": "Settings",
+    "profile": "Profile"
+  },
+  "generic": {
+    "logout": "Logout"
   }
 }

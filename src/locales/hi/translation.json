@@ -8,5 +8,17 @@
     "feeds": {
       "title": "फ़ीड"
     }
+  },
+  "navigations": {
+    "feeds": "फ़ीड",
+    "connections": "कनेक्शन",
+    "notifications": "सूचनाएं",
+    "search": "खोजें",
+    "filter": "फ़िल्टर",
+    "settings": "सेटिंग्स",
+    "profile": "प्रोफ़ाइल"
+  },
+  "generic": {
+    "logout": "लॉग आउट"
   }
 }

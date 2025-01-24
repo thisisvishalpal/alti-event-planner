@@ -1,5 +1,7 @@
 import { Suspense } from "react";
 import { Navigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
 import {
   NotFound,
   Feeds,
@@ -36,70 +38,74 @@ const {
 
 const showThis = false;
 
-export const LoggedInRoutes = [
-  {
-    path: root,
-    element: <Feeds />,
-    fallBack: <Landing />,
-    isActive: true,
-  },
-  {
-    path: feeds,
-    element: <Feeds />,
-    fallBack: <AccessDenied />,
-    label: "Feeds",
-    isActive: true,
-  },
-  {
-    path: profile,
-    element: <Profile />,
-    fallBack: <AccessDenied />,
-    // label: "Profile",
-    isActive: true,
-  },
-  {
-    path: connections,
-    element: <Connections />,
-    fallBack: <AccessDenied />,
-    label: "Connections",
-    isActive: true,
-  },
-  {
-    path: notifications,
-    element: <Notifications />,
-    fallBack: <AccessDenied />,
-    label: "Notifications",
-    isActive: true,
-  },
-  {
-    path: messages,
-    element: <Messages />,
-    fallBack: showThis ? <AccessDenied /> : <NotFound />,
-    label: "Messages",
-    isActive: showThis,
-  },
-  {
-    path: search,
-    element: <Search />,
-    fallBack: <AccessDenied />,
-    label: "Search",
-    isActive: true,
-  },
-  {
-    path: filter,
-    element: <Filter />,
-    fallBack: <AccessDenied />,
-    label: "Filter",
-    isActive: true,
-  },
-  {
-    path: settings,
-    element: <Settings />,
-    fallBack: <AccessDenied />,
-    label: "Settings",
-    isActive: true,
-  },
-];
+export const useLoggedInRoutes = () => {
+  const { t } = useTranslation();
+
+  return [
+    {
+      path: root,
+      element: <Feeds />,
+      fallBack: <Landing />,
+      isActive: true,
+    },
+    {
+      path: feeds,
+      element: <Feeds />,
+      fallBack: <AccessDenied />,
+      label: t("navigations.feeds"),
+      isActive: true,
+    },
+    {
+      path: profile,
+      element: <Profile />,
+      fallBack: <AccessDenied />,
+      // label: "Profile",
+      isActive: true,
+    },
+    {
+      path: connections,
+      element: <Connections />,
+      fallBack: <AccessDenied />,
+      label: t("navigations.connections"),
+      isActive: true,
+    },
+    {
+      path: notifications,
+      element: <Notifications />,
+      fallBack: <AccessDenied />,
+      label: t("navigations.notifications"),
+      isActive: true,
+    },
+    {
+      path: messages,
+      element: <Messages />,
+      fallBack: showThis ? <AccessDenied /> : <NotFound />,
+      label: t("navigations.messages"),
+      isActive: showThis,
+    },
+    {
+      path: search,
+      element: <Search />,
+      fallBack: <AccessDenied />,
+      label: t("navigations.search"),
+      isActive: true,
+    },
+    {
+      path: filter,
+      element: <Filter />,
+      fallBack: <AccessDenied />,
+      label: t("navigations.filter"),
+      isActive: true,
+    },
+    {
+      path: settings,
+      element: <Settings />,
+      fallBack: <AccessDenied />,
+      label: t("navigations.settings"),
+      isActive: true,
+    },
+  ];
+};
 
 export const LoggedOutRoutes = [
   {
@@ -125,8 +131,10 @@ export const NotFoundRoutes = [
   },
 ];
 
-export const Routes = () =>
-  [...LoggedInRoutes, ...LoggedOutRoutes, ...NotFoundRoutes].map(
+export const Routes = () => {
+  const LoggedInRoutes = useLoggedInRoutes();
+
+  return [...LoggedInRoutes, ...LoggedOutRoutes, ...NotFoundRoutes].map(
     ({ path, element, fallBack, isActive }) => ({
       path: path,
       element: (
@@ -138,3 +146,4 @@ export const Routes = () =>
       ),
     })
   );
+};

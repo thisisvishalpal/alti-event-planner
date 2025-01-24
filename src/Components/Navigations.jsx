@@ -1,18 +1,22 @@
 import { Nav, Button, Navbar } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
 import { logout } from "Slices";
 import { urls } from "Utils";
-import { LoggedInRoutes } from "Routes";
+import { useLoggedInRoutes } from "Routes";
 import { useTheme } from "Theme";
 
 const { root } = urls;
 export const Navigations = ({ className }) => {
   const { username } = useSelector(({ userAuth }) => userAuth);
   const { theme } = useTheme();
+  const { t } = useTranslation();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const LoggedInRoutes = useLoggedInRoutes();
 
   const handleLogout = () => {
     dispatch(logout());
@@ -21,7 +25,7 @@ export const Navigations = ({ className }) => {
 
   const menuOptions = {
     path: `user/${username}`,
-    label: "Profile",
+    label: t("navigations.profile"),
     isActive: true,
   };
 
@@ -48,7 +52,7 @@ export const Navigations = ({ className }) => {
           <hr />
           <li>
             <Button onClick={handleLogout} className="nav-link">
-              Logout
+              {t("generic.logout")}
             </Button>
           </li>
         </ul>
