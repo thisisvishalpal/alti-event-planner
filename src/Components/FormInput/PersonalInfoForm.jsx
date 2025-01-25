@@ -10,15 +10,18 @@ export const PersonalInfoForm = ({
   const { t } = useTranslation();
   return (
     <>
-      {showHeading && <h5 className="mb-3">Personal information</h5>}
+      {showHeading && <h5 className="mb-3">{t("personalInfoForm.heading")}</h5>}
+
       {/* fullname */}
       <Form.Group className="mb-3">
-        <Form.Label>{t("signup.fullName")}</Form.Label>
+        <Form.Label>{t("personalInfoForm.fullName.label")}</Form.Label>
         <Form.Control
           type="text"
-          placeholder={t("signup.enterFullName")}
+          placeholder={t("personalInfoForm.fullName.placeholder")}
           disabled={!wantToEdit}
-          {...register("fullName", { required: "Full Name is required" })}
+          {...register("fullName", {
+            required: t("personalInfoForm.fullName.error.required"),
+          })}
         />
         {errors.fullName && (
           <p className="text-danger">{errors.fullName.message}</p>
@@ -27,13 +30,13 @@ export const PersonalInfoForm = ({
 
       {/* Father name */}
       <Form.Group className="mb-3">
-        <Form.Label>Father Name</Form.Label>
+        <Form.Label>{t("personalInfoForm.fatherName.label")}</Form.Label>
         <Form.Control
           type="text"
-          placeholder="Enter your father name"
+          placeholder={t("personalInfoForm.fatherName.placeholder")}
           disabled={!wantToEdit}
           {...register("fatherName", {
-            required: "Father name is required",
+            required: t("personalInfoForm.fatherName.error.required"),
           })}
         />
         {errors.fatherName && (
@@ -43,16 +46,16 @@ export const PersonalInfoForm = ({
 
       {/* Phone number */}
       <Form.Group className="mb-3">
-        <Form.Label>Phone Number</Form.Label>
+        <Form.Label>{t("personalInfoForm.phoneNumber.label")}</Form.Label>
         <Form.Control
           type="tel"
-          placeholder="Enter your phone number"
+          placeholder={t("personalInfoForm.phoneNumber.placeholder")}
           disabled={!wantToEdit}
           {...register("phoneNumber", {
-            required: "Phone number is required",
+            required: t("personalInfoForm.phoneNumber.error.required"),
             pattern: {
               value: /^[0-9]{10}$/,
-              message: "Phone Number must be 10 digits",
+              message: t("personalInfoForm.phoneNumber.error.invalid"),
             },
           })}
           onInput={(e) => {
@@ -66,20 +69,20 @@ export const PersonalInfoForm = ({
 
       {/* Age */}
       <Form.Group className="mb-3">
-        <Form.Label>Age</Form.Label>
+        <Form.Label>{t("personalInfoForm.age.label")}</Form.Label>
         <Form.Control
           type="number"
-          placeholder="Enter your age"
+          placeholder={t("personalInfoForm.age.placeholder")}
           disabled={!wantToEdit}
           {...register("age", {
-            required: "Age is required",
+            required: t("personalInfoForm.age.error.required"),
             min: {
               value: 18,
-              message: "You must be at least 18 years old",
+              message: t("personalInfoForm.age.error.min"),
             },
             max: {
               value: 99,
-              message: "Age cannot be more than 99 years",
+              message: t("personalInfoForm.age.error.max"),
             },
           })}
         />
@@ -88,15 +91,23 @@ export const PersonalInfoForm = ({
 
       {/* Gender */}
       <Form.Group className="mb-3">
-        <Form.Label>Gender</Form.Label>
+        <Form.Label>{t("personalInfoForm.gender.label")}</Form.Label>
         <Form.Select
           disabled={!wantToEdit}
-          {...register("gender", { required: "Gender is required" })}
+          {...register("gender", {
+            required: t("personalInfoForm.gender.error"),
+          })}
         >
-          <option value="">Select your gender</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="other">Other</option>
+          <option value="">{t("personalInfoForm.gender.placeholder")}</option>
+          <option value="male">
+            {t("personalInfoForm.gender.options.male")}
+          </option>
+          <option value="female">
+            {t("personalInfoForm.gender.options.female")}
+          </option>
+          <option value="other">
+            {t("personalInfoForm.gender.options.other")}
+          </option>
         </Form.Select>
         {errors.gender && (
           <p className="text-danger">{errors.gender.message}</p>
@@ -105,16 +116,18 @@ export const PersonalInfoForm = ({
 
       {/* Married */}
       <Form.Group className="mb-3">
-        <Form.Label>Married</Form.Label>
+        <Form.Label>{t("personalInfoForm.married.label")}</Form.Label>
         <Form.Select
           disabled={!wantToEdit}
           {...register("married", {
-            required: "Marital status is required",
+            required: t("personalInfoForm.married.error"),
           })}
         >
-          <option value="">Select marital status</option>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
+          <option value="">{t("personalInfoForm.married.placeholder")}</option>
+          <option value="yes">
+            {t("personalInfoForm.married.options.yes")}
+          </option>
+          <option value="no">{t("personalInfoForm.married.options.no")}</option>
         </Form.Select>
         {errors.married && (
           <p className="text-danger">{errors.married.message}</p>
@@ -123,31 +136,41 @@ export const PersonalInfoForm = ({
 
       {/* City */}
       <Form.Group className="mb-3">
-        <Form.Label>City</Form.Label>
+        <Form.Label>{t("personalInfoForm.city.label")}</Form.Label>
 
         <Form.Select
           disabled={!wantToEdit}
-          {...register("city", { required: "City is required" })}
+          {...register("city", { required: t("personalInfoForm.city.error") })}
         >
-          <option value="">Select your city</option>
-          <option value="gwalior">Gwalior</option>
-          <option value="bhopal">Bhopal</option>
-          <option value="indore">Indore</option>
-          <option value="morena">Morena</option>
-          <option value="dabra">Dabra</option>
+          <option value="">{t("personalInfoForm.city.placeholder")}</option>
+          <option value="gwalior">
+            {t("personalInfoForm.city.options.gwalior")}
+          </option>
+          <option value="bhopal">
+            {t("personalInfoForm.city.options.bhopal")}
+          </option>
+          <option value="indore">
+            {t("personalInfoForm.city.options.indore")}
+          </option>
+          <option value="morena">
+            {t("personalInfoForm.city.options.morena")}
+          </option>
+          <option value="dabra">
+            {t("personalInfoForm.city.options.dabra")}
+          </option>
         </Form.Select>
         {errors.city && <p className="text-danger">{errors.city.message}</p>}
       </Form.Group>
 
       {/* Address */}
       <Form.Group className="mb-3">
-        <Form.Label>Address</Form.Label>
+        <Form.Label>{t("personalInfoForm.address.label")}</Form.Label>
         <Form.Control
           type="text"
-          placeholder="Enter your full address"
+          placeholder={t("personalInfoForm.address.placeholder")}
           disabled={!wantToEdit}
           {...register("address", {
-            required: "Full address is required",
+            required: t("personalInfoForm.address.error"),
           })}
         />
         {errors.address && (
@@ -157,16 +180,16 @@ export const PersonalInfoForm = ({
 
       {/* Bio */}
       <Form.Group className="mb-3">
-        <Form.Label>Bio</Form.Label>
+        <Form.Label>{t("personalInfoForm.bio.label")}</Form.Label>
         <Form.Control
           type="text"
-          placeholder="Enter your bio"
+          placeholder={t("personalInfoForm.bio.placeholder")}
           disabled={!wantToEdit}
           {...register("bio", {
-            required: "Bio is required",
+            required: t("personalInfoForm.bio.error"),
           })}
         />
-        <Form.Text>Bio will always public</Form.Text>
+        <Form.Text>{t("personalInfoForm.bio.note")}</Form.Text>
         {errors.bio && <p className="text-danger">{errors.bio.message}</p>}
       </Form.Group>
     </>

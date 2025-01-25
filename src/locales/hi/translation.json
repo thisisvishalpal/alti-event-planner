@@ -41,5 +41,84 @@
   "landing": {
     "join": "अभी जुड़े",
     "signin": "सिग्न इन"
+  },
+  "personalInfoForm": {
+    "heading": "व्यक्तिगत जानकारी",
+    "fullName": {
+      "label": "पूरा नाम",
+      "placeholder": "अपना पूरा नाम दर्ज करें",
+      "error": {
+        "required": "पूरा नाम आवश्यक है"
+      }
+    },
+    "fatherName": {
+      "label": "पिता का नाम",
+      "placeholder": "अपने पिता का नाम दर्ज करें",
+      "error": {
+        "required": "पिता का नाम आवश्यक है"
+      }
+    },
+    "phoneNumber": {
+      "label": "फोन नंबर",
+      "placeholder": "अपना फोन नंबर दर्ज करें",
+      "error": {
+        "required": "फोन नंबर आवश्यक है",
+        "invalid": "फोन नंबर 10 अंकों का होना चाहिए"
+      }
+    },
+    "age": {
+      "label": "आयु",
+      "placeholder": "अपनी आयु दर्ज करें",
+      "error": {
+        "required": "आयु आवश्यक है",
+        "min": "आपकी आयु कम से कम 18 वर्ष होनी चाहिए",
+        "max": "आयु 99 वर्ष से अधिक नहीं हो सकती"
+      }
+    },
+    "gender": {
+      "label": "लिंग",
+      "placeholder": "अपना लिंग चुनें",
+      "options": {
+        "male": "पुरुष",
+        "female": "महिला",
+        "other": "अन्य"
+      },
+      "error": "लिंग आवश्यक है"
+    },
+    "married": {
+      "label": "विवाहित",
+      "placeholder": "वैवाहिक स्थिति चुनें",
+      "options": {
+        "yes": "हाँ",
+        "no": "नहीं"
+      },
+      "error": "वैवाहिक स्थिति आवश्यक है"
+    },
+    "city": {
+      "label": "शहर",
+      "placeholder": "अपना शहर चुनें",
+      "options": {
+        "gwalior": "ग्वालियर",
+        "bhopal": "भोपाल",
+        "indore": "इंदौर",
+        "morena": "मुरैना",
+        "dabra": "डबरा"
+      },
+      "error": "शहर आवश्यक है"
+    },
+    "address": {
+      "label": "पता",
+      "placeholder": "अपना पूरा पता दर्ज करें",
+      "error": "पूरा पता आवश्यक है"
+    },
+    "bio": {
+      "label": "जीवनी",
+      "placeholder": "अपनी जीवनी दर्ज करें",
+      "note": "जीवनी हमेशा सार्वजनिक रहेगी",
+      "error": "जीवनी आवश्यक है"
+    },
+    "validation": {
+      "required": "आवश्यक है"
+    }
   }
 }

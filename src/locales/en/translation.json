@@ -41,5 +41,84 @@
   "landing": {
     "join": "Join now",
     "signin": "Sign in"
+  },
+  "personalInfoForm": {
+    "heading": "Personal Information",
+    "fullName": {
+      "label": "Full Name",
+      "placeholder": "Enter your full name",
+      "error": {
+        "required": "Full name is required"
+      }
+    },
+    "fatherName": {
+      "label": "Father Name",
+      "placeholder": "Enter your father name",
+      "error": {
+        "required": "Father name is required"
+      }
+    },
+    "phoneNumber": {
+      "label": "Phone Number",
+      "placeholder": "Enter your phone number",
+      "error": {
+        "required": "Phone number is required",
+        "invalid": "Phone Number must be 10 digits"
+      }
+    },
+    "age": {
+      "label": "Age",
+      "placeholder": "Enter your age",
+      "error": {
+        "required": "Age is required",
+        "min": "You must be at least 18 years old",
+        "max": "Age cannot be more than 99 years"
+      }
+    },
+    "gender": {
+      "label": "Gender",
+      "placeholder": "Select your gender",
+      "options": {
+        "male": "Male",
+        "female": "Female",
+        "other": "Other"
+      },
+      "error": "Gender is required"
+    },
+    "married": {
+      "label": "Married",
+      "placeholder": "Select marital status",
+      "options": {
+        "yes": "Yes",
+        "no": "No"
+      },
+      "error": "Marital status is required"
+    },
+    "city": {
+      "label": "City",
+      "placeholder": "Select your city",
+      "options": {
+        "gwalior": "Gwalior",
+        "bhopal": "Bhopal",
+        "indore": "Indore",
+        "morena": "Morena",
+        "dabra": "Dabra"
+      },
+      "error": "City is required"
+    },
+    "address": {
+      "label": "Address",
+      "placeholder": "Enter your full address",
+      "error": "Full address is required"
+    },
+    "bio": {
+      "label": "Bio",
+      "placeholder": "Enter your bio",
+      "note": "Bio will always be public",
+      "error": "Bio is required"
+    },
+    "validation": {
+      "required": "is required"
+    }
   }
 }
