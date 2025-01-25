@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { SpeedInsights } from "@vercel/speed-insights/react";
+import { Analytics } from "@vercel/analytics/react";
 import { useTranslation } from "react-i18next";
 
 //Importing local files
@@ -47,6 +48,7 @@ export function App() {
     <ThemeProvider>
       <ModalProvider>
         <SpeedInsights />
+        <Analytics />
         <RouterProvider router={Router} />
       </ModalProvider>
     </ThemeProvider>
